@@ -9,7 +9,7 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const view = { lat: 9, lon: -28 };
   const place = { cx: 0.64, cy: 0.49, r: 0.39 }, goal = { ...place };     // fractions: cx of width, cy and r of height
-  let tex = null, rotating = true, interactive = false, visible = true, dragging = null, zoom = 1;
+  let orbitOn = true, tex = null, rotating = true, interactive = false, visible = true, dragging = null, zoom = 1;
   let W = 0, H = 0, dpr = 1, rasterKey = '', last = performance.now();
 
   // The sphere is shaded on the GPU so the turn stays smooth; the 2D rasteriser below is the fallback.
@@ -28,8 +28,11 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
         float Y = v.y * cl + z * sl, Z = -v.y * sl + z * cl;
         float lat = asin(clamp(Y, -1., 1.)), lon = rot.y + atan(v.x, Z);
         vec3 c = texture2D(t, vec2(fract(lon / 6.28318530718 + 0.5), 0.5 - lat / 3.14159265359)).rgb;
-        float light = clamp(0.62 + 0.5 * (z * 0.8 - v.x * 0.25 + v.y * 0.3), 0., 1.), rim = pow(1.0 - z, 3.0) * 0.75;
-        c = min(c * 1.05 * light, 1.0) * (1.0 - rim) + vec3(0.353, 0.667, 1.0) * rim;
+        // The sun stands to the upper left: the lower right falls into night.
+        float d = dot(vec3(v.x, v.y, z), normalize(vec3(-0.62, 0.36, 0.70)));
+        float lit = smoothstep(-0.20, 0.50, d), rim = pow(1.0 - z, 3.0) * 0.75 * (0.12 + 0.88 * lit);
+        vec3 day = min(c * 1.12 * (0.60 + 0.50 * max(d, 0.)), 1.0), night = c * 0.06 + vec3(0.004, 0.007, 0.018);
+        c = mix(night, day, lit) * (1.0 - rim) + vec3(0.353, 0.667, 1.0) * rim;
         float a = clamp((1.0 - sqrt(r2)) * edge + 0.5, 0., 1.);
         gl_FragColor = vec4(c * a, a);
       }`));
@@ -89,7 +92,8 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
         const x0 = Math.floor(fx), y0 = Math.floor(fy), ax = fx - x0, ay = fy - y0;
         const xa = ((x0 % tw) + tw) % tw, xb = (xa + 1) % tw, yb = Math.min(th - 1, y0 + 1);
         const i00 = (y0 * tw + xa) * 4, i10 = (y0 * tw + xb) * 4, i01 = (yb * tw + xa) * 4, i11 = (yb * tw + xb) * 4;
-        const light = clamp(0.62 + 0.5 * (z * 0.8 - x * 0.25 + y * 0.3)), rim = Math.pow(1 - z, 3) * 0.75, oi = (py * S + px) * 4;
+        const dd = (x * -0.62 + y * 0.36 + z * 0.70) / 1.002, lit = clamp((dd + 0.2) / 0.7), light = (0.06 + lit * (0.54 + 0.5 * Math.max(dd, 0))) / 1.05;
+        const rim = Math.pow(1 - z, 3) * 0.75 * (0.12 + 0.88 * lit), oi = (py * S + px) * 4;
         for (let k = 0; k < 3; k++) {
           const v = (td[i00 + k] * (1 - ax) + td[i10 + k] * ax) * (1 - ay) + (td[i01 + k] * (1 - ax) + td[i11 + k] * ax) * ay;
           o[oi + k] = Math.min(255, v * 1.05 * light) * (1 - rim) + [90, 170, 255][k] * rim;
@@ -106,17 +110,17 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
     return { x: g.cx + g.R * X, y: g.cy - g.R * (Y * c0 - Z * sl), z: Y * sl + Z * c0 };
   }
 
-  // Dotted ellipse with a few short waveform clusters, as in the visual reference.
-  function orbit(g, front) {
+  // A ring of thin bars that swells and travels like a microphone level display.
+  function orbit(g, front, t) {
+    if (!orbitOn) return;
     const rx = g.R * 1.24, ry = g.R * 0.3, tilt = -13 * D2R, N = 260, ct = Math.cos(tilt), st = Math.sin(tilt);
-    const clusters = [0.55, 1.35, 2.25, 4.1];
     ctx.strokeStyle = ctx.fillStyle = '#FE8500'; ctx.lineCap = 'round';
     for (let i = 0; i < N; i++) {
       const th = (i / N) * 2 * Math.PI, s = Math.sin(th);
       if ((s >= 0) !== front) continue;
       const ex = Math.cos(th) * rx, ey = s * ry, x = g.cx + ex * ct - ey * st, y = g.cy + ex * st + ey * ct;
-      let a = 0; for (const c of clusters) a = Math.max(a, Math.exp(-(((th - c) / 0.1) ** 2)));
-      const h = a * g.R * 0.05 * (0.35 + 0.65 * Math.abs(Math.sin(i * 2.3)));
+      const env = (0.5 + 0.5 * Math.sin(3 * th - 1.3 * t)) * (0.5 + 0.5 * Math.sin(5 * th + 0.9 * t + 1.7)) * (0.6 + 0.4 * Math.sin(th - 0.5 * t));
+      const h = g.R * 0.1 * Math.pow(env, 1.25) * (0.45 + 0.55 * Math.sin(i * 1.9 + t * 5.5));
       if (h > g.R * 0.006) { ctx.lineWidth = Math.max(1.4, g.R / 190); ctx.beginPath(); ctx.moveTo(x, y - h); ctx.lineTo(x, y + h); ctx.stroke(); }
       else { ctx.beginPath(); ctx.arc(x, y, Math.max(0.9, g.R / 330), 0, 7); ctx.fill(); }
     }
@@ -132,14 +136,15 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
     if (visible) {
       const g = geom();
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-      orbit(g, false);
-      const halo = ctx.createRadialGradient(g.cx, g.cy, g.R * 0.97, g.cx, g.cy, g.R * 1.06);
-      halo.addColorStop(0, 'rgba(90,170,255,.55)'); halo.addColorStop(1, 'rgba(90,170,255,0)');
-      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(g.cx, g.cy, g.R * 1.06, 0, 7); ctx.fill();
+      orbit(g, false, now / 1000);
+      const hx = g.cx - g.R * 0.035, hy = g.cy - g.R * 0.02;                 // the glow leans toward the sunlit side
+      const halo = ctx.createRadialGradient(hx, hy, g.R * 0.96, hx, hy, g.R * 1.065);
+      halo.addColorStop(0, 'rgba(90,170,255,.5)'); halo.addColorStop(1, 'rgba(90,170,255,0)');
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(hx, hy, g.R * 1.065, 0, 7); ctx.fill();
       ctx.imageSmoothingQuality = 'high';
       if (glReady) drawSphereGL(g);
       else { rasterize(g.R); if (raster.width) ctx.drawImage(raster, g.cx - g.R, g.cy - g.R, g.R * 2, g.R * 2); }
-      orbit(g, true);
+      orbit(g, true, now / 1000);
       const out = {};
       for (const p of pins) { const q = project(p.lat, p.lon, g); out[p.id] = { x: q.x, y: q.y, visible: q.z > 0.1 }; }
       onPositions(out, g);
@@ -164,6 +169,7 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
     setInteractive(on) { interactive = on; canvas.style.cursor = on ? 'grab' : 'default'; if (!on) zoom = 1; },
     setVisible(on) { visible = on; if (!on) ctx.clearRect(0, 0, canvas.width, canvas.height); },
     setRotating(on) { rotating = on; },
+    setOrbit(on) { orbitOn = on; },
     lookAt(lat, lon) { view.lat = clamp(lat, -75, 75); view.lon = lon; }
   };
 }

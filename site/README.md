@@ -1,4 +1,4 @@
-# PTS — Pixel That Sounds: demo site
+# P.T.S. — Pixel That Sounds: demo site
 
 A static, dependency-free page. From the repository root:
 

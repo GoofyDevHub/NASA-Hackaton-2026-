@@ -11,6 +11,6 @@ Use the actual site and selected audio masters. Edit for fast recognition with e
 | 14–18 s | Show keyboard focus on Describe image, then source and observation period. | Explore by keyboard or screen reader | Brief actual description excerpt. Lower the storm before speech. |
 | 18–23 s | Activate Talk to Obit. Show the spoken request and the selected Southern Ocean scene. | “Play the Southern Ocean.” | Capture the real command and its confirmation. Let speech finish. |
 | 23–26 s | Show the exact cold ocean crop and the thin orbit around Earth. | Cold ocean colours · Low voice | Use the deep male vocal at native pitch. Skip effects under the voice. |
-| 26–29 s | Return to the globe. Hold the title and the NASA source line. | PTS — Pixel That Sounds | Fade the vocal tail. Keep captions readable through the last frame. |
+| 26–29 s | Return to the globe. Hold the title and the NASA source line. | P.T.S. — Pixel That Sounds | Fade the vocal tail. Keep captions readable through the last frame. |
 
 The two lightning regions show a spatial contrast. Label both views during the wipe. Avoid an apparent before/after claim, artificial ellipses or graphics that obscure the NASA overlay. Record the controls and assistant only after they work. Check comprehension with sound muted and with the screen covered.

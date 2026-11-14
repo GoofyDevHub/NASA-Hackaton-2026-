@@ -52,20 +52,39 @@ const globe = createGlobe($('globe'), {
   onPositions: place
 });
 
-// ---- deep space: a fixed field of small stars, the same on every visit
-const stars = $('stars');
-function drawStars() {
-  const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 2), x = stars.getContext('2d');
-  stars.width = w * d; stars.height = h * d; x.setTransform(d, 0, 0, d, 0, 0);
+// ---- deep space: two layers of small stars drift slowly the way the Earth turns, over a faint band of haze
+const stars = $('stars'), sx = stars.getContext('2d'), layers = [];
+function buildStars() {
+  const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 2);
+  stars.width = w * d; stars.height = h * d;
   let seed = 20261114; const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
-  for (let i = 0, n = Math.round(w * h / 2600); i < n; i++) {
-    const big = rnd() < 0.06, r = big ? 0.9 + rnd() * 0.7 : 0.35 + rnd() * 0.5, tint = rnd();
-    x.fillStyle = tint < 0.12 ? '#FFE3C2' : tint < 0.24 ? '#CFE0FF' : '#FFFFFF';
-    x.globalAlpha = big ? 0.75 + rnd() * 0.25 : 0.2 + rnd() * 0.55;
-    x.beginPath(); x.arc(rnd() * w, rnd() * h, r, 0, 7); x.fill();
+  layers.length = 0;
+  for (const [density, speed, size] of [[1700, 2.2, 0.75], [5200, 5.5, 1.15]]) {       // far and near
+    const c = document.createElement('canvas'), x = c.getContext('2d');
+    c.width = w * d; c.height = h * d; x.setTransform(d, 0, 0, d, 0, 0);
+    for (let i = 0, n = Math.round(w * h / density); i < n; i++) {
+      let px = rnd() * w, py = rnd() * h;
+      if (rnd() < 0.4) py = h * (0.92 - 0.62 * px / w) + (rnd() + rnd() + rnd() - 1.5) * h * 0.16;   // denser along a diagonal band
+      const bright = rnd() < 0.07, r = (bright ? 0.9 + rnd() * 0.6 : 0.3 + rnd() * 0.5) * size, tint = rnd();
+      x.fillStyle = tint < 0.12 ? '#FFE3C2' : tint < 0.26 ? '#CFE0FF' : '#FFFFFF';
+      x.globalAlpha = bright ? 0.7 + rnd() * 0.3 : 0.18 + rnd() * 0.5;
+      x.beginPath(); x.arc(px, py, r, 0, 7); x.fill();
+      if (bright && rnd() < 0.3) { x.globalAlpha *= 0.18; x.beginPath(); x.arc(px, py, r * 3.2, 0, 7); x.fill(); }   // soft bloom on a few
+    }
+    layers.push({ c, speed });
   }
 }
-drawStars(); addEventListener('resize', drawStars);
+function drawStars(now) {
+  requestAnimationFrame(drawStars);
+  if (view === 'player' || !layers.length) return;
+  const w = stars.width;
+  sx.clearRect(0, 0, w, stars.height);
+  for (const { c, speed } of layers) {
+    const off = Math.round((now / 1000 * speed * (w / innerWidth)) % w);
+    sx.drawImage(c, off, 0); sx.drawImage(c, off - w, 0);
+  }
+}
+buildStars(); addEventListener('resize', buildStars); requestAnimationFrame(drawStars);
 
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
@@ -75,7 +94,7 @@ const PLACEMENT = {
 function setView(v) {
   view = v; document.body.dataset.view = v;
   $('entrance').hidden = v !== 'entrance'; $('explorer').hidden = v !== 'globe'; $('player').hidden = v !== 'player';
-  globe.setVisible(v !== 'player'); globe.setInteractive(v === 'globe');
+  globe.setVisible(v !== 'player'); globe.setInteractive(v === 'globe'); globe.setOrbit(v === 'entrance');
   if (PLACEMENT[v]) globe.setPlacement(PLACEMENT[v]());
   for (const el of Object.values(pinEls)) el.tabIndex = v === 'globe' ? 0 : -1;
   if (v !== 'globe') { hot = null; callout.hidden = cline.hidden = true; }      // the pin label never outlives the globe view

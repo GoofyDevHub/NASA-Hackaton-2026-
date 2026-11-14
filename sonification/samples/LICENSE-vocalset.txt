@@ -4,5 +4,5 @@ Source: https://zenodo.org/records/1203819
 License: Creative Commons Attribution 4.0 International
 https://creativecommons.org/licenses/by/4.0/
 The six source WAVs are unchanged excerpts from the distributed collection (whole source files).
-The two PTS tracks edit and arrange phrases, adjust gain and duration, and use pitch or room processing.
+The two P.T.S. tracks edit and arrange phrases, adjust gain and duration, and use pitch or room processing.
 Exact source archive members and hashes are in sources.json.

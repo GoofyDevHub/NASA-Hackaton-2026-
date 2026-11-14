@@ -16,7 +16,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .cta:focus-visible, .pill.primary:focus-visible, #p-listen:focus-visible { outline-color: var(--ink); }
 .arrow { font-family: "Segoe UI Symbol", var(--sans); }
 
-#stars { position: fixed; inset: 0; width: 100vw; height: 100vh; transition: opacity .45s; }
+#stars { position: fixed; inset: 0; width: 100vw; height: 100vh; transition: opacity .45s;
+  background:
+    radial-gradient(ellipse 55% 38% at 22% 78%, rgba(46, 64, 128, .20), transparent 70%),
+    radial-gradient(ellipse 48% 30% at 80% 26%, rgba(88, 52, 120, .13), transparent 70%),
+    radial-gradient(ellipse 80% 22% at 50% 52%, rgba(30, 44, 86, .12), transparent 75%); }
 body[data-view="player"] #stars { opacity: 0; }
 #globe { position: fixed; inset: 0; width: 100vw; height: 100vh; touch-action: none; transition: opacity .45s; }
 body[data-view="player"] #globe, body[data-view="player"] #pins { opacity: 0; pointer-events: none; }
