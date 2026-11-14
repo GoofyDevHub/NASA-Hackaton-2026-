@@ -139,7 +139,7 @@ buildStars(); buildMilkyWay(); addEventListener('resize', () => { buildStars(); 
 const PLACEMENT = {
   entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.672, cy: 0.505, r: 0.435 },
   player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.5, cy: 0.54, r: 0.64 },      // centred, large and dimmed, seen through the glass
-  globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.495, cy: 0.459, r: 0.379 }
+  globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.5, cy: 0.462, r: 0.412 }
 };
 function setView(v) {
   view = v; document.body.dataset.view = v;
