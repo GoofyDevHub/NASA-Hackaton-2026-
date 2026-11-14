@@ -1,10 +1,10 @@
-# ORBIT — Earth in Tune: riferimento visivo del team
+# PTS — Pixel That Sounds: riferimento visivo del team
 
 Data: 1 novembre 2026.
 
 Questa immagine costituisce il riferimento visivo iniziale per l'identità del team e per le future proposte grafiche del progetto. Non modifica le specifiche funzionali né approva lo sviluppo del prodotto.
 
-![Immagine del team ORBIT](orbit-earth-in-tune.png)
+![Immagine del team PTS](orbit-earth-in-tune.png)
 
 ## File
 
@@ -20,7 +20,7 @@ Questa immagine costituisce il riferimento visivo iniziale per l'identità del t
 - Colori di riferimento: blu notte per lo sfondo, blu oceano per il pianeta, ciano e turchese luminosi per il suono; ambra come accento secondario. Sono indicazioni visive, non codici colore estratti dal file.
 - Composizione: soggetto centrale, silhouette riconoscibile, sfondo arioso; mantenere il nucleo del soggetto visibile anche nel ritaglio circolare dell'avatar.
 - Gerarchia: un soggetto dominante e un solo gesto grafico orbitale; limitare dettagli decorativi e sovrapposizioni.
-- Testo: l'immagine del team resta senza scritte; usare il nome ORBIT — Earth in Tune nei campi testuali o fuori dall'illustrazione.
+- Testo: l'immagine del team resta senza scritte; usare il nome PTS — Pixel That Sounds nei campi testuali o fuori dall'illustrazione.
 - Per le future interfacce, mantenere testo leggibile e stati comprensibili anche senza distinguere i colori.
 
 ## Provenienza e uso

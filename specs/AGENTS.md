@@ -1,4 +1,4 @@
-# Working on ORBIT
+# Working on PTS
 
 Read the [scope](product.md), [ticket index](ticket/README.md) and the individual ticket before implementing a change. Work on a focused branch based on develop. Keep project-facing text in English and preserve localizable interface labels, including “Parla con Obit”.
 

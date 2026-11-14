@@ -12,7 +12,7 @@ Let the listener explore nine previews. Six have approved sounds, including the 
 
 Use graphite #21232E and off-white #F0F0F0 with orange #FE8500 for emphasis. A single thin orange orbit moves with the actual sound and settles at rest. Show a visible focus ring and a text playback state. Make the globe optional for navigation. Reduced motion freezes globe movement and the reactive animation. Check text, focus, control visibility and image scaling at enlarged zoom. Use semantic HTML controls with accessible names and expose state changes without announcing animation frames.
 
-Keyboard and mouse use the same actions. Screen readers can read scene text, controls and status. A connected braille display or keyboard works through its existing assistive software and standard text/keyboard events. Direct hardware drivers and custom braille chords are outside the demo. Record the actual configurations tested. A dedicated ORBIT device is unnecessary.
+Keyboard and mouse use the same actions. Screen readers can read scene text, controls and status. A connected braille display or keyboard works through its existing assistive software and standard text/keyboard events. Direct hardware drivers and custom braille chords are outside the demo. Record the actual configurations tested. A dedicated PTS device is unnecessary.
 
 ## Talk to Obit
 

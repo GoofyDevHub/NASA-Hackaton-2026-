@@ -1,6 +1,6 @@
-# ORBIT — Earth in Tune
+# PTS — Pixel That Sounds
 
-ORBIT is a listening guide to three NASA Earth visualizations. Choose a region on a globe or from a keyboard-accessible list, then hear what the colours in the image represent. Compare the Amazon and Congo lightning maps by listening for the difference in thunder density. Ask Obit to explain the difference or play the next scene.
+PTS is a listening guide to three NASA Earth visualizations. Choose a region on a globe or from a keyboard-accessible list, then hear what the colours in the image represent. Compare the Amazon and Congo lightning maps by listening for the difference in thunder density. Ask Obit to explain the difference or play the next scene.
 
 **Available here:** nine regional image references, six approved 15-second tracks, their sources and a reproducible audio renderer. The integrated website, voice assistant and 29-second presentation are planned. The specifications are a working agreement for the two-person team. Accessible operation and listener comprehension still need testing.
 
