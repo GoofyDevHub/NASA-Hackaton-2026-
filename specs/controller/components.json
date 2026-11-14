@@ -1,0 +1,842 @@
+[
+  {
+    "name": "Guscio inferiore a due impugnature",
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "color": "#343743",
+    "explode": 0,
+    "group": "base",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Giunzione gusci",
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "color": "#171922",
+    "explode": 0,
+    "group": "base",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Calotta superiore con sede della piastra",
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "color": "#434654",
+    "explode": 100,
+    "group": "cover",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "09 Precedente",
+    "pos": [
+      -73,
+      34,
+      -10
+    ],
+    "color": "#F0F0F0",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "09 Precedente freccia",
+    "pos": [
+      -73,
+      36.55,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "09 Precedente battuta",
+    "pos": [
+      -77.7,
+      36.55,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "09 Precedente interruttore",
+    "pos": [
+      -73,
+      27,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "10 Ascolta pausa",
+    "pos": [
+      -52,
+      34,
+      -13
+    ],
+    "color": "#FE8500",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "10 Ascolta pausa freccia",
+    "pos": [
+      -52,
+      36.55,
+      -13
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "10 Ascolta pausa battuta",
+    "pos": [
+      -47.3,
+      36.55,
+      -13
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pausa secondo rilievo",
+    "pos": [
+      -45,
+      36.55,
+      -13
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "10 Ascolta pausa interruttore",
+    "pos": [
+      -52,
+      27,
+      -13
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "11 Successivo",
+    "pos": [
+      -30,
+      34,
+      -10
+    ],
+    "color": "#F0F0F0",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "11 Successivo freccia",
+    "pos": [
+      -30,
+      36.55,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "11 Successivo battuta",
+    "pos": [
+      -25.3,
+      36.55,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "11 Successivo interruttore",
+    "pos": [
+      -30,
+      27,
+      -10
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "12 Descrivi",
+    "pos": [
+      14,
+      34,
+      12
+    ],
+    "color": "#F0F0F0",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Descrivi righe",
+    "pos": [
+      11,
+      36.55,
+      12
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Descrivi righe",
+    "pos": [
+      14,
+      36.55,
+      12
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Descrivi righe",
+    "pos": [
+      17,
+      36.55,
+      12
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "12 Descrivi interruttore",
+    "pos": [
+      14,
+      27,
+      12
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "13 Arresta",
+    "pos": [
+      48,
+      34,
+      25
+    ],
+    "color": "#FE8500",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Simbolo Stop",
+    "pos": [
+      48,
+      36.55,
+      25
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "13 Arresta interruttore",
+    "pos": [
+      48,
+      27,
+      25
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "14 Richiesta termica",
+    "pos": [
+      76,
+      34,
+      5
+    ],
+    "color": "#F0F0F0",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Punto termico",
+    "pos": [
+      76,
+      36.55,
+      5
+    ],
+    "color": "#14161D",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "14 Richiesta termica interruttore",
+    "pos": [
+      76,
+      27,
+      5
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "15 Encoder volume",
+    "pos": [
+      -46,
+      36,
+      12
+    ],
+    "color": "#AAB5C0",
+    "explode": 117,
+    "group": "controls",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Encoder corpo",
+    "pos": [
+      -46,
+      27,
+      12
+    ],
+    "color": "#14161D",
+    "explode": 65,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "16 Supporto logica",
+    "pos": [
+      -49,
+      10,
+      -21.599999999999998
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "17 ESP32 S3 Zero candidato",
+    "pos": [
+      -63,
+      13,
+      -25.919999999999998
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "18 x 24 mm placeholder; verificare revisione e quote della scheda posseduta"
+  },
+  {
+    "name": "Modulo ESP32 schermatura",
+    "pos": [
+      -63,
+      15.3,
+      -23.759999999999998
+    ],
+    "color": "#AAB5C0",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "USB C ingombro",
+    "pos": [
+      -63,
+      15,
+      -35.28
+    ],
+    "color": "#AAB5C0",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -30.959999999999997
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -30.959999999999997
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -28.799999999999997
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -28.799999999999997
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -26.64
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -26.64
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -24.48
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -24.48
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -22.32
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -22.32
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -71,
+      14.100000000000001,
+      -20.16
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Pad GPIO",
+    "pos": [
+      -55,
+      14.100000000000001,
+      -20.16
+    ],
+    "color": "#BB9B55",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "18 Stadio ERM e regolatore",
+    "pos": [
+      -1,
+      10,
+      -22.32
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "MOSFET ingombro",
+    "pos": [
+      -5,
+      13,
+      -22.32
+    ],
+    "color": "#14161D",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "19 Motore ERM",
+    "pos": [
+      -74,
+      7,
+      28.799999999999997
+    ],
+    "color": "#AAB5C0",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "20 Interruzione indipendente",
+    "pos": [
+      -24,
+      10,
+      8
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Rele cutoff riserva",
+    "pos": [
+      -24,
+      16,
+      8
+    ],
+    "color": "#14161D",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "21 Driver TEC riserva",
+    "pos": [
+      10,
+      8,
+      -28
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "Volume riservato; componente e ingombro reale non selezionati"
+  },
+  {
+    "name": "Driver potenza riserva",
+    "pos": [
+      10,
+      13.5,
+      -28
+    ],
+    "color": "#14161D",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "22 Dissipatore base",
+    "pos": [
+      49,
+      8,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      29,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      34,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      39,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      44,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      49,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      54,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      59,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      64,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "Aletta dissipatore",
+    "pos": [
+      69,
+      17.5,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "23 Cella TEC riserva",
+    "pos": [
+      49,
+      27,
+      -8
+    ],
+    "color": "#F0F0F0",
+    "explode": 61,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "24 Piastra di contatto",
+    "pos": [
+      49,
+      32,
+      -8
+    ],
+    "color": "#AAB5C0",
+    "explode": 88,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "25 Sensore piastra",
+    "pos": [
+      68,
+      31,
+      -8
+    ],
+    "color": "#FE8500",
+    "explode": 88,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "26 Sensore dissipatore",
+    "pos": [
+      73,
+      10,
+      -8
+    ],
+    "color": "#FE8500",
+    "explode": 34,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "27 Sensore indipendente",
+    "pos": [
+      49,
+      31,
+      11
+    ],
+    "color": "#FE8500",
+    "explode": 88,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "28 Ventola ingombro",
+    "pos": [
+      49,
+      2,
+      -8
+    ],
+    "color": "#14161D",
+    "explode": 16,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "29 Connettore alimentazione",
+    "pos": [
+      58,
+      14,
+      -37
+    ],
+    "color": "#14161D",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  },
+  {
+    "name": "30 Interfaccia comunicazione riserva",
+    "pos": [
+      33,
+      10,
+      -27.36
+    ],
+    "color": "#196660",
+    "explode": 28,
+    "group": "internals",
+    "note": "Ingombro concettuale da verificare"
+  }
+]
