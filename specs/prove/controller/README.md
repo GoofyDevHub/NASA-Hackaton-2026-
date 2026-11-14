@@ -1,3 +1,0 @@
-# Prova del controller
-
-Aprire il [modello assemblato](../../controller/controller-3d.html), ruotarlo e separare i gruppi. Confrontare posizione dei sei comandi, simboli e volume con il [render](../../images/controller/presa.png). Provare una ripresa dell’esploso e annotare quali parti si distinguono su schermo piccolo. Per provare la generazione copiare la cartella controller del pacchetto in una cartella di lavoro e rigenerare i GLB seguendo il suo README. Per una prova di presa usare un mockup inerte e registrare portata dei pollici e riconoscibilità di Arresta. Annotare versione, inquadratura o campione usato, esito e correzione.
