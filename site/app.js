@@ -220,13 +220,9 @@ function render() {
     $('p-title').textContent = s.place;
     $('p-sub').textContent = src.subtitle;
     $('p-image').alt = `NASA image: ${s.imageLabel}.`;
-    const band = !!s.audioCropLabel;                       // Southern Ocean: regional thumbnail plus the wide band that drives the voice
-    const img = $('p-image');
-    img.onload = () => { const r = img.naturalWidth / img.naturalHeight, hh = Math.min(band ? 17.5 : 24.5, 38 / r);
-      img.style.height = `calc(var(--u) * ${hh})`; img.style.width = `calc(var(--u) * ${hh * r})`; };
-    img.src = band ? s.image : (s.audioCrop || s.image);
-    $('p-tag').textContent = s.imageLabel;
-    $('p-strip-wrap').hidden = !band; if (band) $('p-strip').src = s.audioCrop;
+    $('p-image').src = s.audioCrop || s.image;              // every view fills the same frame; the ocean scenes show their exact crop
+    $('p-tag').textContent = s.audioCropLabel ? 'Southern Ocean band · detail of the exact crop' : s.imageLabel;
+    openLens(s);
     $('p-legend').src = src.legend; $('p-legend').alt = src.legendAlt;
     $('p-source').innerHTML = '';
     const link = document.createElement('a'); link.href = src.page; link.textContent = src.sourceId;
@@ -255,6 +251,49 @@ function render() {
   const v = Math.round(state.volume * 100);
   $('p-volume').value = v; $('p-volume').style.setProperty('--v', v + '%'); $('p-volume').setAttribute('aria-valuetext', `${v} percent`);
 }
+// ---- the lens: a small Earth turned to the place, a marker on it, and two rays opening onto the image frame
+const LENS = { w: 38, h: 24.5, mini: 10.4, frameX: 11, frameH: 20.25 };       // in layout units, matching styles.css
+let earthPx = null, lensScene = null;
+{ const im = new Image(); im.onload = () => { const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+    const x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(im, 0, 0, 1024, 512); earthPx = x.getImageData(0, 0, 1024, 512).data;
+    if (lensScene) drawMini(lensScene); }; im.src = 'textures/earth.jpg'; }
+function miniView(s) { return { lat: Math.max(-58, Math.min(58, s.pin.lat * 0.75)), lon: s.pin.lon + 14 }; }
+function miniSpot(s) {                                     // where the place falls on the small Earth, in layout units
+  const v = miniView(s), R = Math.PI / 180, la = s.pin.lat * R, dl = (s.pin.lon - v.lon) * R, sl = Math.sin(v.lat * R), cl = Math.cos(v.lat * R);
+  const X = Math.cos(la) * Math.sin(dl), Y = Math.sin(la), Z = Math.cos(la) * Math.cos(dl), r = LENS.mini / 2 * 0.96;
+  return { x: LENS.mini / 2 + r * X, y: LENS.h - LENS.mini / 2 - r * (Y * cl - Z * sl) };
+}
+function drawMini(s) {
+  const cv = $('p-mini'), S = Math.max(120, Math.round(cv.clientWidth * Math.min(devicePixelRatio || 1, 2))), x = cv.getContext('2d');
+  cv.width = cv.height = S;
+  if (!earthPx) return;
+  const v = miniView(s), D = Math.PI / 180, sl = Math.sin(v.lat * D), cl = Math.cos(v.lat * D), l0 = v.lon * D, r = S / 2 * 0.96, c = S / 2;
+  const img = x.createImageData(S, S), o = img.data;
+  for (let py = 0; py < S; py++) for (let px = 0; px < S; px++) {
+    const ux = (px + 0.5 - c) / r, uy = (c - py - 0.5) / r, r2 = ux * ux + uy * uy;
+    if (r2 > 1) continue;
+    const z = Math.sqrt(1 - r2), Y = uy * cl + z * sl, Z = -uy * sl + z * cl;
+    const lat = Math.asin(Math.max(-1, Math.min(1, Y))), lon = l0 + Math.atan2(ux, Z);
+    let u = (lon / (2 * Math.PI) + 0.5) % 1; if (u < 0) u += 1;
+    const ti = (Math.min(511, Math.floor((0.5 - lat / Math.PI) * 512)) * 1024 + Math.min(1023, Math.floor(u * 1024))) * 4;
+    const d = ux * -0.62 + uy * 0.36 + z * 0.70, lit = Math.max(0, Math.min(1, (d + 0.2) / 0.7)), k = 0.1 + lit * (0.6 + 0.5 * Math.max(d, 0));
+    const rim = Math.pow(1 - z, 3) * 0.7 * (0.15 + 0.85 * lit), oi = (py * S + px) * 4;
+    for (let n = 0; n < 3; n++) o[oi + n] = Math.min(255, earthPx[ti + n] * k) * (1 - rim) + [90, 170, 255][n] * rim;
+    o[oi + 3] = 255 * Math.max(0, Math.min(1, (1 - Math.sqrt(r2)) * r + 0.5));
+  }
+  x.putImageData(img, 0, 0);
+}
+function openLens(s) {
+  lensScene = s; drawMini(s);
+  const p = miniSpot(s), e = 0.55, f = n => n.toFixed(2);
+  $('p-spot').setAttribute('x', f(p.x - e)); $('p-spot').setAttribute('y', f(p.y - e)); $('p-spot').setAttribute('width', f(e * 2)); $('p-spot').setAttribute('height', f(e * 2));
+  $('p-ray').setAttribute('d', `M${f(p.x - e)} ${f(p.y - e)} L${LENS.frameX} 0 M${f(p.x + e)} ${f(p.y + e)} L${LENS.frameX} ${LENS.frameH}`);
+  const shot = document.querySelector('.shot'), lens = document.querySelector('.lens');
+  shot.style.transformOrigin = `calc(var(--u) * ${f(p.x - LENS.frameX)}) calc(var(--u) * ${f(p.y)})`;       // the image grows out of the place
+  lens.classList.remove('zoom'); void lens.offsetWidth; lens.classList.add('zoom');
+}
+addEventListener('resize', () => lensScene && drawMini(lensScene));
+
 // ---- the thin orange line: flat at rest, it records the level of the actual sound as the track advances
 const trace = new Float32Array(260), tcv = $('p-trace'), tctx = tcv.getContext('2d');
 const still = matchMedia('(prefers-reduced-motion: reduce)');

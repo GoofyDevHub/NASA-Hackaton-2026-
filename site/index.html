@@ -47,14 +47,15 @@
     <!-- 3. Player -->
     <section id="player" aria-labelledby="p-title" hidden>
       <div class="plate">
-        <figure class="shot">
-          <img id="p-image" alt="">
-          <figcaption id="p-tag"></figcaption>
-        </figure>
-        <figure class="strip" id="p-strip-wrap" hidden>
-          <img id="p-strip" alt="NASA image: Southern Ocean band around Antarctica.">
-          <figcaption>The Southern Ocean band that drives the voice, exact crop</figcaption>
-        </figure>
+        <div class="lens">
+          <canvas id="p-mini" aria-hidden="true"></canvas>
+          <svg id="p-rays" viewBox="0 0 38 24.5" preserveAspectRatio="none" aria-hidden="true">
+            <path id="p-ray" pathLength="1"/>
+            <rect id="p-spot" width="1" height="1"/>
+          </svg>
+          <figure class="shot"><img id="p-image" alt=""></figure>
+          <p id="p-tag" class="tag"></p>
+        </div>
         <div class="prov">
           <img id="p-legend" alt="">
           <p id="p-source"></p>
