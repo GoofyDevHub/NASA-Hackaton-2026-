@@ -1,0 +1,118 @@
+{
+  "vocalSet": {
+    "dataset": "VocalSet 1.1",
+    "source": "https://zenodo.org/records/1203819",
+    "archive": "https://zenodo.org/records/1203819/files/VocalSet11.zip?download=1",
+    "authors": [
+      "Julia Wilkins",
+      "Prem Seetharaman",
+      "Alison Wahl",
+      "Bryan Pardo"
+    ],
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "files": {
+    "f1_long_forte_a.wav": {
+      "credit": "VocalSet",
+      "archivePath": "FULL/female1/long_tones/forte/f1_long_forte_a.wav",
+      "sha256": "79c77dbc24f8aba97a878d6896728e559dfc109a2ed23c557c29ae256cdc859c",
+      "archiveCrc32": 747628242,
+      "zipMember": {
+        "name": "FULL/female1/long_tones/forte/f1_long_forte_a.wav",
+        "method": 8,
+        "crc32": 747628242,
+        "compressedSize": 723108,
+        "size": 998072,
+        "localOffset": 261163392
+      }
+    },
+    "f1_long_messa_a.wav": {
+      "credit": "VocalSet",
+      "archivePath": "FULL/female1/long_tones/messa/f1_long_messa_a.wav",
+      "sha256": "6d7bcc523f6e0092a759bff4abba0bb570143b899ee8cd4b1711c9287494e768",
+      "archiveCrc32": 4223724548,
+      "zipMember": {
+        "name": "FULL/female1/long_tones/messa/f1_long_messa_a.wav",
+        "method": 8,
+        "crc32": 4223724548,
+        "compressedSize": 827260,
+        "size": 1251544,
+        "localOffset": 264332284
+      }
+    },
+    "f1_long_straight_a.wav": {
+      "credit": "VocalSet",
+      "archivePath": "FULL/female1/long_tones/straight/f1_long_straight_a.wav",
+      "sha256": "e1ff90d89de7e30a4dd717dd642173e57b083832f38e74eb8033d349c02bc340",
+      "archiveCrc32": 2758722071,
+      "retrieval": "Retained mirror sample, checked byte-for-byte CRC against the official ZIP directory.",
+      "zipMember": {
+        "name": "FULL/female1/long_tones/straight/f1_long_straight_a.wav",
+        "method": 8,
+        "crc32": 2758722071,
+        "compressedSize": 716043,
+        "size": 1042802,
+        "localOffset": 257673532
+      }
+    },
+    "m3_long_straight_a.wav": {
+      "credit": "VocalSet",
+      "sha256": "0220658c4ac8b96392c2bbcc3348fa757ed6264185610d31daef87ec0399cf4f",
+      "zipMember": {
+        "name": "FULL/male3/long_tones/straight/m3_long_straight_a.wav",
+        "method": 8,
+        "crc32": 3987427308,
+        "compressedSize": 776769,
+        "size": 1037528,
+        "localOffset": 686206086
+      }
+    },
+    "m3_long_forte_a.wav": {
+      "credit": "VocalSet",
+      "sha256": "7ed3ce85e98c8d905958454dedefbf3b292d5d36a26d2b9d3a67eb7ec95e9586",
+      "zipMember": {
+        "name": "FULL/male3/long_tones/forte/m3_long_forte_a.wav",
+        "method": 8,
+        "crc32": 618588353,
+        "compressedSize": 589319,
+        "size": 664372,
+        "localOffset": 690656988
+      }
+    },
+    "m3_long_messa_a.wav": {
+      "credit": "VocalSet",
+      "sha256": "de06cdf1b4760279e37cca2728a0f3103b8e688c540c2beefe71e513c1388525",
+      "zipMember": {
+        "name": "FULL/male3/long_tones/messa/m3_long_messa_a.wav",
+        "method": 8,
+        "crc32": 982296016,
+        "compressedSize": 1191202,
+        "size": 1653164,
+        "localOffset": 692505302
+      }
+    },
+    "cough-1.ogg": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Cough_1.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:Cough_1.ogg",
+      "author": "ezwa",
+      "license": "Public domain, released by author",
+      "sha256": "74d085545dceef494e95174d07391d102bf7fbcd0d544174e5256f5ddefa8db8"
+    },
+    "cough-2.ogg": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Cough_2.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:Cough_2.ogg",
+      "author": "ezwa",
+      "license": "Public domain, released by author",
+      "sha256": "5efdb357e72ee7f433ecd7a8bf0d8233d73e9257d8cce79d6c5a8b6256c3f36b"
+    },
+    "rain-and-thunder.ogg": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Rain_and_thunder.ogg",
+      "sha256": "cbfd7b7504bc4e53d6e56ac8d933ba56f97cc28f15a46800c74c2d8eccb3fa89",
+      "author": "Caesar",
+      "page": "https://commons.wikimedia.org/wiki/File:Rain_and_thunder.ogg",
+      "license": "Public domain (PD-self)",
+      "location": "Sundbyberg, Sweden"
+    }
+  }
+}

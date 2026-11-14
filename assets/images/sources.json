@@ -1,0 +1,254 @@
+{
+  "description": "Regional previews of three NASA visualizations. The two exact ocean audio crops are listed separately.",
+  "images": {
+    "antarctica-ocean.png": {
+      "sha256": "3892d154a637c668c25b740aadaf1ad061b9a2e5d0930655f91640a1a3d3bb8a",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3912/",
+      "sourcePeriod": "Visualization: 2007-03-25 to 2008-03-03; exact preview instant unqualified.",
+      "credit": "NASA/Goddard/SVS; Greg Shirah; ECCO2 MIT/JPL",
+      "pixelRectangle": [
+        614,
+        825,
+        796,
+        933
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -72,
+        -74,
+        -40,
+        -55
+      ],
+      "sourceSha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "rawCropRgbSha256": "85395be7cd2096518b19b0ff6797e3a93dce61cffcf255fc33cef2e9da0f166e",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "antarctica-lightning.png": {
+      "sha256": "63dae860b654bb6a0d40cb0b2ab2a94a0a83b93b554ec6c983d4444d84517acd",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3144/",
+      "sourcePeriod": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson",
+      "pixelRectangle": [
+        216,
+        290,
+        280,
+        328
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -72,
+        -74,
+        -40,
+        -55
+      ],
+      "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+      "rawCropRgbSha256": "e6a2ef6a54d0bbe152a6acfe09628e191e954484242805e0c4d62897c7f607ee",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "unqualified"
+    },
+    "antarctica-aerosols.png": {
+      "sha256": "5216c6b2bb6891f17fa70252c8a7003fc96ebeab0632ef5216b675f142963ff8",
+      "sourcePage": "https://svs.gsfc.nasa.gov/5669/",
+      "sourcePeriod": "GEOS model: 2025-08-19, 20:00 UTC.",
+      "credit": "NASA GMAO/SVS; Joseph V. Ardizzone; Helen-Nicole Kostis; Lesley Ott",
+      "pixelRectangle": [
+        576,
+        870,
+        747,
+        984
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -72,
+        -74,
+        -40,
+        -55
+      ],
+      "sourceSha256": "0c6a8f6c46fb52a2f9a636bbd804fc6e5e23454dcb2f0d3fe04c653c772e8a7a",
+      "rawCropRgbSha256": "c0fe34b3e3a85f9740830c976cb19a70e447cf16c5061f6351d1eedff35d13a8",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "congo-ocean.png": {
+      "sha256": "0597153a9805590e3550725dbd2e320e3ad0b79b25b67bf7dc5d59d2720b0fc9",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3912/",
+      "sourcePeriod": "Visualization: 2007-03-25 to 2008-03-03; exact preview instant unqualified.",
+      "credit": "NASA/Goddard/SVS; Greg Shirah; ECCO2 MIT/JPL",
+      "pixelRectangle": [
+        1047,
+        495,
+        1104,
+        597
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        4,
+        -15,
+        14,
+        3
+      ],
+      "sourceSha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "rawCropRgbSha256": "04e16e53f08393b41a5a31c96d3e863286f34685daa62061d85ef00c84802c14",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "congo-lightning.png": {
+      "sha256": "432f783dd6ca8144b90f7f37bb5ad8eacfa732762466f5058b695f892a653646",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3144/",
+      "sourcePeriod": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson",
+      "pixelRectangle": [
+        370,
+        164,
+        424,
+        206
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        5,
+        -13,
+        32,
+        8
+      ],
+      "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+      "rawCropRgbSha256": "1364ed16a9f632969d5f57e6b40e21c7b0c9567cca9efebfce7d9f97074929e8",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "congo-aerosols.png": {
+      "sha256": "40288f4d194c7f7e2512a0897f6e9b6aa5c51c641d33f9ca149b399654acf063",
+      "sourcePage": "https://svs.gsfc.nasa.gov/5669/",
+      "sourcePeriod": "GEOS model: 2025-08-19, 20:00 UTC.",
+      "credit": "NASA GMAO/SVS; Joseph V. Ardizzone; Helen-Nicole Kostis; Lesley Ott",
+      "pixelRectangle": [
+        987,
+        492,
+        1131,
+        618
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        5,
+        -13,
+        32,
+        8
+      ],
+      "sourceSha256": "0c6a8f6c46fb52a2f9a636bbd804fc6e5e23454dcb2f0d3fe04c653c772e8a7a",
+      "rawCropRgbSha256": "78301b1f82031e1bef480a60c93e2078a22f44ee04c59272f40999c42b7a59b7",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "amazon-ocean.png": {
+      "sha256": "1400451f912c360f87e03887872098c39503af914454fdef1e3e058cd6d237e2",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3912/",
+      "sourcePeriod": "Visualization: 2007-03-25 to 2008-03-03; exact preview instant unqualified.",
+      "credit": "NASA/Goddard/SVS; Greg Shirah; ECCO2 MIT/JPL",
+      "pixelRectangle": [
+        728,
+        466,
+        796,
+        558
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -52,
+        -8,
+        -40,
+        8
+      ],
+      "sourceSha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "rawCropRgbSha256": "540a8b51b3cc5e602fca0b451d23c2228771354eb6a019ffa4f535d4b994cd17",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "amazon-lightning.png": {
+      "sha256": "dcec44a4762c664b6f1a7460ea6ed81431e7bd55bbb5287d4f41acd7deacd11a",
+      "sourcePage": "https://svs.gsfc.nasa.gov/3144/",
+      "sourcePeriod": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson",
+      "pixelRectangle": [
+        208,
+        164,
+        272,
+        212
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -76,
+        -16,
+        -44,
+        8
+      ],
+      "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+      "rawCropRgbSha256": "e61d4093c524cf791b002a3cdd90e70b7dbb3dfaf09db5af4433152975ac37a7",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    },
+    "amazon-aerosols.png": {
+      "sha256": "76068a2c8c5d3283363029826dde91ceca0941c8d1bec9c59e091ac968724ba9",
+      "sourcePage": "https://svs.gsfc.nasa.gov/5669/",
+      "sourcePeriod": "GEOS model: 2025-08-19, 20:00 UTC.",
+      "credit": "NASA GMAO/SVS; Joseph V. Ardizzone; Helen-Nicole Kostis; Lesley Ott",
+      "pixelRectangle": [
+        555,
+        492,
+        725,
+        636
+      ],
+      "approximateBoundsWestSouthEastNorth": [
+        -76,
+        -16,
+        -44,
+        8
+      ],
+      "sourceSha256": "0c6a8f6c46fb52a2f9a636bbd804fc6e5e23454dcb2f0d3fe04c653c772e8a7a",
+      "rawCropRgbSha256": "2e7f6f1800a80d0f0bed1cfbf590654b053ae41f2fbeb3c15297541a028be9eb",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "qualification": "audition"
+    }
+  },
+  "originals": {
+    "ocean.jpg": {
+      "sha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "page": "https://svs.gsfc.nasa.gov/3912/",
+      "assetUrl": "https://svs.gsfc.nasa.gov/vis/a000000/a003900/a003912/flat_global_ecco2_2028x1024.25000.jpg"
+    },
+    "lightning.png": {
+      "sha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+      "page": "https://svs.gsfc.nasa.gov/3144/",
+      "assetUrl": "https://svs.gsfc.nasa.gov/vis/a000000/a003100/a003144/lightning.png"
+    },
+    "aerosols.png": {
+      "sha256": "0c6a8f6c46fb52a2f9a636bbd804fc6e5e23454dcb2f0d3fe04c653c772e8a7a",
+      "page": "https://svs.gsfc.nasa.gov/5669/",
+      "assetUrl": "https://svs.gsfc.nasa.gov/vis/a000000/a005600/a005669/Aerosols_2025-08-19T20_00_00_1920x1080.png"
+    }
+  },
+  "audioCropNote": "Current Antarctic ocean audio uses the broader Southern Ocean band, not the Peninsula crop in the nine-image overview. Exact active ocean input crops are retained in audio-crops/.",
+  "sourcePages": {
+    "ocean": "https://svs.gsfc.nasa.gov/3912/",
+    "lightning": "https://svs.gsfc.nasa.gov/3144/",
+    "aerosols": "https://svs.gsfc.nasa.gov/5669/"
+  },
+  "activeOceanAudioCrops": {
+    "antarctica-ocean.png": {
+      "file": "audio-crops/antarctica-ocean.png",
+      "pixelRectangle": [
+        0,
+        800,
+        2048,
+        960
+      ],
+      "rawCropRgbSha256": "93047885a32b403977be5345581f7916f6f90f08d1b467e44a07768f5b749b22",
+      "fileSha256": "beb990a7d9600f1a206d6a5066b31b5a36e039a6ae982735ac53fa21a9d8091a",
+      "source": "originals/ocean.jpg",
+      "transform": "Exact native-resolution rectangular crop, without recolouring or enlargement."
+    },
+    "amazon-ocean.png": {
+      "file": "audio-crops/amazon-ocean.png",
+      "pixelRectangle": [
+        728,
+        466,
+        796,
+        558
+      ],
+      "rawCropRgbSha256": "540a8b51b3cc5e602fca0b451d23c2228771354eb6a019ffa4f535d4b994cd17",
+      "fileSha256": "0e9eb6415301fafa8ffb1b79f260120721e733c886f450bc9abcc7aa73f71bfe",
+      "source": "originals/ocean.jpg",
+      "transform": "Exact native-resolution rectangular crop, without recolouring or enlargement."
+    }
+  }
+}

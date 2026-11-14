@@ -1,0 +1,8 @@
+VocalSet 1.1. Julia Wilkins, Prem Seetharaman, Alison Wahl and Bryan Pardo (2018).
+VocalSet: A Singing Voice Dataset. ISMIR 2018.
+Source: https://zenodo.org/records/1203819
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+The six source WAVs are unchanged excerpts from the distributed collection (whole source files).
+The two ORBIT tracks edit and arrange phrases, adjust gain and duration, and use pitch or room processing.
+Exact source archive members and hashes are in sources.json.

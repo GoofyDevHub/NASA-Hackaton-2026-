@@ -1,0 +1,652 @@
+{
+  "antarctica-wind": {
+    "status": "illustrative-user-request",
+    "matchedPixels": 0,
+    "reason": "User requested light wind. The image remains unqualified; no wind speed or lightning intensity is inferred.",
+    "kind": "light-wind-demo-not-observation",
+    "source": {
+      "path": "../assets/images/originals/lightning.png",
+      "page": "https://svs.gsfc.nasa.gov/3144/",
+      "period": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson"
+    },
+    "approximateBoundsWestSouthEastNorth": [
+      -72,
+      -74,
+      -40,
+      -55
+    ],
+    "pixelRectangle": [
+      216,
+      290,
+      280,
+      328
+    ],
+    "originalDimensions": [
+      720,
+      360
+    ],
+    "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+    "cropRawRgbSha256": "e6a2ef6a54d0bbe152a6acfe09628e191e954484242805e0c4d62897c7f607ee",
+    "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+    "geography": "Approximate plate-carree image coordinates; no watershed mask.",
+    "events": [],
+    "windSeedSha256": "e6a2ef6a54d0bbe152a6acfe09628e191e954484242805e0c4d62897c7f607ee",
+    "synthesis": "Seeded, band-limited coloured airflow with slow gust envelopes; no rain or thunder samples.",
+    "audioSource": "Procedural wind, generated locally; not a field recording or measured Antarctic wind.",
+    "wav": "../assets/audio/antarctica-wind.wav",
+    "mp3": "../assets/audio/antarctica-wind.mp3",
+    "loudnessLufs": -23.47,
+    "truePeakDbTP": -11.41,
+    "mp3TruePeakDbTP": -11.64,
+    "wavSha256": "2675c23b9b20ce1e3aadc044a6b1d0853f4d986818f588c52e0bde7194b6be9d",
+    "mp3Sha256": "7179f33c489ab71d9ae37e8dd345181887376afde1b204adabfee09e51152c95",
+    "repeatedWavIdentical": true
+  },
+  "congo-storm": {
+    "status": "image-derived-audition",
+    "matchedPixels": 1930,
+    "matchedPixelFraction": 0.8509700176366843,
+    "interpolatedColumns": 0,
+    "activityDisplayScore": 0.41009595854922276,
+    "minimumColumnScore": 0.1744533333333333,
+    "maximumColumnScore": 0.6354133333333333,
+    "soundProfile": "high",
+    "numericMeaning": "Dimensionless display-colour proxy; not rainfall, storm severity or flash counts.",
+    "kind": "image-derived-rain-thunder-metaphor",
+    "source": {
+      "path": "../assets/images/originals/lightning.png",
+      "page": "https://svs.gsfc.nasa.gov/3144/",
+      "period": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson"
+    },
+    "approximateBoundsWestSouthEastNorth": [
+      5,
+      -13,
+      32,
+      8
+    ],
+    "pixelRectangle": [
+      370,
+      164,
+      424,
+      206
+    ],
+    "originalDimensions": [
+      720,
+      360
+    ],
+    "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+    "cropRawRgbSha256": "1364ed16a9f632969d5f57e6b40e21c7b0c9567cca9efebfce7d9f97074929e8",
+    "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+    "geography": "Approximate plate-carree image coordinates; no watershed mask.",
+    "events": [
+      {
+        "seconds": 1.9904583333333334,
+        "activity": 0.31009575756084157,
+        "amplitudeBeforeEmphasis": 0.11652409647333942,
+        "attackMs": 63.31249999999999
+      },
+      {
+        "seconds": 4.386770833333333,
+        "activity": 0.3379216900309954,
+        "amplitudeBeforeEmphasis": 0.12537957335829697,
+        "attackMs": 58.6875
+      },
+      {
+        "seconds": 6.205666666666667,
+        "activity": 0.367789911424814,
+        "amplitudeBeforeEmphasis": 0.13504854551742212,
+        "attackMs": 53.70833333333333
+      },
+      {
+        "seconds": 7.723416666666667,
+        "activity": 0.44821875008735473,
+        "amplitudeBeforeEmphasis": 0.16184665782722324,
+        "attackMs": 40.29166666666667
+      },
+      {
+        "seconds": 8.937083333333334,
+        "activity": 0.49592271802654847,
+        "amplitudeBeforeEmphasis": 0.1782147697065325,
+        "attackMs": 32.35416666666667
+      },
+      {
+        "seconds": 10.112729166666666,
+        "activity": 0.4794149386524808,
+        "amplitudeBeforeEmphasis": 0.17251335557187547,
+        "attackMs": 35.104166666666664
+      },
+      {
+        "seconds": 11.362520833333333,
+        "activity": 0.4671586611253475,
+        "amplitudeBeforeEmphasis": 0.16830556831708138,
+        "attackMs": 37.145833333333336
+      },
+      {
+        "seconds": 12.495354166666667,
+        "activity": 0.5493720676126969,
+        "amplitudeBeforeEmphasis": 0.19693133405626317,
+        "attackMs": 23.4375
+      },
+      {
+        "seconds": 13.6484375,
+        "activity": 0.39602144256646254,
+        "amplitudeBeforeEmphasis": 0.14433354917232533,
+        "attackMs": 49.0
+      }
+    ],
+    "emphasisGainDbRange": [
+      1.5,
+      8.0
+    ],
+    "wav": "../assets/audio/congo-storm.wav",
+    "mp3": "../assets/audio/congo-storm.mp3",
+    "loudnessLufs": -7.02,
+    "truePeakDbTP": -2.05,
+    "mp3TruePeakDbTP": -1.88,
+    "wavSha256": "04beca0a07d28d5d34eb48d49dc1745f63a948a83bb3295142aec0c93bca674b",
+    "mp3Sha256": "3d42812de9c037d27d79aaf7a4a2fdbea8153097f71e3cff90d98006a08bf9a5",
+    "repeatedWavIdentical": true,
+    "loudnessIncreaseLu": 6.41
+  },
+  "amazon-storm": {
+    "status": "image-derived-audition",
+    "matchedPixels": 2190,
+    "matchedPixelFraction": 0.712890625,
+    "interpolatedColumns": 0,
+    "activityDisplayScore": 0.2085563470319635,
+    "minimumColumnScore": 0.14010000000000003,
+    "maximumColumnScore": 0.31870787878787876,
+    "soundProfile": "medium",
+    "numericMeaning": "Dimensionless display-colour proxy; not rainfall, storm severity or flash counts.",
+    "kind": "image-derived-rain-thunder-metaphor",
+    "source": {
+      "path": "../assets/images/originals/lightning.png",
+      "page": "https://svs.gsfc.nasa.gov/3144/",
+      "period": "Annual climatology: LIS 1998-2002 and OTD 1995-1999.",
+      "credit": "NASA/Goddard/SVS; Jeff de La Beaujardiere; Jeff Halverson"
+    },
+    "approximateBoundsWestSouthEastNorth": [
+      -76,
+      -16,
+      -44,
+      8
+    ],
+    "pixelRectangle": [
+      208,
+      164,
+      272,
+      212
+    ],
+    "originalDimensions": [
+      720,
+      360
+    ],
+    "sourceSha256": "01d7076706b05f3eac0c02c0267051543f0900f3e20813c7b69a46f54b55e86b",
+    "cropRawRgbSha256": "e61d4093c524cf791b002a3cdd90e70b7dbb3dfaf09db5af4433152975ac37a7",
+    "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+    "geography": "Approximate plate-carree image coordinates; no watershed mask.",
+    "events": [
+      {
+        "seconds": 2.507791666666667,
+        "activity": 0.17600665469103108,
+        "amplitudeBeforeEmphasis": 0.07631672702619402,
+        "attackMs": 85.66666666666667
+      },
+      {
+        "seconds": 8.15875,
+        "activity": 0.22163763629318775,
+        "amplitudeBeforeEmphasis": 0.08948327641533874,
+        "attackMs": 78.0625
+      },
+      {
+        "seconds": 13.1866875,
+        "activity": 0.23131867181662819,
+        "amplitudeBeforeEmphasis": 0.09235137474613264,
+        "attackMs": 76.4375
+      }
+    ],
+    "emphasisGainDbRange": [
+      1.5,
+      1.5105250640673011
+    ],
+    "wav": "../assets/audio/amazon-storm.wav",
+    "mp3": "../assets/audio/amazon-storm.mp3",
+    "loudnessLufs": -19.5,
+    "truePeakDbTP": -4.07,
+    "mp3TruePeakDbTP": -3.74,
+    "wavSha256": "1c35ce9b4f39d864a84b01ea4bb7241beab777f52a71148ed0a634758349dbc7",
+    "mp3Sha256": "c85037624600d237fa5d430b0917d4bcb2b531c1d3db4b8bc01e4c6464e8a6f7",
+    "repeatedWavIdentical": true,
+    "loudnessIncreaseLu": 1.45
+  },
+  "amazon-ocean-soprano": {
+    "colouredPixelFraction": 0.4426150895140665,
+    "phrases": [
+      {
+        "sourceFile": "f1_long_messa_a.wav",
+        "sourceExcerpt": [
+          4.35,
+          8.6
+        ],
+        "startSeconds": 0.15,
+        "durationSeconds": 3.35,
+        "temperatureColourMean": 0.9090438448613901,
+        "sourceFundamentalHz": 521.5905087724872,
+        "intendedPitchHz": 531.5160054004212,
+        "appliedShiftSemitones": 0.32634622066289126,
+        "approximateShiftedFundamentalHz": 531.5160054004212,
+        "tempoFactor": 1.2686567164179106
+      },
+      {
+        "sourceFile": "f1_long_forte_a.wav",
+        "sourceExcerpt": [
+          4.15,
+          7.35
+        ],
+        "startSeconds": 3.85,
+        "durationSeconds": 3.35,
+        "temperatureColourMean": 0.9073030334572569,
+        "sourceFundamentalHz": 543.8276103792169,
+        "intendedPitchHz": 529.915052118479,
+        "appliedShiftSemitones": -0.4486595054794408,
+        "approximateShiftedFundamentalHz": 529.915052118479,
+        "tempoFactor": 0.9552238805970149
+      },
+      {
+        "sourceFile": "f1_long_straight_a.wav",
+        "sourceExcerpt": [
+          4.1,
+          7.0
+        ],
+        "startSeconds": 7.55,
+        "durationSeconds": 3.35,
+        "temperatureColourMean": 0.9071985299786612,
+        "sourceFundamentalHz": 531.3782729657016,
+        "intendedPitchHz": 529.8190981039061,
+        "appliedShiftSemitones": 0.0,
+        "approximateShiftedFundamentalHz": 531.3782729657016,
+        "tempoFactor": 0.8656716417910447
+      },
+      {
+        "sourceFile": "f1_long_messa_a.wav",
+        "sourceExcerpt": [
+          4.35,
+          8.6
+        ],
+        "startSeconds": 11.25,
+        "durationSeconds": 3.35,
+        "temperatureColourMean": 0.8992762714818644,
+        "sourceFundamentalHz": 521.5905087724872,
+        "intendedPitchHz": 522.5953190986112,
+        "appliedShiftSemitones": 0.0,
+        "approximateShiftedFundamentalHz": 521.5905087724872,
+        "tempoFactor": 1.2686567164179106
+      }
+    ],
+    "imageSource": {
+      "source": {
+        "path": "../assets/images/originals/ocean.jpg",
+        "page": "https://svs.gsfc.nasa.gov/3912/",
+        "period": "Visualization: 2007-03-25 to 2008-03-03; exact preview instant unqualified.",
+        "credit": "NASA/Goddard/SVS; Greg Shirah; ECCO2 MIT/JPL"
+      },
+      "approximateBoundsWestSouthEastNorth": [
+        -52,
+        -8,
+        -40,
+        8
+      ],
+      "pixelRectangle": [
+        728,
+        466,
+        796,
+        558
+      ],
+      "originalDimensions": [
+        2048,
+        1024
+      ],
+      "sourceSha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "cropRawRgbSha256": "540a8b51b3cc5e602fca0b451d23c2228771354eb6a019ffa4f535d4b994cd17",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "geography": "Approximate plate-carree image coordinates; no watershed mask."
+    },
+    "wav": "../assets/audio/amazon-ocean-soprano.wav",
+    "mp3": "../assets/audio/amazon-ocean-soprano.mp3",
+    "loudnessLufs": -19.99,
+    "truePeakDbTP": -8.69,
+    "mp3TruePeakDbTP": -8.97,
+    "wavSha256": "70598115ff6482187353a9dcf8b8f1386cb5a6c0839ad7810af52f04a0714773",
+    "mp3Sha256": "1b4fb0855de10af5d8a3f9902058922b41a1ba61d64c139c7f7dcb0146d31d17",
+    "repeatedWavIdentical": true
+  },
+  "antarctica-ocean-deep-male": {
+    "version": "orbit-ocean-deep-male/1",
+    "seconds": 15,
+    "sampleRate": 48000,
+    "selectionStatus": "user-selected",
+    "voice": "VocalSet professional male singer m3, tenor, in his naturally recorded low register.",
+    "direction": "Deep, clean and smooth operatic vowel; long natural crescendo and gentle phrase changes.",
+    "processing": "Complete low-register recordings with recorded pitch and natural vibrato retained, pitch-preserving moderate time stretch, phrase gain balance, quiet diffuse room tail. No pitch transposition, short sustain loops, added vibrato, TTS or voice cloning.",
+    "mapping": "Same Antarctic crop. Mean colour-warmth below .33 qualifies the recorded low register. Three spatial thirds gently shape phrase gain through .9+.2*meanWarmth. Exact sung pitch follows the performance rather than a continuous image-to-pitch curve.",
+    "qualification": "Recording-led artistic audition prioritizing a real deep voice, not current temperatures or measurements in degrees. This deliberately changes the preceding continuous/phrase-pitch mapping and does not reconstruct image detail.",
+    "imageSource": {
+      "sourcePage": "https://svs.gsfc.nasa.gov/3912/",
+      "sourcePeriod": "Visualization covers March 2007 to March 2008; exact preview instant unqualified.",
+      "sourceSha256": "dcfd17864c2940f9ce1cf406e866818379991d57b0e900f9b8812f0c7cf72e3c",
+      "sourceDimensions": [
+        2048,
+        1024
+      ],
+      "pixelRectangle": [
+        0,
+        800,
+        2048,
+        960
+      ],
+      "cropRawRgbSha256": "93047885a32b403977be5345581f7916f6f90f08d1b467e44a07768f5b749b22",
+      "geography": "Broad Southern Ocean band around Antarctica, matching the selected original cello audition."
+    },
+    "colouredPixelFraction": 0.278485107421875,
+    "phrases": [
+      {
+        "file": "m3_long_messa_a.wav",
+        "excerpt": [
+          0.1,
+          5.35
+        ],
+        "start": 0.15,
+        "duration": 6.2,
+        "level": 1.0,
+        "sourceFundamentalHz": 127.47791085117453,
+        "imageWarmthMean": 0.15782411587815023,
+        "colourGain": 0.93156482317563,
+        "appliedShiftSemitones": 0.0,
+        "approximateFundamentalHz": 127.47791085117453,
+        "tempoFactor": 0.8467741935483871
+      },
+      {
+        "file": "m3_long_forte_a.wav",
+        "excerpt": [
+          0.15,
+          2.65
+        ],
+        "start": 6.65,
+        "duration": 2.85,
+        "level": 0.65,
+        "sourceFundamentalHz": 130.12403278014372,
+        "imageWarmthMean": 0.1035156641589698,
+        "colourGain": 0.920703132831794,
+        "appliedShiftSemitones": 0.0,
+        "approximateFundamentalHz": 130.12403278014372,
+        "tempoFactor": 0.8771929824561403
+      },
+      {
+        "file": "m3_long_straight_a.wav",
+        "excerpt": [
+          0.1,
+          3.8
+        ],
+        "start": 9.8,
+        "duration": 4.2,
+        "level": 1.15,
+        "sourceFundamentalHz": 126.8722190933963,
+        "imageWarmthMean": 0.1319792192455282,
+        "colourGain": 0.9263958438491057,
+        "appliedShiftSemitones": 0.0,
+        "approximateFundamentalHz": 126.8722190933963,
+        "tempoFactor": 0.8809523809523809
+      }
+    ],
+    "room": {
+      "wetGain": 0.065,
+      "approximateT60": 1.05,
+      "predelaySeconds": 0.025,
+      "seedSha256": "93047885a32b403977be5345581f7916f6f90f08d1b467e44a07768f5b749b22",
+      "meaning": "Artistic acoustics, not image-derived weather."
+    },
+    "loudnessLufs": -20.06,
+    "truePeakDbTP": -8.44,
+    "mp3TruePeakDbTP": -8.68,
+    "wav": "../assets/audio/antarctica-ocean-deep-male.wav",
+    "mp3": "../assets/audio/antarctica-ocean-deep-male.mp3",
+    "wavSha256": "7c1bbcdd49a5a45b667650de170e3c81a545230ed2d5717b688c7f25da2aa85e",
+    "mp3Sha256": "6364bc1c9479266fc2d67e6e6e314ed47db780f9b6f51afd468b5bd01d2aa79c",
+    "repeatedWavIdentical": true,
+    "source": "https://zenodo.org/records/1203819",
+    "sampleManifest": "samples/sources.json",
+    "credit": "Julia Wilkins, Prem Seetharaman, Alison Wahl and Bryan Pardo (2018), VocalSet: A Singing Voice Dataset.",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "determinism": "Two full renders and identical final WAV bytes checked in the same runtime. Room IR uses a raw-image-hash-seeded generator; no uncontrolled randomness."
+  },
+  "congo-air-pollution-cough-dense": {
+    "version": "orbit-congo-human-aerosol/3",
+    "seconds": 15,
+    "sampleRate": 48000,
+    "selectionStatus": "user-selected",
+    "imageSource": {
+      "source": {
+        "path": "../assets/images/originals/aerosols.png",
+        "page": "https://svs.gsfc.nasa.gov/5669/",
+        "period": "GEOS model: 2025-08-19, 20:00 UTC.",
+        "credit": "NASA GMAO/SVS; Joseph V. Ardizzone; Helen-Nicole Kostis; Lesley Ott"
+      },
+      "approximateBoundsWestSouthEastNorth": [
+        5,
+        -13,
+        32,
+        8
+      ],
+      "pixelRectangle": [
+        987,
+        492,
+        1131,
+        618
+      ],
+      "originalDimensions": [
+        1920,
+        1080
+      ],
+      "sourceSha256": "0c6a8f6c46fb52a2f9a636bbd804fc6e5e23454dcb2f0d3fe04c653c772e8a7a",
+      "cropRawRgbSha256": "78301b1f82031e1bef480a60c93e2078a22f44ee04c59272f40999c42b7a59b7",
+      "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
+      "geography": "Approximate plate-carree image coordinates; no watershed mask."
+    },
+    "colouredPixelFraction": 0.9743165784832452,
+    "smokeColourFraction": 0.5363205467372134,
+    "meanSmokeDisplayProxy": 0.8165792931659182,
+    "requestedCoughGroups": 13,
+    "requestedOnsetsSeconds": [
+      0.2783871181250234,
+      1.5279029719051396,
+      2.7837356272347114,
+      4.104739018777075,
+      5.221586040811995,
+      6.221490724264877,
+      7.222090859361094,
+      8.283260170465509,
+      9.285065110629638,
+      10.354918982619095,
+      11.520985275655033,
+      12.777559831710224,
+      14.406122368569404
+    ],
+    "coughEvents": [
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          1.39,
+          1.92
+        ],
+        "startSeconds": 0.18,
+        "durationSeconds": 0.53,
+        "smokeDisplayProxy": 0.8752753781314108
+      },
+      {
+        "source": "cough-2.ogg",
+        "sourceExcerptSeconds": [
+          2.44,
+          3.58
+        ],
+        "startSeconds": 1.0201458333333333,
+        "durationSeconds": 1.14,
+        "smokeDisplayProxy": 0.7697930682587233
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          3.66,
+          4.84
+        ],
+        "startSeconds": 2.47125,
+        "durationSeconds": 1.18,
+        "smokeDisplayProxy": 0.7215575011628441
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          7.36,
+          8.08
+        ],
+        "startSeconds": 3.9722708333333334,
+        "durationSeconds": 0.72,
+        "smokeDisplayProxy": 0.821802434672037
+      },
+      {
+        "source": "cough-2.ogg",
+        "sourceExcerptSeconds": [
+          0.4,
+          0.98
+        ],
+        "startSeconds": 4.9822291666666665,
+        "durationSeconds": 0.58,
+        "smokeDisplayProxy": 0.9433609392988946
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          9.38,
+          9.98
+        ],
+        "startSeconds": 5.834395833333334,
+        "durationSeconds": 0.6,
+        "smokeDisplayProxy": 1.0
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          13.6,
+          14.36
+        ],
+        "startSeconds": 6.706666666666667,
+        "durationSeconds": 0.76,
+        "smokeDisplayProxy": 1.0
+      },
+      {
+        "source": "cough-2.ogg",
+        "sourceExcerptSeconds": [
+          4.63,
+          5.41
+        ],
+        "startSeconds": 7.748145833333333,
+        "durationSeconds": 0.78,
+        "smokeDisplayProxy": 0.9185561702204447
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          15.78,
+          16.85
+        ],
+        "startSeconds": 8.800583333333334,
+        "durationSeconds": 1.07,
+        "smokeDisplayProxy": 1.0
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          1.39,
+          1.92
+        ],
+        "startSeconds": 10.153395833333333,
+        "durationSeconds": 0.53,
+        "smokeDisplayProxy": 0.9074153762262704
+      },
+      {
+        "source": "cough-2.ogg",
+        "sourceExcerptSeconds": [
+          2.44,
+          3.58
+        ],
+        "startSeconds": 10.980833333333333,
+        "durationSeconds": 1.14,
+        "smokeDisplayProxy": 0.835867332220723
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          3.66,
+          4.84
+        ],
+        "startSeconds": 12.4320625,
+        "durationSeconds": 1.18,
+        "smokeDisplayProxy": 0.7879878449450031
+      },
+      {
+        "source": "cough-1.ogg",
+        "sourceExcerptSeconds": [
+          7.36,
+          8.08
+        ],
+        "startSeconds": 13.98,
+        "durationSeconds": 0.72,
+        "smokeDisplayProxy": 0.49037726088755973
+      }
+    ],
+    "betweenGroupPauseSeconds": [
+      0.31014583333333334,
+      0.3111041666666667,
+      0.3210208333333333,
+      0.2899583333333333,
+      0.27216666666666667,
+      0.27227083333333335,
+      0.28147916666666667,
+      0.2724375,
+      0.2828125,
+      0.2974375,
+      0.31122916666666667,
+      0.3679375
+    ],
+    "distinctSourceGestures": 9,
+    "breathingLayer": false,
+    "backgroundLayer": false,
+    "direction": "Denser real human coughs with short irregular pauses. No panting or breathing bed.",
+    "imageMapping": "Same orange/red GEOS smoke-colour coverage. Denser transfer curve: clip(3+round(12*meanSmokeDisplayProxy),3,14) groups. Image quantile distances allocate short pauses between full-length gestures. Local image evidence controls gain. Qualitative visual proxy, not medical calibration.",
+    "naturalness": "Native recording speed/pitch and cough transients retained; excerpts tightened to omit extended intakes/exhales. No panting, breathing layer, pitch shifting, time stretching, synthetic coughs, musical oscillators or noise bed.",
+    "interpretation": "An artistic metaphor for the discomfort associated with polluted air. Recordings by ezwa, not a recording of a Congo resident or a simulation of a specific patient.",
+    "limits": "No surface pollution concentration, AQI, exposure, diagnosis, lung function, or symptom probability is inferred. Aerosol colour area is not an exposure or health-risk measurement. Source is a GEOS model still from August 19, 2025, 20:00 UTC.",
+    "audioSources": "samples/sources.json",
+    "activeSourceFiles": [
+      "cough-1.ogg",
+      "cough-2.ogg"
+    ],
+    "credits": [
+      "ezwa: Cough 1 and Cough 2, released into the public domain."
+    ],
+    "processing": "Audio-stream decoding, mono 48 kHz resampling, 65 Hz high-pass, tight cough-only excerpts, unchanged image-driven scheduling/gain, edit fades and common master gain.",
+    "loudnessLufs": -19.93,
+    "activeCoughLoudnessLufs": -19.32,
+    "silentSampleFraction": 0.2713333333333333,
+    "truePeakDbTP": -5.47,
+    "mp3TruePeakDbTP": -5.69,
+    "wav": "../assets/audio/congo-air-pollution-cough-dense.wav",
+    "mp3": "../assets/audio/congo-air-pollution-cough-dense.mp3",
+    "wavSha256": "bfe67184b30ff8d1a1756ced39e737617bd6eb091356522e65d97871fa23c318",
+    "mp3Sha256": "96bc6e4eefa92749e3dbdfbcb4119acd057f09dded4b11305997b217c3fc0b71",
+    "repeatedWavIdentical": true,
+    "determinism": "Fixed source files, exact image crop and deterministic mappings. Two full renders and identical final WAV bytes verified in this runtime; no random or generative audio process."
+  }
+}
