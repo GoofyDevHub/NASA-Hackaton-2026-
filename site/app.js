@@ -97,7 +97,7 @@ function buildMilkyWay() {
   x.filter = 'blur(' + Math.round(H * 0.012) + 'px)'; x.globalCompositeOperation = 'lighter';
   for (let i = 0; i < 260; i++) {                                                       // diffuse glow
     const t = rnd() * 1.1 - 0.05, k = core(t), [px, py] = at(t, gauss() * sigma * (0.55 + 0.5 * k));
-    const warm = k * (0.5 + 0.5 * rnd()), al = (0.02 + 0.03 * k) * (0.5 + rnd());
+    const warm = k * (0.5 + 0.5 * rnd()), al = (0.03 + 0.042 * k) * (0.5 + rnd());
     blob(px, py, H * (0.05 + 0.1 * rnd()) * (0.85 + 0.35 * k), 1.15 + rnd() * 0.8,
       `rgba(${Math.round(150 + 85 * warm)},${Math.round(165 + 40 * warm)},${Math.round(215 - 55 * warm)},${al.toFixed(3)})`);
   }
@@ -110,7 +110,7 @@ function buildMilkyWay() {
   for (let i = 0, n = Math.round(W * H / 120); i < n; i++) {                            // crowded faint stars
     const t = rnd() * 1.1 - 0.05, [px, py] = at(t, gauss() * sigma * 0.95), tint = rnd();
     x.fillStyle = tint < 0.2 ? '#FFE8CF' : tint < 0.4 ? '#D3E1FF' : '#FFFFFF';
-    x.globalAlpha = (0.14 + 0.5 * rnd() * rnd()) * (0.75 + 0.5 * core(t));
+    x.globalAlpha = (0.18 + 0.6 * rnd() * rnd()) * (0.75 + 0.5 * core(t));
     x.beginPath(); x.arc(px, py, 0.25 + rnd() * 0.5, 0, 7); x.fill();
   }
   milky = c;
@@ -121,7 +121,7 @@ function drawStars(now) {
   if (!layers.length) return;
   const w = stars.width, h = stars.height, k = w / innerWidth, wrap = (v, m) => ((v % m) + m) % m;
   sx.clearRect(0, 0, w, h);
-  milkyAlpha += ((view === 'entrance' ? 0 : 1) - milkyAlpha) * (1 - Math.exp(-Math.min(0.5, (now - lastSky) / 1000) * 1.6)); lastSky = now;                   // the band fades in once the listener explores
+  milkyAlpha += (1 - milkyAlpha) * (1 - Math.exp(-Math.min(0.5, (now - lastSky) / 1000) * 1.6)); lastSky = now;                   // the band fades in as the page opens
   if (milky && milkyAlpha > 0.005) {
     const mw = w * 1.3, mh = h * 1.3, cl = (v, m) => Math.max(-m, Math.min(m, v));
     sx.globalAlpha = milkyAlpha;
@@ -137,7 +137,7 @@ buildStars(); buildMilkyWay(); addEventListener('resize', () => { buildStars(); 
 
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
-  entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.639, cy: 0.491, r: 0.391 },
+  entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.672, cy: 0.505, r: 0.435 },
   player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.5, cy: 0.54, r: 0.64 },      // centred, large and dimmed, seen through the glass
   globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.495, cy: 0.459, r: 0.379 }
 };
