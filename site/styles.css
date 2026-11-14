@@ -69,7 +69,6 @@ body[data-view="player"] .voice { right: calc(var(--u) * 17); top: calc(var(--u)
 .lead { font-size: calc(var(--u) * 1.5); margin: calc(var(--u) * 2.9) 0 0 calc(var(--u) * .2); }
 .cta { margin-top: calc(var(--u) * 2.9); height: calc(var(--u) * 3.6); padding: 0 calc(var(--u) * 1.9); background: var(--or); color: #1b1c22;
   font-size: calc(var(--u) * 1.45); border-radius: calc(var(--u) * .2); display: inline-flex; align-items: center; gap: calc(var(--u) * .7); }
-.cta:hover, .pill.primary:hover, #p-listen:hover { background: #ff9a2e; }
 .cta:active, .pill:active, #p-listen:active { transform: translateY(2px); }
 
 /* ---------- 2. globe */
@@ -198,6 +197,44 @@ body[data-view="entrance"] .pin { pointer-events: none; }
 #contents .t { font-size: calc(var(--u) * .9); color: var(--or); }
 #contents .t.mute { color: #9A9DAC; }
 
+/* ---------- liquid glass controls: translucent, blurred, with a lit upper edge. Orange glass marks the main action. */
+.cta, .pill, #p-listen, #p-stop, .textlink, .options, #voice-toggle, .voice-lang button {
+  color: var(--ink);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .17), rgba(255, 255, 255, .04) 46%, rgba(0, 0, 0, .2)), rgba(10, 11, 18, .36);
+  -webkit-backdrop-filter: blur(18px) saturate(165%); backdrop-filter: blur(18px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, .28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .38), inset 0 -1px 0 rgba(0, 0, 0, .28), 0 calc(var(--u) * .5) calc(var(--u) * 1.6) rgba(0, 0, 0, .4);
+  transition: background .2s, border-color .2s, transform .1s;
+}
+.cta, .pill, #p-listen, #p-stop, .textlink, .options { border-radius: 99px; }
+.cta:hover, .pill:hover, #p-stop:hover, .textlink:hover, #voice-toggle:hover {
+  border-color: rgba(255, 255, 255, .55);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .26), rgba(255, 255, 255, .08) 46%, rgba(0, 0, 0, .16)), rgba(10, 11, 18, .3);
+}
+.cta, .pill.primary, #p-listen {
+  background: linear-gradient(135deg, rgba(255, 200, 130, .62), rgba(254, 133, 0, .46) 44%, rgba(176, 82, 0, .5)), rgba(254, 133, 0, .22);
+  border-color: rgba(255, 196, 128, .75); text-shadow: 0 1px 2px rgba(60, 26, 0, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 236, 205, .6), inset 0 -1px 0 rgba(90, 40, 0, .4), 0 calc(var(--u) * .5) calc(var(--u) * 1.8) rgba(254, 133, 0, .22);
+}
+.cta:hover, .pill.primary:hover, #p-listen:hover {
+  border-color: rgba(255, 220, 175, .95);
+  background: linear-gradient(135deg, rgba(255, 214, 160, .74), rgba(255, 146, 20, .58) 44%, rgba(196, 96, 0, .56)), rgba(254, 133, 0, .3);
+}
+.cta { padding: 0 calc(var(--u) * 2.3); }
+.textlink { margin-left: 0; height: calc(var(--u) * 4.2); padding: 0 calc(var(--u) * 1.6); display: inline-flex; align-items: center; }
+.options { align-self: flex-start; padding: calc(var(--u) * .9) calc(var(--u) * 1.8); gap: calc(var(--u) * 2.2); }
+.check .box { border-color: rgba(255, 255, 255, .5); border-radius: calc(var(--u) * .3); background: rgba(255, 255, 255, .08); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3); }
+.check input:checked + .box { border-color: var(--or); background: rgba(254, 133, 0, .3); }
+.volume input::-webkit-slider-runnable-track { height: calc(var(--u) * .45); border-radius: 99px; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .5);
+  background: linear-gradient(to right, rgba(254, 133, 0, .9) var(--v, 80%), rgba(255, 255, 255, .18) var(--v, 80%)); }
+.volume input::-webkit-slider-thumb { width: calc(var(--u) * 1.25); height: calc(var(--u) * 1.25); margin-top: calc(var(--u) * -.4);
+  background: radial-gradient(circle at 35% 30%, #fff, #d9dbe6 70%); box-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+.volume input::-moz-range-track { height: calc(var(--u) * .45); border-radius: 99px; background: rgba(255, 255, 255, .18); }
+.volume input::-moz-range-progress { height: calc(var(--u) * .45); border-radius: 99px; background: rgba(254, 133, 0, .9); }
+.volume input::-moz-range-thumb { width: calc(var(--u) * 1.25); height: calc(var(--u) * 1.25); }
+#voice-toggle[aria-pressed="true"] { border-color: rgba(255, 196, 128, .8); color: #FFD9A8; }
+.voice-lang button[aria-pressed="true"] { background: linear-gradient(135deg, rgba(255, 255, 255, .34), rgba(255, 255, 255, .12)), rgba(10, 11, 18, .3); }
+
 /* ---------- narrow or tall windows: larger unit, stacked layouts */
 @media (max-aspect-ratio: 1/1) {
   :root { --u: 2.1vw; }
@@ -210,3 +247,6 @@ body[data-view="entrance"] .pin { pointer-events: none; }
   #contents ul { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* The view title takes focus only so a screen reader starts reading there; it is not a control and shows no ring. */
+#p-title:focus, #p-title:focus-visible { outline: none; }
