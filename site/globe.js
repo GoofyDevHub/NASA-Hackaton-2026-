@@ -3,7 +3,7 @@
 const D2R = Math.PI / 180;
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 
-export function createGlobe(canvas, { texture, pins, onPositions }) {
+export function createGlobe(canvas, { texture, pins, onPositions, onDrag }) {
   const ctx = canvas.getContext('2d');
   const raster = document.createElement('canvas'), rctx = raster.getContext('2d');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -111,17 +111,29 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
   }
 
   // A ring of thin bars that swells and travels like a microphone level display.
+  // Samples are spaced evenly along the ellipse, so bars never bunch up where the ring turns.
+  const RING = (() => {
+    const rx = 1.24, ry = 0.3, fine = 1440, len = [0]; let px = rx, py = 0;
+    for (let i = 1; i <= fine; i++) { const th = (i / fine) * 2 * Math.PI, x = Math.cos(th) * rx, y = Math.sin(th) * ry; len.push(len[i - 1] + Math.hypot(x - px, y - py)); px = x; py = y; }
+    const pts = [], M = 232;
+    for (let k = 0, i = 0; k < M; k++) { const want = (k / M) * len[fine]; while (len[i] < want) i++; const th = (i / fine) * 2 * Math.PI; pts.push({ x: Math.cos(th) * rx, y: Math.sin(th) * ry, th }); }
+    return pts;
+  })();
   function orbit(g, front, t) {
     if (!orbitOn) return;
-    const rx = g.R * 1.24, ry = g.R * 0.3, tilt = -13 * D2R, N = 260, ct = Math.cos(tilt), st = Math.sin(tilt);
-    ctx.strokeStyle = ctx.fillStyle = '#FE8500'; ctx.lineCap = 'round';
-    for (let i = 0; i < N; i++) {
-      const th = (i / N) * 2 * Math.PI, s = Math.sin(th);
-      if ((s >= 0) !== front) continue;
-      const ex = Math.cos(th) * rx, ey = s * ry, x = g.cx + ex * ct - ey * st, y = g.cy + ex * st + ey * ct;
-      const env = (0.5 + 0.5 * Math.sin(3 * th - 1.3 * t)) * (0.5 + 0.5 * Math.sin(5 * th + 0.9 * t + 1.7)) * (0.6 + 0.4 * Math.sin(th - 0.5 * t));
-      const h = g.R * 0.1 * Math.pow(env, 1.25) * (0.45 + 0.55 * Math.sin(i * 1.9 + t * 5.5));
-      if (h > g.R * 0.006) { ctx.lineWidth = Math.max(1.4, g.R / 190); ctx.beginPath(); ctx.moveTo(x, y - h); ctx.lineTo(x, y + h); ctx.stroke(); }
+    const tilt = -13 * D2R, ct = Math.cos(tilt), st = Math.sin(tilt);
+    ctx.strokeStyle = ctx.fillStyle = '#FE8500'; ctx.lineCap = 'round'; ctx.lineWidth = Math.max(1.4, g.R / 190);
+    for (let i = 0; i < RING.length; i++) {
+      const p = RING[i];
+      if ((p.y >= 0) !== front) continue;
+      const ex = p.x * g.R, ey = p.y * g.R, x = g.cx + ex * ct - ey * st, y = g.cy + ex * st + ey * ct;
+      let h = 0;
+      if (i % 2 === 0) {                                       // every other sample is a bar, the rest stay dots
+        const env = (0.5 + 0.5 * Math.sin(2 * p.th - 0.9 * t)) * (0.5 + 0.5 * Math.sin(3 * p.th + 0.6 * t + 1.7));
+        const limb = clamp(Math.abs(Math.hypot(ex, ey) / g.R - 1) / 0.16);          // quiet where the ring meets the edge of the Earth
+        h = g.R * 0.075 * Math.pow(env, 1.4) * (0.5 + 0.5 * Math.sin(i * 0.9 + t * 3.2)) * (0.15 + 0.85 * limb);
+      }
+      if (h > g.R * 0.008) { ctx.beginPath(); ctx.moveTo(x, y - h); ctx.lineTo(x, y + h); ctx.stroke(); }
       else { ctx.beginPath(); ctx.arc(x, y, Math.max(0.9, g.R / 330), 0, 7); ctx.fill(); }
     }
   }
@@ -158,6 +170,7 @@ export function createGlobe(canvas, { texture, pins, onPositions }) {
     if (!dragging) return;
     const s = 60 / geom().R;
     view.lon -= (e.clientX - dragging.x) * s; view.lat = clamp(view.lat + (e.clientY - dragging.y) * s, -75, 75);
+    onDrag?.(e.clientX - dragging.x, e.clientY - dragging.y);
     dragging = { x: e.clientX, y: e.clientY };
   });
   const drop = () => { dragging = null; };

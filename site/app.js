@@ -49,17 +49,19 @@ function place(pos, g) {
 const globe = createGlobe($('globe'), {
   texture: 'textures/earth.jpg',
   pins: Object.entries(REGIONS).map(([id, r]) => ({ id, lat: r.lat, lon: r.lon })),
-  onPositions: place
+  onPositions: place,
+  onDrag: (dx, dy) => { pan.x += dx; pan.y += dy; }
 });
 
 // ---- deep space: two layers of small stars drift slowly the way the Earth turns, over a faint band of haze
 const stars = $('stars'), sx = stars.getContext('2d'), layers = [];
+const pan = { x: 0, y: 0 };                               // how far the listener has dragged the sky along with the globe
 function buildStars() {
   const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 2);
   stars.width = w * d; stars.height = h * d;
   let seed = 20261114; const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
   layers.length = 0;
-  for (const [density, speed, size] of [[1700, 2.2, 0.75], [5200, 5.5, 1.15]]) {       // far and near
+  for (const [density, speed, size, depth] of [[1700, 2.2, 0.75, 0.22], [5200, 5.5, 1.15, 0.42]]) {       // far and near
     const c = document.createElement('canvas'), x = c.getContext('2d');
     c.width = w * d; c.height = h * d; x.setTransform(d, 0, 0, d, 0, 0);
     for (let i = 0, n = Math.round(w * h / density); i < n; i++) {
@@ -71,17 +73,17 @@ function buildStars() {
       x.beginPath(); x.arc(px, py, r, 0, 7); x.fill();
       if (bright && rnd() < 0.3) { x.globalAlpha *= 0.18; x.beginPath(); x.arc(px, py, r * 3.2, 0, 7); x.fill(); }   // soft bloom on a few
     }
-    layers.push({ c, speed });
+    layers.push({ c, speed, depth });
   }
 }
 function drawStars(now) {
   requestAnimationFrame(drawStars);
-  if (view === 'player' || !layers.length) return;
-  const w = stars.width;
-  sx.clearRect(0, 0, w, stars.height);
-  for (const { c, speed } of layers) {
-    const off = Math.round((now / 1000 * speed * (w / innerWidth)) % w);
-    sx.drawImage(c, off, 0); sx.drawImage(c, off - w, 0);
+  if (!layers.length) return;
+  const w = stars.width, h = stars.height, k = w / innerWidth, wrap = (v, m) => ((v % m) + m) % m;
+  sx.clearRect(0, 0, w, h);
+  for (const { c, speed, depth } of layers) {
+    const ox = Math.round(wrap((now / 1000 * speed + pan.x * depth) * k, w)), oy = Math.round(wrap(pan.y * depth * k, h));
+    for (const dx of [0, -w]) for (const dy of [0, -h]) sx.drawImage(c, ox + dx, oy + dy);
   }
 }
 buildStars(); addEventListener('resize', buildStars); requestAnimationFrame(drawStars);
@@ -89,12 +91,13 @@ buildStars(); addEventListener('resize', buildStars); requestAnimationFrame(draw
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
   entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.639, cy: 0.491, r: 0.391 },
+  player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.07, cy: 0.83, r: 0.6 },      // large and low, seen through the glass
   globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.495, cy: 0.459, r: 0.379 }
 };
 function setView(v) {
   view = v; document.body.dataset.view = v;
   $('entrance').hidden = v !== 'entrance'; $('explorer').hidden = v !== 'globe'; $('player').hidden = v !== 'player';
-  globe.setVisible(v !== 'player'); globe.setInteractive(v === 'globe'); globe.setOrbit(v === 'entrance');
+  globe.setInteractive(v === 'globe'); globe.setOrbit(v === 'entrance');
   if (PLACEMENT[v]) globe.setPlacement(PLACEMENT[v]());
   for (const el of Object.values(pinEls)) el.tabIndex = v === 'globe' ? 0 : -1;
   if (v !== 'globe') { hot = null; callout.hidden = cline.hidden = true; }      // the pin label never outlives the globe view
@@ -174,7 +177,7 @@ function render() {
     $('p-image').alt = `NASA image: ${s.imageLabel}.`;
     const band = !!s.audioCropLabel;                       // Southern Ocean: regional thumbnail plus the wide band that drives the voice
     const img = $('p-image');
-    img.onload = () => { const r = img.naturalWidth / img.naturalHeight, hh = Math.min(band ? 19 : 26.5, 40 / r);
+    img.onload = () => { const r = img.naturalWidth / img.naturalHeight, hh = Math.min(band ? 17.5 : 24.5, 38 / r);
       img.style.height = `calc(var(--u) * ${hh})`; img.style.width = `calc(var(--u) * ${hh * r})`; };
     img.src = band ? s.image : (s.audioCrop || s.image);
     $('p-tag').textContent = s.imageLabel;
