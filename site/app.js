@@ -52,6 +52,21 @@ const globe = createGlobe($('globe'), {
   onPositions: place
 });
 
+// ---- deep space: a fixed field of small stars, the same on every visit
+const stars = $('stars');
+function drawStars() {
+  const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 2), x = stars.getContext('2d');
+  stars.width = w * d; stars.height = h * d; x.setTransform(d, 0, 0, d, 0, 0);
+  let seed = 20261114; const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+  for (let i = 0, n = Math.round(w * h / 2600); i < n; i++) {
+    const big = rnd() < 0.06, r = big ? 0.9 + rnd() * 0.7 : 0.35 + rnd() * 0.5, tint = rnd();
+    x.fillStyle = tint < 0.12 ? '#FFE3C2' : tint < 0.24 ? '#CFE0FF' : '#FFFFFF';
+    x.globalAlpha = big ? 0.75 + rnd() * 0.25 : 0.2 + rnd() * 0.55;
+    x.beginPath(); x.arc(rnd() * w, rnd() * h, r, 0, 7); x.fill();
+  }
+}
+drawStars(); addEventListener('resize', drawStars);
+
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
   entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.639, cy: 0.491, r: 0.391 },
@@ -63,6 +78,7 @@ function setView(v) {
   globe.setVisible(v !== 'player'); globe.setInteractive(v === 'globe');
   if (PLACEMENT[v]) globe.setPlacement(PLACEMENT[v]());
   for (const el of Object.values(pinEls)) el.tabIndex = v === 'globe' ? 0 : -1;
+  if (v !== 'globe') { hot = null; callout.hidden = cline.hidden = true; }      // the pin label never outlives the globe view
 }
 narrow.addEventListener('change', () => PLACEMENT[view] && globe.setPlacement(PLACEMENT[view]()));
 

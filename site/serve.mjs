@@ -36,4 +36,4 @@ createServer(async (req, res) => {
     if (!res.headersSent) res.writeHead(404, { 'content-type': 'text/plain' });
     res.end('Not found');
   }
-}).listen(PORT, '127.0.0.1', () => console.log(`ORBIT demo: http://localhost:${PORT}/`));
+}).listen(PORT, '127.0.0.1', () => console.log(`PTS demo: http://localhost:${PORT}/`));
