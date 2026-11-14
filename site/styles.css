@@ -212,13 +212,15 @@ body[data-view="entrance"] .pin { pointer-events: none; }
   background: linear-gradient(135deg, rgba(255, 255, 255, .26), rgba(255, 255, 255, .08) 46%, rgba(0, 0, 0, .16)), rgba(10, 11, 18, .3);
 }
 .cta, .pill.primary, #p-listen {
-  background: linear-gradient(135deg, rgba(255, 200, 130, .62), rgba(254, 133, 0, .46) 44%, rgba(176, 82, 0, .5)), rgba(254, 133, 0, .22);
-  border-color: rgba(255, 196, 128, .75); text-shadow: 0 1px 2px rgba(60, 26, 0, .55);
-  box-shadow: inset 0 1px 0 rgba(255, 236, 205, .6), inset 0 -1px 0 rgba(90, 40, 0, .4), 0 calc(var(--u) * .5) calc(var(--u) * 1.8) rgba(254, 133, 0, .22);
+  /* the site's own orange (#FE8500), kept nearly solid so it matches the pins and accents; the glass shows in the lit edge */
+  color: #1b1c22;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%), rgba(254, 133, 0, .9);
+  border-color: rgba(255, 178, 92, .95);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), inset 0 -1px 0 rgba(120, 58, 0, .35), 0 calc(var(--u) * .5) calc(var(--u) * 1.8) rgba(254, 133, 0, .25);
 }
 .cta:hover, .pill.primary:hover, #p-listen:hover {
-  border-color: rgba(255, 220, 175, .95);
-  background: linear-gradient(135deg, rgba(255, 214, 160, .74), rgba(255, 146, 20, .58) 44%, rgba(196, 96, 0, .56)), rgba(254, 133, 0, .3);
+  border-color: #FFC88F;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .32), rgba(255, 255, 255, .04) 55%), rgba(254, 133, 0, .98);
 }
 .cta { padding: 0 calc(var(--u) * 2.3); }
 .textlink { margin-left: 0; height: calc(var(--u) * 4.2); padding: 0 calc(var(--u) * 1.6); display: inline-flex; align-items: center; }
