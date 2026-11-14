@@ -1,25 +1,58 @@
-# ORBIT — specifica di prodotto
+# ORBIT product — working draft
 
-Una persona sceglie un contenuto della Terra, può farselo descrivere e ascoltare come le caratteristiche visive o i dati diventano musica. Il valore da dimostrare è riconoscere la struttura di un fenomeno e ciò che cambia da un’immagine all’altra. Il suono deve invogliare al riascolto. L’app PC Windows deve funzionare offline, con mouse e tastiera, con un lettore di schermo e con il controller opzionale.
+This specification records the team's current direction. Both teammates will review unresolved choices, test feasibility and refine the requirements. Preferred sound and visual references guide development. Individual implementation details and acceptance results still need confirmation.
 
-## Le tre funzionalità da consegnare
+## Purpose
 
-1. **Ascolto su PC.** Il globo si orienta sul luogo documentato. Un elenco equivalente consente di aprire il contenuto da tastiera. Il popup resta silenzioso. Voce descrittiva su richiesta, avvio volontario della musica, pausa, ripresa, arresto, cambio e loop. Il primo comando, «Avvia playlist», riproduce tutte le immagini pronte in ordine, un ciclo di 15 s per scena. Le descrizioni si possono includere a scelta.
-2. **PC con controller.** I comandi si riflettono nel medesimo lettore. Per la demo mostrare il collegamento simulato, il progetto modificabile e l’esploso. Per ogni immagine il simulatore associa caldo o freddo al fenomeno e ne spiega il motivo. Sono previsti sei tasti, volume a manopola, vibrazione e un canale termico volontario con protezioni locali. La costruzione fisica resta successiva. Ergonomia, temperature ed elettronica richiedono verifiche fisiche.
-3. **Confronto.** L’utente sceglie A e B della stessa famiglia e alterna gli ascolti. Scala, percorso, strumenti e guadagno restano uguali. Verificare se chi ascolta sa descrivere una differenza o scegliere la sagoma corrispondente. Dati insufficienti o coppie incompatibili producono una spiegazione accessibile.
+Help blind and low-vision users explore NASA Earth imagery through optional descriptions and image-driven piano music. The PC interface should also be visually appealing for sighted users. Independent navigation and understanding an image change are the outcomes to test.
 
-Il catalogo parte dalle [14 immagini pubblicate dalla NASA](../catalogo/campione/README.md). Accetta nuove immagini qualificate senza modifiche al lettore. Sono previsti otto confronti candidati nelle serie Pacifico, Florida e Fuji.
+## PC application
 
-## Tre prodotti per i giudici
+Choose an image using a natural-looking Earth globe or equivalent accessible list. Use documented geography. Open a silent scene dialog with separate description and music controls.
 
-| Prodotto | Risultato atteso | Riferimento |
+Provide Play/Pause, Resume, Stop, Previous, Next, volume and single-image repeat. Description pauses music and waits for explicit Resume after speech ends. Show the text alongside any narration.
+
+The first home action is Start playlist. It plays each qualified image once in stable catalog order, with a proposed 15-second phrase per image. The 14-image selection gives 3 min 30 s of music. Descriptions are optional and initially excluded. Announce title and position without a continuous stream of note information.
+
+During an active playlist, previous/next continues from the new scene. During pause, navigation stays silent. Previous at the first scene signals the boundary; Next at the last concludes. Stop cancels pending advances and returns focus to Start playlist.
+
+Support mouse, keyboard and screen reader, visible focus, zoom, sufficient contrast, reduced motion and an accessible alternative to the globe and comparison wipe. Validate menu clarity and announcements with actual users.
+
+## Controller design and simulator
+
+The preferred shape has rounded grips, six tactile controls, a volume knob, vibration motor and warm/cool plate. Buttons are Previous, Play/Pause, Next, Describe, Stop and Thermal. From home, controller Play invokes Start playlist directly.
+
+The simulator follows the shared player state. Every image has a documented warm/cool category and an accessible explanation. The current proposal enables this simulated channel during playback, with Thermal toggling it and keeping the preference across scenes. Stop, pause, description, link loss and faults remove output.
+
+Deliver editable mechanical sources, assembled/exploded views, a component inventory, BOM, diagrams and the connected simulator. Component selection, electrical details, dimensions and tactile ergonomics need further work. Physical construction and measured contact profiles require the checks in the hardware specification.
+
+## Image comparison
+
+The selected catalog has 14 images and eight candidate pairs — six Pacific, one Florida and one Fuji. Confirm each pair's registration, crop, masking, scale, musical method, phase and gain.
+
+A visual wipe reveals the actual second image over the first. Keyboard-accessible A/B controls support the listening task. Test whether listeners recognize the intended difference and explain any limitation. Warm/cool contextual associations are declared conventions; physical values require calibrated source data.
+
+## Presentation film
+
+The working target is a single 29-second film. Final pacing, text, narration, comparison excerpts and sound mix remain subject to review.
+
+| Time | Action | Audio and text direction |
 |---|---|---|
-| Software PC | App locale, catalogo con fonti, gesti equivalenti, descrizioni e audio riproducibile | [Software](software.md), [interazione](interazione.md), [catalogo](catalogo.md), [sonificazione](sonificazione.md) |
-| Controller | File modificabili del progetto, BOM, schemi, meccanica con scheda e attuatori, integrazione simulata, assemblato ed esploso | [Hardware](hardware.md), [protocollo](protocollo-controller.md), [modello di studio](../controller/README.md) |
-| Film | Beneficio comprensibile subito, cattura del lettore, due ascolti puliti, controller con simboli ed esploso centrale. Sottotitoli, trascrizione e crediti | [Storyboard in dieci scene](storyboard.md), [riferimenti visivi](../images/galleria.html) |
+| 0–3 s | Slowly rotating Earth and thin orbit | “What does a changing Earth sound like?” with brief typing |
+| 3–7 s | Actual player, visible Play press | Synchronized click followed by the image's piano |
+| 7–13 s | Match cut to a model button, then exploded view | Short accents, readable symbols, controller concept/simulation labels |
+| 13–18 s | Slow aligned wipe from A to B | “Same place. Same sound rules.” |
+| 18–26 s | Four seconds of A, four of B | Shared gain and phase, clear labels, sonification alone |
+| 26–29 s | Earth, team name and source credit | Brief ending, readable credits and English captions |
 
-## Direzione e stato
+The extended storyboard and 14-second motion study provide artistic references. Review the actual exported length, mono mix, laptop readability, descriptive transcript and English language requirements.
 
-Fondo grafite #21232E, testo #F0F0F0, accento #FE8500. Una sottile orbita sonora segue il globo. Sono accolti come mockup il sito, la forma del controller e i dieci fotogrammi del film. Le due tavole del menu mostrano il lettore prima e durante l’ascolto. Il montaggio richiede una nuova prova di ritmo in sviluppo. Il [film di gara dura 29 s](fattibilita.md#film-per-i-giudici). La frase musicale A+ al pianoforte dura 15 s per immagine e si può ripetere in ascolto singolo. Al giro dei giudici devono essere disponibili insieme il sito verificato, il progetto completo del controller con simulatore e il film esportato.
+## Shared design and completion
 
-[Requisiti e prove](requisiti.md) · [Fonti consultate](fonti.md) · [Revisione evento](revisione-evento.md)
+The current palette is graphite #21232E, off-white #F0F0F0 and orange #FE8500. Preserve the thin, restrained audio-reactive orbit and consistent materials across website, controller and film.
+
+A+ acoustic piano is the preferred method. The original Sarychev reference has 22 touches over 15 seconds. Review its behavior on every selected image and test a continuous repeat transition.
+
+Prioritize PC listening, then controller integration, then comparison. The intended judging package includes all three products together. Record each decision as proposed, agreed, implemented or tested.
+
+[Draft tickets](../ticket/README.md) · [Sound](sonificazione.md) · [Detailed requirements](requisiti.md) · [Submission checklist](nasa-submission.md).

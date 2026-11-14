@@ -1,25 +1,57 @@
-# Da un'immagine a un suono: cosa significa davvero
+# A+ piano sonification — current reference
 
-## Riferimento musicale scelto per le immagini
+A+ turns visual features into a phrase played with acoustic-piano recordings. It is the preferred listening reference. Final mapping parameters, density across images, player integration and continuous looping still need team review and testing.
 
-A+ trasforma una scena in una frase di pianoforte acustico campionato. Percorre una griglia di 64 × 64 celle lungo la curva di Hilbert. Colore e luminosità guidano le altezze; A+ seleziona una frase portante e aggiunge tocchi quando emerge un cambio di altezza. Con gli stessi pixel, parametri, campioni e ambiente, la generazione è ripetibile. Il ciclo del lettore dura 15 secondi. La playlist avanza di una scena a fine ciclo. In ascolto singolo Ripeti raccorda fine e inizio mantenendo code e livello stabili. Sul Sarychev la frase preferita contiene 22 tocchi. La densità dipende dalla scena. La variante che dirada i raddoppi rimane una variante sperimentale esterna alla demo. Il funzionamento dal sito e la capacità di riconoscere i cambiamenti a orecchio richiedono verifiche dedicate.
+## Image to music
 
-## Riprodurre il riferimento A+
+1. Prepare the image and documented mask, then read a 64 × 64 grid along a Hilbert curve.
+2. Group readings into 180 events. Colour and brightness guide pitch, brightness affects the piano touch, and horizontal position gives gentle stereo placement.
+3. The phrase function smooths brief fluctuations and selects main notes. Enrichment adds a touch where a different pitch becomes significant. Density depends on the image.
+4. The renderer chooses a nearby sampled key, transposes it and applies gain, an envelope and stereo position. Reference WAVs last 15 seconds, stereo 48 kHz, PCM 24 bit.
 
-1. L’[estrattore](../prove/suono/piano-naturale/cinque-scene/estrai.py) carica il JPEG nel [simulatore di riferimento](../prove/suono/confronto-simulatore/simulatore.html), imposta 15 s ed esporta 180 gruppi in ordine di Hilbert. Le [partiture salvate](../prove/suono/piano-naturale/cinque-scene/partiture.json) riportano per ogni gruppo frequenza, luminosità, complessità e posizione orizzontale. L’impronta identifica il file analizzato.
-2. La funzione `phrase` seleziona le note portanti; `enrich` inserisce un tocco aggiuntivo quando emerge un’altezza diversa. Il numero di tocchi deriva dalla scena. Il [renderer](../prove/suono/piano-naturale/genera.py) traspone il campione di pianoforte più vicino, regola tocco e panorama e lascia decadere la nota. [Selezione A+](../prove/suono/piano-naturale/variante_a.py) · [Campioni e licenza](../prove/suono/piano-naturale/README.md).
-3. Per verificare il porting, confrontare sullo stesso JPEG l’ordine delle note, le frequenze e gli istanti di attacco. Sul Fuji il riferimento A+ ha 15 tocchi, sul Sarychev 22. Il file `sarychev-originale.wav` usa A+; `sarychev.wav` contiene la variante da 18. Alcuni altri WAV del laboratorio mostrano la riduzione dei raddoppi. Le [misure per scena](../prove/suono/piano-naturale/cinque-scene/misure.json) riportano entrambi i conteggi. [Fuji A+](../prove/suono/piano-naturale/a-piu-note.wav) · [Sarychev A+](../prove/suono/piano-naturale/cinque-scene/sarychev-originale.wav).
+Keep preparation, mask, mapping, tuning, duration and gain consistent for a comparison. Store versioned inputs and samples. Identical inputs and rendering environment reproduce the same result. Scientific interpretation requires the source legend and documented processing.
 
-### Rigenerazione locale
+## Listening references
 
-In una copia del pacchetto, con Python e FFmpeg disponibili, eseguire dalla radice:
+| File | Interpretation |
+|---|---|
+| [Fuji A+](../prove/suono/piano-naturale/a-piu-note.wav) | Preferred enriched phrase with 15 touches |
+| [Sarychev original A+](../prove/suono/piano-naturale/cinque-scene/sarychev-originale.wav) | Preferred 22-touch example |
+| [Sarychev reduced variant](../prove/suono/piano-naturale/cinque-scene/sarychev.wav) | Experimental reduction to 18 touches |
+| [Measurements](../prove/suono/piano-naturale/cinque-scene/misure.json) | Original and reduced counts for each landscape |
+| [Stored scores](../prove/suono/piano-naturale/cinque-scene/partiture.json) | Feature groups and input file hashes |
 
-```text
-python -m pip install -r prove/suono/terra-sonify/requirements.txt
-python prove/suono/piano-naturale/variante_a.py
-python prove/suono/piano-naturale/cinque-scene/genera.py
+Some landscape WAVs demonstrate reduced density. Use the enrichment function in variante_a.py when implementing A+, and keep the exact Sarychev reference available. Note counts depend on the same image and preparation.
+
+[Image-to-score extractor](../prove/suono/piano-naturale/cinque-scene/estrai.py) · [Analysis simulator](../prove/suono/confronto-simulatore/simulatore.html) · [Phrase selection and rendering](../prove/suono/piano-naturale/genera.py) · [Enrichment](../prove/suono/piano-naturale/variante_a.py).
+
+## Reproduce the references
+
+Python and FFmpeg are required. Make FFmpeg available on the command path. In a working copy, run from the repository root:
+
+```bash
+python -m pip install -r specs/prove/suono/terra-sonify/requirements.txt
+python specs/prove/suono/piano-naturale/variante_a.py
+python specs/prove/suono/piano-naturale/cinque-scene/genera.py
 ```
 
-Per riestrarre anche le partiture dai cinque JPEG servono Chrome e il pacchetto Python Playwright. Eseguire `python prove/suono/piano-naturale/cinque-scene/estrai.py` prima del renderer. Per le prove A/B in app mantenere il guadagno comune. I WAV dimostrativi hanno un livello pareggiato e una dissolvenza di uscita; nel lettore verificare separatamente il raccordo su dieci cicli, evitando una pausa a ogni giro.
+The scripts overwrite WAVs and measurements in their own directories. The landscape generator renders the recorded experimental variants, including the original Sarychev A+ file.
 
-[Altri metodi esplorati](../prove/suono/metodi-esplorati.md).
+To extract the five image scores again, install Chrome and Python Playwright, then run:
+
+```bash
+python -m pip install playwright
+python specs/prove/suono/piano-naturale/cinque-scene/estrai.py
+```
+
+The extractor checks two independent passes and blocks remote requests. Rendering stored scores works without a browser.
+
+## Integration and remaining tests
+
+The current player proposal generates A+ on request, with cache keys covering the canonical image, mask, profile, algorithm and samples. Use the Web Audio clock for playback.
+
+Test ten repeat cycles for clicks, inserted gaps and growing voice/memory counts. Reference WAVs have an ending fade, so the seamless loop needs an explicit integration decision. The playlist plays one phrase per image and then advances. Description pauses music and requires explicit resume.
+
+Earlier isolated-copy checks reproduced the reference scores and seven WAVs byte for byte in the tested environment. Understanding, mono comparison, full-catalog behavior and integrated looping still need testing.
+
+Piano recordings are Alexander Holm's Salamander Grand Piano V3 under CC BY 3.0. Include attribution and the documented transposition, filtering, attenuation and envelopes. [Sample attribution](../prove/suono/piano-naturale/README.md) · [License](../prove/suono/piano-naturale/campioni/LICENSE.txt) · [Earlier methods](../prove/suono/metodi-esplorati.md).

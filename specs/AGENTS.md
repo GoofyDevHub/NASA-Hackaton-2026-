@@ -1,20 +1,41 @@
-# Sviluppare ORBIT da questa cartella
+# Develop ORBIT
 
-L’obiettivo è consegnare insieme un lettore PC offline, un progetto di controller USB con simulatore integrato e un film di 29 secondi. La [specifica di prodotto](docs/prodotto.md) fissa il perimetro, i [19 ticket](ticket/README.md) danno ingressi, dipendenze e prove di accettazione. I file in `prove/` documentano esperimenti riproducibili. In caso di differenze tra una prova e la specifica, implementare la decisione riportata nella specifica.
+Build an accessible PC Earth-image jukebox, a USB controller design with an integrated simulator, and a 29-second film. The team has two members. Start with the English [repository overview](../README.md) and [19 tickets](ticket/README.md).
 
-## Percorso di sviluppo
+## Current direction for team review
 
-1. **Una coppia funzionante sul PC.** Iniziare da [DA01](ticket/catalogo/da01.md) e [SW01](ticket/software/sw01.md). Usare gennaio e ottobre del Pacifico per verificare fonte, ritaglio e maschera su una stessa area. Completare SW02, SO01 e SO02 fino a ottenere apertura silenziosa, descrizione su richiesta, pianoforte al gesto, pausa e Stop. Usare il [Sarychev a 22 tocchi](prove/suono/piano-naturale/cinque-scene/sarychev-originale.wav) per verificare il carattere musicale dell’implementazione.
-2. **Playlist e confronto.** Portare nel lettore le [14 immagini selezionate](catalogo/campione/selezione.json). SW03 copre l’avvio dalla home senza schermo, incluse le descrizioni facoltative. SW04 collega ogni scena alla sua categoria caldo/freddo. AB01 richiede la stessa area, fase, scala musicale e guadagno per entrambi gli ascolti. Verificare singolarmente le sei coppie del Pacifico, la coppia della Florida e quella del Fuji prima di abilitarle.
-3. **Controller.** HW01 e HW02 possono avanzare mentre si realizza il lettore. Il [modello modificabile e l’esploso](controller/README.md) documentano la geometria di partenza. Completare distinta, schemi e file meccanici, quindi integrare HW03 e HW04 con lo stesso lettore. Verificare sei tasti, manopola, risposta vibratoria simulata e categoria termica motivata. Sul simulatore il tasto Termico alterna la resa della scena. Le condizioni per alimentare un dispositivo fisico sono nel [protocollo](docs/protocollo-controller.md).
-4. **Film.** Usare VD01–VD04. Montare catture del sito funzionante ed esploso con simboli leggibili e indicazione della simulazione. Seguire i [tempi del film di gara](docs/fattibilita.md#film-per-i-giudici). L’[estratto di 14 s](prove/video/confronto.html) serve a studiare click e tendina. I dieci fotogrammi guidano stile e inquadrature. Controllare durata esportata, sottotitoli e otto secondi di confronto sonoro pulito.
-5. **Prova integrata.** Prima dei giudici, eseguire QA01, QA02 ed EV01 da una copia pulita. Avviare con schermo coperto e rete spenta, percorrere la playlist da tastiera con lettore di schermo e con il controller simulato. Provare descrizione, avanti, indietro, arresto, disconnessione e A/B. Aprire gli stessi file del controller e il film scelti per la presentazione. Registrare per ciascun ticket versione, prova eseguita ed esito.
+The specifications and tickets are working drafts. Both teammates still need to review open decisions and task ownership. Update the relevant documents as feasibility checks and user testing provide evidence. The points below describe the current direction and preferred references.
 
-## Riferimenti tecnici e materiali
+- Prioritize PC listening, then PC with controller, then image comparison. Have all three products ready together for judging.
+- Select through the globe or equivalent accessible list. Scene opening is silent. Provide optional description, play/pause, resume, stop, previous, next, volume and repeat.
+- Start playlist is the first focusable home-screen action. Controller Play invokes it directly from home. Play all 14 qualified images once, 15 seconds per image. Descriptions are optional and initially excluded.
+- Description pauses music and waits for explicit resume. Navigation during playback continues the playlist; navigation during pause stays silent. Stop cancels queued playback.
+- Use deterministic A+ acoustic piano, 64 × 64 Hilbert analysis and 180 feature groups. The preferred Sarychev example has 22 touches. The experimental reduced file has 18.
+- Qualify all eight candidate comparisons individually. Match crop, registration, mask policy, musical rules, phase and gain.
+- Simulate six controller controls, volume, vibration and each image's documented warm/cool cue. Thermal toggles the simulated channel and preserves that preference across scenes. Pause, Stop, description and faults stop its output.
+- Deliver editable controller sources, diagrams, BOM and assembled/exploded views. Physical contact profiles require the measurements and protections in the hardware specification.
+- The 29-second film uses actual player capture, a readable controller exploded view, a slow aligned wipe and two clean four-second A/B listening windows.
 
-- **Sito.** TypeScript, controlli HTML semantici, Web Audio e analisi in Worker. Servire gli asset in locale. Una sola istanza del lettore coordina mouse, tastiera e controller. Il globo e l’elenco aprono lo stesso contenuto. La [specifica software](docs/software.md) definisce stati, errori e trasporto. Le [tavole](images/galleria.html#sito) fissano palette, menu e orbita sonora sottile.
-- **Suono.** La [specifica musicale](docs/sonificazione.md) collega immagini, estrattore, partiture, pianoforte e WAV di controllo. Ogni frase dura 15 s. Ripeti mantiene la scena singola, la playlist avanza dopo un ciclo. La densità varia con i pixel. Applicare gli stessi parametri alle scene dello stesso confronto.
-- **Dati.** Partire dai file del [catalogo](catalogo/campione/README.md) e dai [sei originali ad alta risoluzione](prove/dati-nasa/README.md). Conservare crediti, date di osservazione, hash e trasformazioni. Le convenzioni termiche hanno una spiegazione per scena. Il lettore accetta immagini fisse; il film è un prodotto di presentazione.
-- **Stato delle verifiche.** Distinguere una prova già ripetibile dal collaudo del prodotto integrato. Le [verifiche aperte](docs/revisione-evento.md) comprendono accessibilità sul PC target, comprensibilità delle coppie, integrazione del controller, montaggio ed esportazione. La [fattibilità](docs/fattibilita.md) raccoglie anche i riferimenti ufficiali su formato, provenienza e riuso.
+## Implementation order
 
-I percorsi nei documenti sono relativi. Per ripetere gli esperimenti usare i prerequisiti indicati nelle relative istruzioni. Quando un generatore scrive nella propria cartella, usare una copia di lavoro per conservare i riferimenti approvati.
+1. DA01 and SW01 establish one Pacific pair. Complete SW02, SO01 and SO02 until description, music, pause and Stop work on the target PC.
+2. SW03 and SW04 extend the catalog to the complete playlist and thermal cues. AB01 qualifies comparison.
+3. HW01 and HW02 can progress alongside the player. Complete HW03 and HW04 after transport is ready.
+4. Complete VD01–VD04 using the preferred visual references and proposed film timeline.
+5. Run QA01, QA02 and EV01 on a clean copy, offline, with screen covered and keyboard/screen reader, then simulated controller input. Record versions, observations and limitations.
+
+## Sources and engineering
+
+Use TypeScript, semantic HTML, CSS, Web Audio and an analysis Worker. Serve local assets through a loopback launcher. One coordinator owns playback and scene state. Version tokens reject stale audio, speech, analysis and actuator callbacks.
+
+Use graphite #21232E, off-white #F0F0F0 and orange #FE8500. Match the thin audio-reactive orbit and controller finish in the [visual references](images/README.md).
+
+Use the [catalog selection](catalogo/campione/selezione.json), [full-resolution sources](prove/dati-nasa/README.md) and [audio guide](docs/sonificazione.md). Retain source credits, licenses, hashes and transformation records.
+
+Historical technical notes and experimental interfaces include Italian. Consult the original protocol/electrical details during implementation. English overview and tickets identify the current proposed behavior. Review English coverage of materials selected for public submission.
+
+## Workflow and evidence
+
+Work on a focused branch from develop and propose changes back to develop. Run ticket acceptance checks. Use working copies when generators overwrite outputs. Include raster, mask, profile, algorithm and sample revisions in cache keys.
+
+Record implemented behavior, simulation, physical measurements and user tests according to their actual evidence. The [NASA checklist](docs/nasa-submission.md) tracks judging and submission readiness.
