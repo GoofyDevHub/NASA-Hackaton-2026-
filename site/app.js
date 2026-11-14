@@ -91,7 +91,7 @@ buildStars(); addEventListener('resize', buildStars); requestAnimationFrame(draw
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
   entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.639, cy: 0.491, r: 0.391 },
-  player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.07, cy: 0.83, r: 0.6 },      // large and low, seen through the glass
+  player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.5, cy: 0.53, r: 0.47 },      // centred and dimmed, seen through the glass
   globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.495, cy: 0.459, r: 0.379 }
 };
 function setView(v) {
