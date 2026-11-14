@@ -23,7 +23,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
     radial-gradient(ellipse 80% 22% at 50% 52%, rgba(30, 44, 86, .12), transparent 75%); }
 #globe { position: fixed; inset: 0; width: 100vw; height: 100vh; touch-action: none; transition: opacity .45s; }
 body[data-view="player"] #pins { opacity: 0; pointer-events: none; }
-body[data-view="player"] #globe { opacity: .55; }
+body[data-view="player"] #globe { opacity: .4; }
 
 /* ---------- header */
 .top { position: fixed; inset: 0 0 auto 0; height: calc(var(--u) * 5.7); pointer-events: none; z-index: 3; }

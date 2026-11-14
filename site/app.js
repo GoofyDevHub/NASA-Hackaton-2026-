@@ -76,22 +76,67 @@ function buildStars() {
     layers.push({ c, speed, depth });
   }
 }
+// The Milky Way: a soft diagonal band of glow, dust lanes and crowded faint stars, painted once per window size.
+let milky = null, milkyAlpha = 0, lastSky = 0;
+function buildMilkyWay() {
+  const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 1.5), W = w * 1.3, H = h * 1.3;
+  const c = document.createElement('canvas'), x = c.getContext('2d');
+  c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
+  let seed = 7741; const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const gauss = () => (rnd() + rnd() + rnd() + rnd() - 2) / 0.58;                       // roughly normal, sigma 1
+  const ax = 0, ay = H * 0.97, bx = W, by = H * 0.08, len = Math.hypot(bx - ax, by - ay);     // band axis, lower left to upper right
+  const ux = (bx - ax) / len, uy = (by - ay) / len, nx = -uy, ny = ux, sigma = H * 0.085, ang = Math.atan2(uy, ux);
+  const at = (t, off) => [ax + ux * len * t + nx * off, ay + uy * len * t + ny * off];
+  const core = t => Math.exp(-(((t - 0.34) / 0.3) ** 2));                               // brighter bulge toward the lower left
+  const blob = (px, py, r, stretch, colour) => { x.save(); x.translate(px, py); x.rotate(ang); x.scale(stretch, 1);
+    const g = x.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, colour); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(0, 0, r, 0, 7); x.fill(); x.restore(); };
+
+  x.filter = 'blur(' + Math.round(H * 0.012) + 'px)'; x.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 260; i++) {                                                       // diffuse glow
+    const t = rnd() * 1.1 - 0.05, k = core(t), [px, py] = at(t, gauss() * sigma * (0.55 + 0.5 * k));
+    const warm = k * (0.5 + 0.5 * rnd()), al = (0.02 + 0.03 * k) * (0.5 + rnd());
+    blob(px, py, H * (0.05 + 0.1 * rnd()) * (0.85 + 0.35 * k), 1.15 + rnd() * 0.8,
+      `rgba(${Math.round(150 + 85 * warm)},${Math.round(165 + 40 * warm)},${Math.round(215 - 55 * warm)},${al.toFixed(3)})`);
+  }
+  x.globalCompositeOperation = 'source-over'; x.filter = 'blur(' + Math.round(H * 0.006) + 'px)';
+  for (let i = 0; i < 130; i++) {                                                        // dark dust lanes along the middle
+    const t = rnd() * 1.1 - 0.05, [px, py] = at(t, gauss() * sigma * 0.28 + Math.sin(t * 9) * sigma * 0.22);
+    blob(px, py, H * (0.012 + 0.028 * rnd()), 1.6 + rnd() * 2.2, `rgba(3,4,9,${(0.22 + 0.4 * rnd() * (0.4 + core(t))).toFixed(3)})`);
+  }
+  x.filter = 'none';
+  for (let i = 0, n = Math.round(W * H / 120); i < n; i++) {                            // crowded faint stars
+    const t = rnd() * 1.1 - 0.05, [px, py] = at(t, gauss() * sigma * 0.95), tint = rnd();
+    x.fillStyle = tint < 0.2 ? '#FFE8CF' : tint < 0.4 ? '#D3E1FF' : '#FFFFFF';
+    x.globalAlpha = (0.14 + 0.5 * rnd() * rnd()) * (0.75 + 0.5 * core(t));
+    x.beginPath(); x.arc(px, py, 0.25 + rnd() * 0.5, 0, 7); x.fill();
+  }
+  milky = c;
+}
+
 function drawStars(now) {
   requestAnimationFrame(drawStars);
   if (!layers.length) return;
   const w = stars.width, h = stars.height, k = w / innerWidth, wrap = (v, m) => ((v % m) + m) % m;
   sx.clearRect(0, 0, w, h);
+  milkyAlpha += ((view === 'entrance' ? 0 : 1) - milkyAlpha) * (1 - Math.exp(-Math.min(0.5, (now - lastSky) / 1000) * 1.6)); lastSky = now;                   // the band fades in once the listener explores
+  if (milky && milkyAlpha > 0.005) {
+    const mw = w * 1.3, mh = h * 1.3, cl = (v, m) => Math.max(-m, Math.min(m, v));
+    sx.globalAlpha = milkyAlpha;
+    sx.drawImage(milky, -w * 0.15 + cl(pan.x * 0.1 * k, w * 0.15), -h * 0.15 + cl(pan.y * 0.1 * k, h * 0.15), mw, mh);
+    sx.globalAlpha = 1;
+  }
   for (const { c, speed, depth } of layers) {
     const ox = Math.round(wrap((now / 1000 * speed + pan.x * depth) * k, w)), oy = Math.round(wrap(pan.y * depth * k, h));
     for (const dx of [0, -w]) for (const dy of [0, -h]) sx.drawImage(c, ox + dx, oy + dy);
   }
 }
-buildStars(); addEventListener('resize', buildStars); requestAnimationFrame(drawStars);
+buildStars(); buildMilkyWay(); addEventListener('resize', () => { buildStars(); buildMilkyWay(); }); requestAnimationFrame(drawStars);
 
 // ---- views: entrance -> globe -> player
 const PLACEMENT = {
   entrance: () => narrow.matches ? { cx: 0.5, cy: 0.72, r: 0.2 } : { cx: 0.639, cy: 0.491, r: 0.391 },
-  player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.5, cy: 0.53, r: 0.47 },      // centred and dimmed, seen through the glass
+  player: () => narrow.matches ? { cx: 0.5, cy: 0.9, r: 0.3 } : { cx: 0.5, cy: 0.54, r: 0.64 },      // centred, large and dimmed, seen through the glass
   globe: () => narrow.matches ? { cx: 0.5, cy: 0.45, r: 0.24 } : { cx: 0.495, cy: 0.459, r: 0.379 }
 };
 function setView(v) {
