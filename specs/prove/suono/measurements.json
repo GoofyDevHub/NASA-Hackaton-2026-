@@ -1,0 +1,72 @@
+{
+  "purpose": "Synthetic listening studies; not NASA data or validated product algorithms",
+  "inputs": {
+    "A": [
+      -0.6,
+      -0.3,
+      0.1,
+      0.6,
+      0.8,
+      0.2,
+      -0.2,
+      -0.4
+    ],
+    "B": [
+      -0.6,
+      -0.3,
+      0.1,
+      0.8,
+      1,
+      0.65,
+      0.2,
+      -0.4
+    ]
+  },
+  "segments": {
+    "A": [
+      0,
+      8
+    ],
+    "silence": [
+      8,
+      8.5
+    ],
+    "B": [
+      8.5,
+      16.5
+    ]
+  },
+  "normalization": "No per-image normalization; algorithm gains differ; not perceptually loudness matched",
+  "results": [
+    {
+      "filename": "canone-orbitale.wav",
+      "durationSeconds": 17,
+      "sampleRate": 44100,
+      "peak": 0.08030314608445208,
+      "peakDbFS": -21.905348795459485,
+      "rms": 0.01936845664276282,
+      "maximumSampleStep": 0.004623917605914112,
+      "bytes": 2998844
+    },
+    {
+      "filename": "marea-spettrale.wav",
+      "durationSeconds": 17,
+      "sampleRate": 44100,
+      "peak": 0.12844103232196308,
+      "peakDbFS": -17.82592425053636,
+      "rms": 0.034971789797223755,
+      "maximumSampleStep": 0.008672183237656114,
+      "bytes": 2998844
+    },
+    {
+      "filename": "arcipelago-risonante.wav",
+      "durationSeconds": 17,
+      "sampleRate": 44100,
+      "peak": 0.062440203646299666,
+      "peakDbFS": -24.09071378345442,
+      "rms": 0.014180930193812369,
+      "maximumSampleStep": 0.0029730609068294557,
+      "bytes": 2998844
+    }
+  ]
+}

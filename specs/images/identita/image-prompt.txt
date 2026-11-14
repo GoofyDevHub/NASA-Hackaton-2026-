@@ -1,0 +1,10 @@
+Generation mode: built-in imagegen
+
+Use case: stylized-concept.
+Asset type: square team profile picture for an independent space hackathon project called ORBIT — Earth in Tune, designed to remain striking inside a circular avatar crop.
+Primary request: create a sophisticated, memorable, cinematic visual of planet Earth transforming into sound, representing accessible Earth exploration through audio.
+Subject and scene: a richly detailed blue Earth with luminous cyan atmosphere floating against very dark navy space. A single elegant orbital ribbon wraps around the planet and transforms smoothly into a glowing audio waveform, teal cyan shifting to subtle warm amber. Restrained realistic clouds and ocean texture, physically evocative rather than a technical diagram. Sparse stars, strong negative space.
+Style: premium cinematic 3D editorial artwork, polished but restrained, tactile light, high contrast, refined sci-tech identity.
+Composition: bold central planet and single waveform orbit, compact silhouette and generous safe margins for circular crop, readable at tiny avatar size. Square 1024x1024 composition.
+Text: no text.
+Constraints: no people, no astronauts, no headphones, no NASA logo, no official mission insignia, no flags, no watermark, no tiny UI elements, no crowded infographic. This is original artistic team artwork, not satellite measurement imagery. Opaque dark background.

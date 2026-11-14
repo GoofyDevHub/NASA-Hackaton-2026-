@@ -1,0 +1,56 @@
+{
+  "bahamas": {
+    "original": 20,
+    "notes": 20,
+    "distinct": 8,
+    "min_hz": 68.75,
+    "max_hz": 309.375,
+    "removed_s": []
+  },
+  "malaspina": {
+    "original": 28,
+    "notes": 25,
+    "distinct": 9,
+    "min_hz": 68.75,
+    "max_hz": 366.6666666666667,
+    "removed_s": [
+      3.5,
+      5.5,
+      6.417
+    ]
+  },
+  "namib": {
+    "original": 17,
+    "notes": 17,
+    "distinct": 4,
+    "min_hz": 247.5,
+    "max_hz": 618.75,
+    "removed_s": []
+  },
+  "richat": {
+    "original": 22,
+    "notes": 18,
+    "distinct": 8,
+    "min_hz": 77.34375,
+    "max_hz": 618.75,
+    "removed_s": [
+      2.25,
+      5.917,
+      12.5,
+      13.5
+    ]
+  },
+  "sarychev": {
+    "original": 22,
+    "notes": 18,
+    "distinct": 5,
+    "min_hz": 165.0,
+    "max_hz": 618.75,
+    "removed_s": [
+      2.417,
+      3.333,
+      4.25,
+      8.667
+    ]
+  }
+}

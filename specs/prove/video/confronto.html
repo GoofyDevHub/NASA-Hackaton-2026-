@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORBIT · Il mare cambia</title>
+<style>
+*{box-sizing:border-box}body{margin:0 auto;max-width:1080px;padding:clamp(10px,3vw,32px);background:#21232e;color:#f0f0f0;font:16px/1.45 system-ui}h1{font:clamp(26px,4vw,48px) Georgia,serif;margin:.2em 0}.stage{position:relative;aspect-ratio:16/9;overflow:hidden;background:#161923}.stage img,.layer{width:100%;height:100%;display:block;position:absolute;inset:0;object-fit:cover}.warm{clip-path:inset(0 100% 0 0)}.edge{position:absolute;top:0;bottom:0;left:0;width:2px;background:#fe8500}.flag{position:absolute;bottom:12px;left:12px;background:#21232ee8;padding:4px 9px}.opening{background:#21232e}.opening img{transition:transform .18s;transform-origin:73% 77%}.opening.press img{transform:scale(1.045)}.typed{position:absolute;inset:0 0 auto;background:#21232e;padding:.25em 4%;font:clamp(26px,6vw,86px) Georgia,serif;height:24%}.level{position:absolute;left:71%;top:29%;width:12%;height:5px;background:#777}.level i{display:block;width:20%;height:100%;background:#fe8500}.opening[hidden]{display:none}.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}button{font:inherit;border:1px solid #bbbcc6;border-radius:4px;background:#21232e;color:#f0f0f0;min-height:46px;padding:8px 14px}button:first-child{background:#fe8500;color:#21232e;border-color:#fe8500}input{accent-color:#fe8500}input[type=range]{width:min(300px,90%)}:focus-visible{outline:3px solid #fe8500;outline-offset:3px}p{margin:.5em 0}a{color:#ffac60}@media(prefers-reduced-motion:reduce){.opening img{transition:none}.opening.press img{transform:none}}</style>
+<h1>Il mare cambia</h1><p>Pacifico orientale. A mostra il mare di riferimento, B una fascia d’acqua più calda. Le due mappe sono illustrative.</p>
+<div class="stage" aria-label="Due immagini sovrapposte del Pacifico orientale">
+<img src="../../images/video/mare-a.png" alt="A. La corrente equatoriale ha colori blu e turchesi.">
+<img class="warm" src="../../images/video/mare-b.png" alt="B. La stessa fascia oceanica appare in arancio e rosso.">
+<div class="edge"></div><span class="flag">A · Mare di riferimento</span>
+<div class="opening layer" hidden><img src="../../images/video/ascolta.png" alt="Il cursore preme Ascolta"><div class="typed" aria-hidden="true"></div><div class="level" aria-hidden="true"><i></i></div></div></div>
+<div class="controls"><button id="run">Avvia tendina · 10 s</button><button id="preview">Prova il montaggio · 14 s</button><button id="stop">Ferma</button><label><input type="checkbox" id="sound" checked> Effetti di montaggio</label></div>
+<div class="controls"><button id="a">Mostra A</button><button id="b">Mostra B</button><label>Porzione di B <input type="range" id="range" min="0" max="100" value="0"></label><output id="value">0%</output></div>
+<p id="status" role="status">Pronto. Avvia la prova oppure sposta il cursore.</p>
+<script src="confronto.js"></script></html>
