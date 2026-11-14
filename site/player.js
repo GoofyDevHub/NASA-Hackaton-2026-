@@ -206,5 +206,6 @@ export function setVolume(v) {
 }
 export function setDuck(k) { state.duck = k; applyVolume(); }
 export const position = () => audio.currentTime || 0;
+export const duration = () => (isFinite(audio.duration) && audio.duration) || 15;
 export const startedAgo = () => performance.now() - startedAt;
 export const _audio = audio;   // test hook only

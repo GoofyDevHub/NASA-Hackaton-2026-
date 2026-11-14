@@ -136,9 +136,25 @@ function render() {
     const src = sourceOf(s);
     $('p-title').textContent = s.place;
     $('p-sub').textContent = src.subtitle;
-    $('p-image').src = s.audioCrop || s.image;
     $('p-image').alt = `NASA image: ${s.imageLabel}.`;
-    $('p-tag').textContent = `${src.sourceId} · ${s.audioCropLabel ? 'Southern Ocean band' : s.imageLabel}`;
+    const band = !!s.audioCropLabel;                       // Southern Ocean: regional thumbnail plus the wide band that drives the voice
+    const img = $('p-image');
+    img.onload = () => { const r = img.naturalWidth / img.naturalHeight, hh = Math.min(band ? 19 : 26.5, 40 / r);
+      img.style.height = `calc(var(--u) * ${hh})`; img.style.width = `calc(var(--u) * ${hh * r})`; };
+    img.src = band ? s.image : (s.audioCrop || s.image);
+    $('p-tag').textContent = s.imageLabel;
+    $('p-strip-wrap').hidden = !band; if (band) $('p-strip').src = s.audioCrop;
+    $('p-legend').src = src.legend; $('p-legend').alt = src.legendAlt;
+    $('p-source').innerHTML = '';
+    const link = document.createElement('a'); link.href = src.page; link.textContent = src.sourceId;
+    $('p-source').append(link, `. ${src.period} ${src.credit}.`);
+    $('p-cue').textContent = s.audio ? `${s.cue}.${s.illustrative ? ' An illustrative cue, not a measurement.' : ''}` : 'Image only. No sound has been approved for this view.';
+    const n = PLAYLIST.length, i = PLAYLIST.indexOf(s.id);
+    const near = d => byId(PLAYLIST[i < 0 ? (d > 0 ? 0 : n - 1) : (i + d + n) % n]);
+    $('p-prev-name').textContent = `${near(-1).place} · ${sourceOf(near(-1)).label}`;
+    $('p-next-name').textContent = `${near(1).place} · ${sourceOf(near(1)).label}`;
+    $('p-index').innerHTML = i < 0 ? '—' : `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(n).padStart(2, '0')}`;
+    trace.fill(0);
     $('p-desc').textContent = fullDescription(s);
     globe.lookAt(REGIONS[s.region].lat * 0.6, REGIONS[s.region].lon);
   }
@@ -147,7 +163,7 @@ function render() {
   $('p-status').textContent = status === 'none' ? 'Image only · no sound' : STATUS[status] + (state.status === 'playing' && s.illustrative ? ' · illustrative sound' : '');
   const pos = PLAYLIST.indexOf(s.id);
   $('p-tour').hidden = !(state.playlist && pos >= 0);
-  $('p-tour').textContent = `Guided tour · ${pos + 1} of ${PLAYLIST.length}`;
+  $('p-tour').textContent = 'Guided tour';
   $('p-listen').hidden = !s.audio && state.status !== 'describing';
   $('p-listen').innerHTML = state.status === 'playing' || state.status === 'describing' ? `${ICON.pause} Pause`
     : state.status === 'paused' ? `${ICON.play} Resume` : `${ICON.play} Listen to the image`;
@@ -156,6 +172,30 @@ function render() {
   const v = Math.round(state.volume * 100);
   $('p-volume').value = v; $('p-volume').style.setProperty('--v', v + '%'); $('p-volume').setAttribute('aria-valuetext', `${v} percent`);
 }
+// ---- the thin orange line: flat at rest, it records the level of the actual sound as the track advances
+const trace = new Float32Array(260), tcv = $('p-trace'), tctx = tcv.getContext('2d');
+const still = matchMedia('(prefers-reduced-motion: reduce)');
+const clock = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+function drawTrace() {
+  requestAnimationFrame(drawTrace);
+  if (view !== 'player') return;
+  const w = tcv.clientWidth, h = tcv.clientHeight, d = Math.min(devicePixelRatio || 1, 2);
+  if (!w) return;
+  if (tcv.width !== Math.round(w * d)) { tcv.width = Math.round(w * d); tcv.height = Math.round(h * d); }
+  const dur = player.duration(), pos = Math.min(player.position(), dur), N = trace.length, head = Math.min(N - 1, Math.floor(pos / dur * N));
+  if (state.status === 'playing') trace[head] = Math.max(trace[head], still.matches ? 0 : player.level());
+  if (state.status === 'idle' && pos === 0) trace.fill(0);
+  $('p-time').textContent = `${clock(pos)} / ${clock(dur)}`;
+  tctx.setTransform(d, 0, 0, d, 0, 0); tctx.clearRect(0, 0, w, h);
+  const mid = h / 2, x = i => (i / (N - 1)) * w, px = pos / dur * w;
+  tctx.lineWidth = 1; tctx.strokeStyle = '#6B6E7C'; tctx.beginPath(); tctx.moveTo(px, mid); tctx.lineTo(w, mid); tctx.stroke();
+  tctx.strokeStyle = '#FE8500'; tctx.lineWidth = 1.5; tctx.lineJoin = 'round'; tctx.beginPath(); tctx.moveTo(0, mid);
+  for (let i = 0; i <= head && pos > 0; i++) tctx.lineTo(x(i), mid + (i % 2 ? -1 : 1) * trace[i] * (h * 0.46));
+  tctx.lineTo(px, mid); tctx.stroke();
+  if (pos > 0) { tctx.fillStyle = '#FE8500'; tctx.beginPath(); tctx.arc(Math.min(w - 3, Math.max(3, px)), mid, 3, 0, 7); tctx.fill(); }
+}
+requestAnimationFrame(drawTrace);
+
 player.subscribe(render);
 setView('entrance');
 render();

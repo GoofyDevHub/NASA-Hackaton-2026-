@@ -45,33 +45,51 @@
 
     <!-- 3. Player -->
     <section id="player" aria-labelledby="p-title" hidden>
-      <div class="card">
+      <div class="plate">
         <figure class="shot">
           <img id="p-image" alt="">
           <figcaption id="p-tag"></figcaption>
         </figure>
-        <div class="body">
-          <button id="p-close" type="button" aria-label="Close player">✕</button>
+        <figure class="strip" id="p-strip-wrap" hidden>
+          <img id="p-strip" alt="NASA image: Southern Ocean band around Antarctica.">
+          <figcaption>The Southern Ocean band that drives the voice, exact crop</figcaption>
+        </figure>
+        <div class="prov">
+          <img id="p-legend" alt="">
+          <p id="p-source"></p>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="meta">
+          <span id="p-index" aria-hidden="true"></span>
           <p class="state"><span id="p-lamp" aria-hidden="true"></span><span id="p-status">Ready to listen</span><span id="p-tour" class="tour" hidden></span></p>
-          <h1 id="p-title" tabindex="-1"></h1>
-          <p id="p-sub" class="sub"></p>
-          <p id="p-desc" class="sr-only"></p>
+          <button id="p-close" type="button" aria-label="Close player">✕</button>
+        </div>
+        <h1 id="p-title" tabindex="-1"></h1>
+        <p id="p-sub" class="sub"></p>
+        <p id="p-cue" class="cue"></p>
+        <p id="p-desc" class="sr-only"></p>
 
-          <div class="transport">
-            <button id="p-listen" class="primary" type="button"></button>
-            <button id="p-stop" class="outline" type="button"><span class="ico-stop" aria-hidden="true"></span>Stop</button>
-          </div>
+        <div class="trace" aria-hidden="true">
+          <canvas id="p-trace"></canvas>
+          <span id="p-time">0:00 / 0:15</span>
+        </div>
+
+        <div class="transport">
+          <button id="p-listen" class="primary" type="button"></button>
+          <button id="p-stop" class="outline" type="button"><span class="ico-stop" aria-hidden="true"></span>Stop</button>
           <button id="p-describe" class="textlink" type="button">Listen to the description</button>
+        </div>
 
-          <hr>
-          <div class="options">
-            <label class="check"><input id="p-repeat" type="checkbox"><span class="box" aria-hidden="true"></span>Repeat image</label>
-            <label class="volume" for="p-volume">Volume <input id="p-volume" type="range" min="0" max="100" step="5" value="80"></label>
-          </div>
-          <div class="steps">
-            <button id="p-prev" type="button"><span class="arrow">←</span> Previous</button>
-            <button id="p-next" type="button">Next <span class="arrow">→</span></button>
-          </div>
+        <div class="options">
+          <label class="check"><input id="p-repeat" type="checkbox"><span class="box" aria-hidden="true"></span>Repeat image</label>
+          <label class="volume" for="p-volume">Volume <input id="p-volume" type="range" min="0" max="100" step="5" value="80"></label>
+        </div>
+
+        <div class="steps">
+          <button id="p-prev" type="button"><span class="dir"><span class="arrow">←</span> Previous</span><span class="who" id="p-prev-name"></span></button>
+          <button id="p-next" type="button"><span class="dir">Next <span class="arrow">→</span></span><span class="who" id="p-next-name"></span></button>
         </div>
       </div>
     </section>
