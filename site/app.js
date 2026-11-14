@@ -1,6 +1,7 @@
 import { SCENES, REGIONS, PLAYLIST, byId, sourceOf, fullDescription } from './scenes.js';
 import * as player from './player.js';
 import { createGlobe } from './globe.js';
+import { createVoice } from './voice.js';
 
 const $ = id => document.getElementById(id);
 const { state } = player;
@@ -22,6 +23,7 @@ for (const [id, region] of Object.entries(REGIONS)) {
   b.addEventListener('click', () => openScene(firstScene(id).id, b));
   // The globe holds still while a pin is pointed at or focused, so it is easy to press.
   for (const ev of ['pointerenter', 'focus']) b.addEventListener(ev, () => { hot = id; globe.setRotating(false); });
+  b.addEventListener('focus', () => { if (b.classList.contains('behind')) globe.lookAt(region.lat * 0.6, region.lon); });
   for (const ev of ['pointerleave', 'blur']) b.addEventListener(ev, () => { if (hot === id) { hot = null; globe.setRotating(true); } });
   $('pins').append(b); pinEls[id] = b;
 }
@@ -30,7 +32,7 @@ const callout = $('callout'), cline = $('callout-line');
 function place(pos, g) {
   for (const [id, el] of Object.entries(pinEls)) {
     el.style.left = pos[id].x + 'px'; el.style.top = pos[id].y + 'px';
-    el.style.visibility = pos[id].visible ? 'visible' : 'hidden';
+    el.classList.toggle('behind', !pos[id].visible);
   }
   const p = hot && view === 'globe' && pos[hot]?.visible ? pos[hot] : null;
   callout.hidden = cline.hidden = !p;
@@ -145,11 +147,13 @@ function setView(v) {
   globe.setInteractive(v === 'globe'); globe.setOrbit(v === 'entrance');
   if (PLACEMENT[v]) globe.setPlacement(PLACEMENT[v]());
   for (const el of Object.values(pinEls)) el.tabIndex = v === 'globe' ? 0 : -1;
-  if (v !== 'globe') { hot = null; callout.hidden = cline.hidden = true; }      // the pin label never outlives the globe view
+  if (v !== 'globe') { hot = null; callout.hidden = cline.hidden = true; }
+  if (v !== 'player') document.title = (v === 'globe' ? 'Globe · ' : '') + 'P.T.S. — Pixel That Sounds';      // the pin label never outlives the globe view
 }
 narrow.addEventListener('change', () => PLACEMENT[view] && globe.setPlacement(PLACEMENT[view]()));
 
-$('explore').addEventListener('click', () => { setView('globe'); $('tour').focus({ preventScroll: true }); player.announce('Globe. Choose an orange pin, start the tour or open the content list.'); });
+function enter() { if (view !== 'entrance') return; setView('globe'); $('tour').focus({ preventScroll: true }); player.announce('Globe. Three places: Amazon, Congo and Antarctica. Start the tour or open the content list.'); }
+$('explore').addEventListener('click', enter);
 
 function openScene(id, from) {
   opener = from; hot = null; globe.setRotating(true);
@@ -210,7 +214,7 @@ function render() {
     // Return focus to where the listener came from; a pin follows the region last shown (the globe has turned to it).
     const last = byId(shown);
     const back = opener && opener.classList.contains('pin') && last ? pinEls[last.region] : opener && document.contains(opener) ? opener : $('tour');
-    opener = null; back.style.visibility = 'visible'; back.focus({ preventScroll: true });
+    opener = null; back.classList.remove('behind'); back.focus({ preventScroll: true });
   }
   if (!open) { shown = null; return; }
 
@@ -233,6 +237,8 @@ function render() {
     $('p-prev-name').textContent = `${near(-1).place} · ${sourceOf(near(-1)).label}`;
     $('p-next-name').textContent = `${near(1).place} · ${sourceOf(near(1)).label}`;
     $('p-index').innerHTML = i < 0 ? '—' : `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(n).padStart(2, '0')}`;
+    $('p-index-text').textContent = i < 0 ? 'Image only, outside the tour.' : `Track ${i + 1} of ${n}.`;
+    document.title = `${s.place}, ${src.label} · P.T.S.`;
     trace.fill(0);
     $('p-desc').textContent = fullDescription(s);
     globe.lookAt(REGIONS[s.region].lat * 0.6, REGIONS[s.region].lon);
@@ -317,6 +323,33 @@ function drawTrace() {
   if (pos > 0) { tctx.fillStyle = '#FE8500'; tctx.beginPath(); tctx.arc(Math.min(w - 3, Math.max(3, px)), mid, 3, 0, 7); tctx.fill(); }
 }
 requestAnimationFrame(drawTrace);
+
+// ---- voice control
+const vStatus = $('voice-status');
+const voice = createVoice({
+  view: () => view,
+  enter,
+  home: () => { if (view === 'player') closePlayer(); contents.open && contents.close(); setView('entrance'); $('explore').focus({ preventScroll: true }); },
+  startTour: () => { contents.open && contents.close(); if (view === 'entrance') setView('globe'); opener = $('tour'); player.startPlaylist(); $('p-title').focus(); },
+  openList: () => { if (view === 'player') closePlayer(); if (view === 'entrance') setView('globe'); if (!contents.open) contents.showModal(); },
+  closeList: () => contents.open && contents.close(),
+  listOpen: () => contents.open,
+  openScene: id => { contents.open && contents.close(); if (view === 'entrance') setView('globe'); openScene(id, $('list')); },
+  closePlayer
+}, {
+  state: s => { const on = s === 'on', t = $('voice-toggle');
+    t.setAttribute('aria-pressed', String(on)); t.disabled = s === 'unsupported';
+    $('voice-label').textContent = s === 'unsupported' ? 'Voice needs Chrome or Edge' : on ? 'Listening' : 'Voice control';
+    if (!on) vStatus.textContent = ''; },
+  heard: (text, answer) => { vStatus.innerHTML = ''; const b = document.createElement('b'); b.textContent = `“${text}”`; vStatus.append(b, answer ? ` ${answer}` : ' (ignored)'); },
+  interim: text => { vStatus.textContent = text + '…'; },
+  message: text => { vStatus.textContent = text; },
+  lang: l => { $('voice-en').setAttribute('aria-pressed', String(l === 'en-US')); $('voice-it').setAttribute('aria-pressed', String(l === 'it-IT')); }
+});
+$('voice-toggle').addEventListener('click', voice.toggle);
+$('voice-en').addEventListener('click', () => voice.setLang('en-US'));
+$('voice-it').addEventListener('click', () => voice.setLang('it-IT'));
+window.ptsVoice = voice;                                   // lets a typed phrase be tried from the console: ptsVoice.run('next')
 
 player.subscribe(render);
 setView('entrance');

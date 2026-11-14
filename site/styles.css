@@ -39,8 +39,32 @@ body[data-view="player"] .brand { left: calc(var(--u) * 5.16); top: calc(var(--u
 body[data-view="player"] .brand .dash { display: none; }
 body[data-view="player"] .brand em { font-size: calc(var(--u) * 1.37); margin-left: calc(var(--u) * .5); }
 
+/* voice control */
+.voice { right: calc(var(--u) * 3.5); display: flex; align-items: center; gap: calc(var(--u) * .8); pointer-events: auto; font-family: var(--sans); font-size: calc(var(--u) * 1.1); }
+body[data-view="player"] .voice { right: calc(var(--u) * 17); top: calc(var(--u) * 1.75); }
+#voice-toggle { display: inline-flex; align-items: center; gap: calc(var(--u) * .7); height: calc(var(--u) * 2.9); padding: 0 calc(var(--u) * 1.2); border: 1px solid rgba(255, 255, 255, .45); border-radius: 99px; background: rgba(4, 5, 10, .5); }
+#voice-toggle svg { height: calc(var(--u) * 1.5); width: auto; }
+#voice-toggle:hover { border-color: var(--ink); }
+#voice-toggle[aria-pressed="true"] { border-color: var(--or); color: var(--or); }
+#voice-toggle[aria-pressed="true"] svg { animation: mic-pulse 1.6s ease-in-out infinite; }
+#voice-toggle:disabled { opacity: .5; cursor: not-allowed; }
+@keyframes mic-pulse { 50% { opacity: .35; } }
+.voice-lang { display: flex; }
+.voice-lang button { height: calc(var(--u) * 2.9); min-width: calc(var(--u) * 2.9); padding: 0 calc(var(--u) * .5); border: 1px solid rgba(255, 255, 255, .3); color: var(--dim); }
+.voice-lang button:first-child { border-radius: 99px 0 0 99px; border-right: 0; }
+.voice-lang button:last-child { border-radius: 0 99px 99px 0; }
+.voice-lang button[aria-pressed="true"] { color: var(--ink); background: rgba(255, 255, 255, .14); }
+.voice-note { position: absolute; right: 0; top: calc(var(--u) * 3.6); width: calc(var(--u) * 30); margin: 0; padding: calc(var(--u) * .9) calc(var(--u) * 1.1); font-size: calc(var(--u) * 1.02); line-height: 1.45;
+  background: rgba(8, 9, 14, .92); border: 1px solid rgba(255, 255, 255, .2); border-radius: calc(var(--u) * .6); opacity: 0; visibility: hidden; transition: opacity .15s; }
+.voice:hover .voice-note, #voice-toggle:focus-visible ~ .voice-note { opacity: 1; visibility: visible; }
+.voice-status { left: 50%; transform: translateX(-50%); top: calc(var(--u) * 2.1); max-width: calc(var(--u) * 34); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--sans); font-size: calc(var(--u) * 1.1); color: var(--dim); }
+.voice-status b { color: var(--or); font-weight: 600; }
+.pin.behind { opacity: 0; pointer-events: none; }
+
 /* ---------- 1. entrance */
 #entrance { position: fixed; left: calc(var(--u) * 4.6); top: 50%; transform: translateY(-46%); z-index: 2; }
+#entrance h1 span { display: block; }
 #entrance h1 { font-weight: 400; font-size: calc(var(--u) * 6.25); line-height: 1.02; letter-spacing: -.012em; }
 .lead { font-size: calc(var(--u) * 1.5); margin: calc(var(--u) * 2.9) 0 0 calc(var(--u) * .2); }
 .cta { margin-top: calc(var(--u) * 2.9); height: calc(var(--u) * 3.6); padding: 0 calc(var(--u) * 1.9); background: var(--or); color: #1b1c22;

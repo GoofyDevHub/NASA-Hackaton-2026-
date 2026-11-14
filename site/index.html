@@ -8,6 +8,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-view="entrance">
+  <header class="top">
+    <p class="brand">P.T.S. <span class="dash">—</span> <em>Pixel That Sounds</em></p>
+    <div class="voice">
+      <button id="voice-toggle" type="button" aria-pressed="false" aria-describedby="voice-note">
+        <svg viewBox="0 0 20 28" aria-hidden="true"><rect x="6" y="1.5" width="8" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 13a8 8 0 0 0 16 0M10 21v5.5M5.5 26.5h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="voice-label">Voice control</span>
+      </button>
+      <div class="voice-lang" role="group" aria-label="Language you speak for voice control">
+        <button id="voice-en" type="button" aria-pressed="true" aria-label="English">EN</button>
+        <button id="voice-it" type="button" aria-pressed="false" aria-label="Italiano" lang="it">IT</button>
+      </div>
+      <p id="voice-note" class="voice-note">Uses your microphone and the browser's speech recognition. In Chrome and Edge your voice is sent to the browser maker's service to become text. Say “help” for the commands and “stop listening” to turn it off.</p>
+    </div>
+    <p id="voice-status" class="voice-status" aria-hidden="true"></p>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <button id="crumb-explore" type="button">Explore</button><span aria-hidden="true">/</span><span aria-current="page">Player</span>
+    </nav>
+  </header>
+
   <canvas id="stars" aria-hidden="true"></canvas>
   <canvas id="globe" aria-hidden="true"></canvas>
   <div id="pins"></div>
@@ -18,19 +37,12 @@
   </div>
   <div id="callout-line" aria-hidden="true" hidden></div>
 
-  <header class="top">
-    <p class="brand">P.T.S. <span class="dash">—</span> <em>Pixel That Sounds</em></p>
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <button id="crumb-explore" type="button">Explore</button><span aria-hidden="true">/</span><span aria-current="page">Player</span>
-    </nav>
-  </header>
-
   <p id="live" class="sr-only" role="status" aria-live="polite"></p>
 
   <main>
     <!-- 1. Entrance -->
     <section id="entrance" aria-labelledby="hero-title">
-      <h1 id="hero-title">Earth has<br>something<br>to tell you.</h1>
+      <h1 id="hero-title"><span>Earth has</span> <span>something</span> <span>to tell you.</span></h1>
       <p class="lead">Choose a place. Hear a different perspective.</p>
       <button id="explore" class="cta" type="button">Explore on Earth <span class="arrow">→</span></button>
     </section>
@@ -64,7 +76,7 @@
 
       <div class="body">
         <div class="meta">
-          <span id="p-index" aria-hidden="true"></span>
+          <span id="p-index" aria-hidden="true"></span><span id="p-index-text" class="sr-only"></span>
           <p class="state"><span id="p-lamp" aria-hidden="true"></span><span id="p-status">Ready to listen</span><span id="p-tour" class="tour" hidden></span></p>
           <button id="p-close" type="button" aria-label="Close player">✕</button>
         </div>
