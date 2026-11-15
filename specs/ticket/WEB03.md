@@ -14,3 +14,5 @@ Add Start playlist as the first focusable home action, with previous, next and r
 ## Verify
 
 Run a full cycle, toggle repeat across an ending, navigate while paused and stop just before a transition. Verify the three image-only scenes are skipped.
+
+> **Current build, 15 November 2026.** The entrance offers Voice control and Explore on Earth; the globe offers Start tour and Content list. The tour and Previous/Next loop as a ring, so the tour does not end by itself. Decide whether to keep that or restore the ending and announcement in the acceptance above.
