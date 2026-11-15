@@ -35,7 +35,7 @@ export const IT = {
     'antarctica-lightning': 'Si sente un vento leggero sintetizzato. È un segnale illustrativo scelto dal gruppo. Non è una registrazione e non deriva da una misura.',
     'antarctica-ocean': 'Si sente una voce maschile bassa che canta tre frasi lunghe. I colori freddi scelgono il registro basso del cantante, e tre sezioni della fascia cambiano leggermente il volume di ogni frase. Il cantante mantiene la sua altezza naturale.',
     'amazon-ocean': 'Si sente un soprano in quattro frasi. I colori caldi scelgono la voce acuta, e quattro sezioni della vista spostano leggermente l\'altezza di ogni frase, entro tre semitoni.',
-    'congo-aerosols': 'Si sentono tredici gruppi di colpi di tosse registrati, con brevi pause. La parte della vista coperta dai colori del fumo decide quanti colpi di tosse ci sono e quanto sono ravvicinati. È una risposta artistica ai colori del fumo.'
+    'congo-aerosols': 'Si sentono tredici gruppi di colpi di tosse registrati, con brevi intervalli. La parte della vista coperta dai colori del fumo decide quanti colpi di tosse ci sono e quanto sono ravvicinati. È una risposta artistica ai colori del fumo.'
   },
 
   limits: {

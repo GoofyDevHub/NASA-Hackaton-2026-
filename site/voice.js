@@ -11,7 +11,7 @@ import * as player from './player.js';
 const V = {
   off: ['stop listening', 'voice off', 'turn off voice', 'turn off the voice', 'microphone off', 'stop voice', 'basta ascoltare', 'smetti di ascoltare', 'spegni la voce', 'spegni voce', 'disattiva la voce', 'disattiva voce', 'spegni il microfono', 'voce spenta'],
   help: ['help', 'commands', 'what can i say', 'aiuto', 'comandi', 'cosa posso dire', 'aiutami'],
-  status: ['where am i', 'status', 'what is this', 'what is playing', 'dove sono', 'dove mi trovo', 'stato', 'cosa sto ascoltando', 'che cos e'],
+  status: ['where am i', 'status', 'what is this', 'what is playing', 'dove sono', 'dove mi trovo', '=stato', 'cosa sto ascoltando', 'che cos e'],
   langIt: ['italiano', 'italian', 'italiana', 'in italiano', 'parla italiano'],
   langEn: ['english', 'inglese', 'in inglese', 'parla inglese', 'speak english'],
   tour: ['=tour', 'start tour', 'start the tour', 'guided tour', 'play all', 'play everything', 'playlist', 'percorso', 'visita guidata', 'avvia il tour', 'avvia tour', 'inizia il tour', 'fai partire il tour', '=giro', 'tur'],
@@ -21,28 +21,28 @@ const V = {
   list: ['content list', 'contents', '=list', 'the list', 'elenco', 'lista', 'contenuti', 'indice', 'elenco contenuti'],
   close: ['close', 'exit', 'cancel', 'chiudi', 'chiudere', '=esci', 'annulla', 'go back', 'back to globe', 'back to the globe', 'torna indietro', 'torna al globo', 'globe', 'globo', 'clothes', 'closed'],
   explore: ['explore', 'explorer', 'explored', 'esplora', 'esplorare', 'esplori'],
-  home: ['=home', 'entrance', 'homepage', 'inizio', 'pagina iniziale', 'ingresso'],
-  enter: ['explore', 'explorer', 'enter', 'start', 'begin', '=go', '=open', 'continue', 'esplora', 'esplorare', 'entra', 'entrare', 'inizia', 'comincia', 'avanti', '=vai', 'apri'],
-  again: ['again', 'restart', 'replay', 'start over', 'once more', 'da capo', 'ricomincia', 'di nuovo', 'ancora', 'riascolta', 'un altra volta'],
+  home: ['=home', 'entrance', 'homepage', '=inizio', 'pagina iniziale', '=ingresso', 'torna all inizio'],
+  enter: ['explore', 'explorer', 'enter', 'start', 'begin', '=go', '=open', 'continue', 'esplora', 'esplorare', 'splora', 'entra', 'entrare', 'inizia', 'iniziare', 'comincia', 'avanti', '=vai', '=apri'],
+  again: ['again', 'restart', 'replay', 'start over', 'once more', 'da capo', 'ricomincia', 'di nuovo', 'riascolta', 'un altra volta', 'ancora una volta'],
   track: ['track', 'number', 'traccia', 'numero', 'brano'],
   first: ['=first', 'first track', 'prima traccia', 'primo brano', 'la prima'],
   last: ['=last', 'last track', 'ultima', 'ultimo', 'ultima traccia'],
   explain: ['what do i hear', 'what am i hearing', 'what does it mean', 'meaning', 'explain', 'cosa sento', 'cosa sto sentendo', 'cosa significa', 'significato', 'spiega', 'spiegami', 'che suono e'],
-  play: ['listen', 'play', '=hear', 'resume', 'continue', 'start', '=go', 'ascolta', 'ascoltare', 'ascolto', 'suona', 'riproduci', 'riprendi', 'continua', 'avvia', '=vai', 'senti', 'fai partire', 'lesson', 'plane'],
-  pause: ['pause', 'pausa', 'paused', 'hold on', '=wait', 'aspetta', 'paws', 'pose', 'posa', 'in pausa', 'metti in pausa'],
-  stop: ['stop', 'stopped', 'ferma', 'fermati', 'fermo', 'basta', 'silenzio', 'halt', 'stoppa', 'firma'],
-  next: ['next', 'forward', 'skip', 'successivo', 'successiva', 'prossimo', 'prossima', 'avanti', '=dopo', 'nexte', 'nest', 'necks'],
+  play: ['listen', 'play', '=hear', 'resume', 'continue', 'start', '=go', 'ascolta', 'ascoltare', 'ascolto', 'scolta', '=suona', 'riproduci', 'riprendi', 'riprendere', 'continua', 'avvia', '=vai', '=senti', 'fai partire', 'lesson', '=plane', '=clay'],
+  pause: ['pause', 'pausa', 'paused', 'hold on', '=wait', 'aspetta', '=paws', '=pose', '=posa', '=causa', 'in pausa', 'metti in pausa'],
+  stop: ['stop', 'stopped', 'ferma', 'fermati', 'fermo', 'basta', 'silenzio', 'halt', 'stoppa', '=firma', '=shop', '=top'],
+  next: ['next', 'forward', 'skip', 'successivo', 'successiva', 'prossimo', 'prossima', 'avanti', 'davanti', '=dopo', 'nexte', '=nest', '=necks', '=text'],
   prev: ['previous', '=back', 'backward', 'before', 'precedente', 'indietro', 'previews', 'in dietro'],
   describe: ['describe', 'description', 'descrivi', 'descrizione', 'descrivere', 'describes'],
-  source: ['source', 'sources', 'credit', 'credits', 'fonte', 'fonti', 'origine', 'crediti', 'da dove viene'],
+  source: ['source', 'sources', 'credit', 'credits', '=fonte', '=fonti', 'origine', 'crediti', 'da dove viene'],
   repeat: ['repeat', 'repeating', 'repeats', 'repetition', '=loop', 'ripeti', 'ripetizione', 'ripetere', 'ripete'],
   negative: ['=off', '=no', '=not', 'stop', 'disattiva', 'spegni', 'togli', 'basta', '=non', 'senza'],
-  volume: ['volume', 'louder', 'quieter', 'softer', 'mute', 'alza', 'abbassa', 'muto', 'piu forte', 'piu alto', 'piu piano', 'piu basso', 'turn up', 'turn down', 'turn it up', 'turn it down'],
-  up: ['louder', '=up', 'higher', 'alza', 'aumenta', 'raise', 'increase', 'piu forte', 'piu alto'],
+  volume: ['volume', 'louder', 'quieter', 'softer', 'mute', '=alza', 'alzare', 'abbassa', '=muto', 'piu forte', 'piu alto', 'piu piano', 'piu basso', 'turn up', 'turn down', 'turn it up', 'turn it down'],
+  up: ['louder', '=up', 'higher', '=alza', 'alzare', 'aumenta', 'raise', 'increase', 'piu forte', 'piu alto'],
   down: ['quieter', 'softer', '=down', 'lower', 'abbassa', 'diminuisci', 'decrease', 'reduce', 'piu piano', 'piu basso'],
   max: ['=max', 'maximum', 'massimo', 'al massimo', 'full volume'],
   min: ['minimum', 'minimo', 'al minimo'],
-  mute: ['mute', 'muto', 'silenzia'],
+  mute: ['mute', '=muto', 'silenzia'],
   amazon: ['amazon', 'amazons', 'amazonia', 'amazzonia', 'amazzoni', 'amazzone', 'amazzonica'],
   congo: ['congo', 'kongo', 'conga', 'africa'],
   antarctica: ['antarctica', 'antarctic', 'antartica', 'antartide', 'antartico', 'antartida', 'polar', '=polo', 'peninsula', 'penisola'],
@@ -69,7 +69,8 @@ function lev(a, b) {
   return prev[b.length];
 }
 // Close enough to be the same word: one letter off for words of four letters or more, two for seven or more.
-const similar = (t, k) => t === k || (Math.min(t.length, k.length) >= 4 && lev(t, k) <= (Math.min(t.length, k.length) >= 7 ? 2 : 1));
+// A near-miss must also start with the same letter, so everyday words are not taken for commands ("cosa" is not "posa").
+const similar = (t, k) => t === k || (t[0] === k[0] && Math.min(t.length, k.length) >= 4 && lev(t, k) <= (Math.min(t.length, k.length) >= 7 ? 2 : 1));
 
 export const normalise = raw => raw.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9% ]+/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -143,8 +144,9 @@ function tone(kind) {
 }
 
 export function createVoice(app, ui) {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let rec = null, enabled = false, speaking = false, lang = 'en-US', restartTimer = 0, duckTimer = 0, misses = 0, tickNext = false;
+  // Looked up when needed, so a stand-in recogniser (window.__ptsSR) can be used to test without a microphone.
+  const Recogniser = () => window.__ptsSR || window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, enabled = false, speaking = false, lang = 'en-US', restartTimer = 0, duckTimer = 0, misses = 0, tickNext = false, previous = null;
   try { if (localStorage.getItem('pts-voice-lang') === 'it-IT') lang = 'it-IT'; } catch {}
 
   const T = () => TEXT[lang], it = () => lang === 'it-IT';
@@ -164,6 +166,7 @@ export function createVoice(app, ui) {
     const region = ['amazon', 'congo', 'antarctica'].find(has), phen = ['lightning', 'ocean', 'aerosols'].find(has);
     if (region && phen) return { scene: SCENES.find(s => s.region === region && s.phenomenon === phen) };
     if (region) return { scene: PLAYLIST.map(byId).find(s => s.region === region) };
+    if (phen && app.view() === 'player') return { scene: SCENES.find(s => s.region === player.scene().region && s.phenomenon === phen) };
     if (phen) return { ask: T().which(it() ? IT.phenomenon[phen] : phen) };
     return null;
   }
@@ -184,8 +187,14 @@ export function createVoice(app, ui) {
     const has = matcher(q), v = app.view();
 
     if (has('off')) return () => { setEnabled(false); return said(T().off); };
-    if (player.state.status === 'describing')                       // the page is speaking: only a stop gets through
-      return has('stop') || has('pause') ? () => { player.pause(); return shown(T().descStopped, 'down'); } : null;
+    if (player.state.status === 'describing') {                     // the page is reading a description aloud
+      // Only commands that end or leave the description get through, so its own words cannot be taken for commands.
+      if (has('stop') || has('pause')) return () => { player.pause(); return shown(T().descStopped, 'down'); };
+      if (has('close') || has('explore')) return () => { app.closePlayer(); return said(`${T().globe} ${T().hint.globe}`); };
+      if (has('next')) return () => { player.step(1); return said(T().next(name(player.scene()))); };
+      if (has('prev')) return () => { player.step(-1); return said(T().prev(name(player.scene()))); };
+      return null;
+    }
     if (has('langIt') && !has('langEn')) return () => { setLang('it-IT'); return said(T().lang); };
     if (has('langEn')) return () => { setLang('en-US'); return said(T().lang); };
     if (has('help')) return () => said(T().help[v]);
@@ -211,7 +220,7 @@ export function createVoice(app, ui) {
     if (has('last')) return () => playScene(byId(PLAYLIST[PLAYLIST.length - 1]));
 
     const t = target(has);
-    if (t?.ask) return () => said(t.ask);
+    if (t?.ask) return Object.assign(() => said(t.ask), { weak: true });
     if (t?.scene) return () => {
       const s = t.scene;
       if (has('play') && s.audio) return playScene(s);
@@ -270,11 +279,20 @@ export function createVoice(app, ui) {
   }
 
   // Tries each thing the recogniser thinks it heard, best first, and acts on the first that is a command.
+  // A command said in two breaths ("Congo" … "aerosol", "volume" … "40") is put back together with the words just before.
+  function decide(q) {
+    const act = plan(q);
+    if (previous && performance.now() - previous.at < 6000 && (act?.weak || (!act && (/\d/.test(q) || numberIn(q))))) {
+      const joined = plan(`${previous.q} ${q}`);
+      if (joined && !joined.weak) return joined;
+    }
+    return act;
+  }
   function run(alternatives) {
     const list = [].concat(alternatives).filter(Boolean);
     for (const text of list) {
-      const act = plan(normalise(text));
-      if (act) { misses = 0; return answer(text, act()); }
+      const q = normalise(text), act = decide(q);
+      if (act) { misses = 0; previous = { q, at: performance.now() }; return answer(text, act()); }
     }
     const text = list[0] || '';
     if (!text || quiet() || player.state.status === 'describing') { ui.heard(text, ''); return null; }
@@ -288,8 +306,8 @@ export function createVoice(app, ui) {
   function listenSoon() { clearTimeout(restartTimer); restartTimer = setTimeout(listen, 150); }
   function listen() {
     if (!enabled || speaking || rec) return;
-    const r = new SR(); rec = r;
-    const handled = new Set(), timers = {};
+    const r = new (Recogniser())(); rec = r;
+    const consumed = {}, timers = {};      // per recogniser result: how many words have already been acted on
     r.lang = lang; r.continuous = true; r.interimResults = true; r.maxAlternatives = 5;
     r.onstart = () => { if (tickNext) { tickNext = false; tone('ready'); } };
     r.onresult = e => {
@@ -297,14 +315,18 @@ export function createVoice(app, ui) {
         player.setDuck(0.35); clearTimeout(duckTimer); duckTimer = setTimeout(() => { if (!speaking) player.setDuck(1); }, 1400);
       }
       for (let i = e.resultIndex; i < e.results.length; i++) {
-        if (handled.has(i)) continue;
         const res = e.results[i], alts = Array.from(res, a => a.transcript.trim()).filter(Boolean);
         if (!alts.length) continue;
         clearTimeout(timers[i]);
-        if (res.isFinal) { handled.add(i); run(alts); continue; }
-        ui.interim(alts[0]);
-        // Do not wait for the recogniser to make up its mind: a clear command that stays unchanged for a moment is obeyed.
-        timers[i] = setTimeout(() => { if (!handled.has(i) && rec === r && plan(normalise(alts[0]))) { handled.add(i); run(alts); } }, 550);
+        // The recogniser keeps adding to one result until it hears a real silence. Whatever comes after the words
+        // already obeyed is new speech and is treated as such: a second command is never thrown away.
+        const total = normalise(alts[0]).split(' ').filter(Boolean).length, done = consumed[i] || 0;
+        const fresh = alts.map(a => normalise(a).split(' ').slice(done).join(' ')).filter(Boolean);
+        if (!fresh.length) continue;
+        if (res.isFinal) { consumed[i] = total; run(fresh); continue; }
+        ui.interim(fresh[0]);
+        // Do not wait for that silence either: a clear command that stays unchanged for half a second is obeyed.
+        timers[i] = setTimeout(() => { if (rec === r && fresh.some(f => decide(f))) { consumed[i] = total; run(fresh); } }, 500);
       }
     };
     r.onerror = e => {
@@ -320,7 +342,7 @@ export function createVoice(app, ui) {
   setInterval(() => { if (enabled && !speaking && !rec) listen(); }, 3000);
 
   function setEnabled(on) {
-    if (on && !SR) { ui.message(T().unsupported); return; }
+    if (on && !Recogniser()) { ui.message(T().unsupported); return; }
     enabled = on; clearTimeout(restartTimer); misses = 0;
     if (!on) { try { rec?.abort(); } catch {} rec = null; player.setDuck(1); ui.state('off'); return; }
     ui.state('on');
@@ -332,7 +354,7 @@ export function createVoice(app, ui) {
     if (enabled) { try { rec?.abort(); } catch {} }                  // restart recognition in the new language
   }
 
-  ui.lang(lang); ui.state(SR ? 'off' : 'unsupported');
+  ui.lang(lang); ui.state(Recogniser() ? 'off' : 'unsupported');
   return {
     toggle: () => setEnabled(!enabled),
     setLang: l => { setLang(l); if (enabled) speak(T().lang); },

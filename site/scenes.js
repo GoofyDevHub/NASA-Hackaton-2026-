@@ -115,7 +115,7 @@ export const SCENES = [
     audio: audio('congo-air-pollution-cough-dense', '96bc6e4eefa92749e3dbdfbcb4119acd057f09dded4b11305997b217c3fc0b71', 'bfe67184b30ff8d1a1756ced39e737617bd6eb091356522e65d97871fa23c318'),
     cue: 'Thirteen groups of coughs',
     description: 'Congo region, central Africa. A still from NASA\'s GEOS atmospheric model for 19 August 2025 at 20:00 UTC. Orange and red smoke colours, labelled black carbon in the legend, cover more than half of the view, with a bright pink and white core near the centre and a green sulfate patch at the eastern edge.',
-    soundKey: 'You hear thirteen groups of recorded coughs with short pauses. The share of the view covered by smoke colours sets how many coughs there are and how closely they follow each other. It is an artistic response to smoke colours.'
+    soundKey: 'You hear thirteen groups of recorded coughs with short gaps between them. The share of the view covered by smoke colours sets how many coughs there are and how closely they follow each other. It is an artistic response to smoke colours.'
   },
   {
     id: 'congo-ocean', place: 'Atlantic, Congo mouth', pin: { lat: -6, lon: 7 }, region: 'congo', phenomenon: 'ocean',

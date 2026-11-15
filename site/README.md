@@ -40,6 +40,8 @@ Recognition is forgiving on purpose:
 - Every alternative the recogniser offers is tried, best first, until one is a command.
 - A clear command is obeyed about half a second after it is heard, without waiting for the recogniser to finish.
 - English and Italian command words both work in either language mode.
+- Commands can follow one another without waiting: “listen”, then “pause”, then “resume” in one breath are each obeyed. A command said in two parts (“Congo” … “aerosols”, “volume” … “40”) is put back together, and in the player a phenomenon alone means the same place.
+- A near-miss must start with the same letter as the command, so ordinary talk is rarely taken for one.
 - While you speak during playback, the sound is lowered for a moment.
 
 How the page answers:
@@ -48,7 +50,7 @@ How the page answers:
 - **Speech for information**: where you are, a place name, help, the source, what you hear, the list. The microphone closes while the page speaks, so it never hears itself, and a soft tick tells you when it is listening again.
 - **Nothing extra when a sound starts**: the sound is the answer. The reply is still shown at the top of the page.
 - An unknown phrase is answered in words once; after that only with the low tone, so talk nearby does not keep the page speaking.
-- While a description is being read aloud, only “stop” and “pause” are obeyed, so the page cannot command itself.
+- While a description is being read aloud, only “stop”, “pause”, “next”, “previous” and “close” are obeyed, so the page's own words are not taken for commands.
 
 The voice it speaks with:
 
