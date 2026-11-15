@@ -1,5 +1,5 @@
 // One playback state for mouse, keyboard, assistive technology and Obit.
-import { PLAYLIST, byId, fullDescription } from './scenes.js';
+import { PLAYLIST, byId, fullDescription, describe as describeText } from './scenes.js';
 
 export const state = {
   sceneId: null,
@@ -9,7 +9,8 @@ export const state = {
   playlist: false,         // a playlist run is in progress
   narration: false,        // speak each description before its track during a playlist run
   volume: 0.8,
-  duck: 1                  // lowered while Obit listens or speaks
+  duck: 1,                 // lowered while the listener is giving a voice command
+  lang: 'en-US'            // language of everything the page says aloud
 };
 
 const listeners = new Set();
@@ -45,7 +46,10 @@ export function speak(text, done) {
   const end = () => { if (!finished) { finished = true; done?.(); } };
   if (!('speechSynthesis' in window)) { announce(text); setTimeout(end, 0); return; }
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US'; u.rate = 1;
+  u.lang = state.lang; u.rate = 1;
+  const voices = speechSynthesis.getVoices();
+  const voice = voices.find(v => v.lang === state.lang) || voices.find(v => v.lang.startsWith(state.lang.slice(0, 2)));
+  if (voice) u.voice = voice;
   u.onend = end; u.onerror = end;
   utterance = u;                       // keep a reference so the browser does not drop its events
   speechSynthesis.speak(u);
@@ -139,7 +143,7 @@ export function describe() {
   audio.pause();
   state.playlist = false;
   setStatus('describing');
-  speak(fullDescription(s), () => {
+  speak(fullDescription(s, state.lang), () => {
     if (mine !== token) return;
     setStatus(hadSound ? 'paused' : 'idle');
     announce(hadSound ? 'Description finished. The sound is paused. Choose Resume to continue.' : 'Description finished.');
@@ -150,7 +154,7 @@ export function describe() {
 function narrateThenPlay() {
   const s = scene(), mine = token;
   setStatus('describing');
-  speak(s.description, () => { if (mine === token) { startAudio(); announce(`Playing ${s.spoken}.` + (s.illustrative ? ' Illustrative sound.' : '')); } });
+  speak(describeText(s, state.lang), () => { if (mine === token) { startAudio(); announce(`Playing ${s.spoken}.` + (s.illustrative ? ' Illustrative sound.' : '')); } });
 }
 
 function goTo(id, keep) {              // keep: 'playing' | 'paused' | 'idle'
@@ -204,6 +208,7 @@ export function setVolume(v) {
   try { localStorage.setItem('orbit-volume', String(state.volume)); } catch {}
   emit();
 }
+export function setLang(l) { state.lang = l === 'it-IT' ? 'it-IT' : 'en-US'; }
 export function setDuck(k) { state.duck = k; applyVolume(); }
 export const position = () => audio.currentTime || 0;
 export const duration = () => (isFinite(audio.duration) && audio.duration) || 15;

@@ -43,6 +43,7 @@ body[data-view="player"] .brand em { font-size: calc(var(--u) * 1.37); margin-le
 .voice { right: calc(var(--u) * 3.5); display: flex; align-items: center; gap: calc(var(--u) * .8); pointer-events: auto; font-family: var(--sans); font-size: calc(var(--u) * 1.1); }
 body[data-view="player"] .voice { right: calc(var(--u) * 17); top: calc(var(--u) * 1.75); }
 #voice-toggle { display: inline-flex; align-items: center; gap: calc(var(--u) * .7); height: calc(var(--u) * 2.9); padding: 0 calc(var(--u) * 1.2); border: 1px solid rgba(255, 255, 255, .45); border-radius: 99px; background: rgba(4, 5, 10, .5); }
+#voice-toggle kbd { font: inherit; font-size: .85em; line-height: 1; padding: .2em .45em; border: 1px solid currentColor; border-radius: .35em; opacity: .75; }
 #voice-toggle svg { height: calc(var(--u) * 1.5); width: auto; }
 #voice-toggle:hover { border-color: var(--ink); }
 #voice-toggle[aria-pressed="true"] { border-color: var(--or); color: var(--or); }

@@ -11,15 +11,15 @@
   <header class="top">
     <p class="brand">P.T.S. <span class="dash">—</span> <em>Pixel That Sounds</em></p>
     <div class="voice">
-      <button id="voice-toggle" type="button" aria-pressed="false" aria-describedby="voice-note">
+      <button id="voice-toggle" type="button" aria-pressed="false" aria-describedby="voice-note" aria-keyshortcuts="V">
         <svg viewBox="0 0 20 28" aria-hidden="true"><rect x="6" y="1.5" width="8" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 13a8 8 0 0 0 16 0M10 21v5.5M5.5 26.5h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <span id="voice-label">Voice control</span>
+        <span id="voice-label">Voice control</span><kbd aria-hidden="true">V</kbd>
       </button>
-      <div class="voice-lang" role="group" aria-label="Language you speak for voice control">
-        <button id="voice-en" type="button" aria-pressed="true" aria-label="English">EN</button>
-        <button id="voice-it" type="button" aria-pressed="false" aria-label="Italiano" lang="it">IT</button>
+      <div class="voice-lang" role="group" aria-label="Language for voice control">
+        <button id="voice-en" type="button" aria-pressed="true" aria-label="Speak and hear English">EN</button>
+        <button id="voice-it" type="button" aria-pressed="false" aria-label="Parla e ascolta in italiano" lang="it">IT</button>
       </div>
-      <p id="voice-note" class="voice-note">Uses your microphone and the browser's speech recognition. In Chrome and Edge your voice is sent to the browser maker's service to become text. Say “help” for the commands and “stop listening” to turn it off.</p>
+      <p id="voice-note" class="voice-note">Uses your microphone and the browser's speech recognition. In Chrome and Edge your voice is sent to the browser maker's service to become text. Press the V key at any time to turn it on or off. Say “help” for the commands and “stop listening” to turn it off.</p>
     </div>
     <p id="voice-status" class="voice-status" aria-hidden="true"></p>
     <nav class="crumbs" aria-label="Breadcrumb">

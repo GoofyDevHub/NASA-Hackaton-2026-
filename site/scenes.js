@@ -2,6 +2,8 @@
 // Media paths are relative to the repository root. Hashes are checked by site/check.mjs
 // against assets/images/sources.json and assets/audio/sha256.json.
 
+import { IT } from './scenes.it.js';
+
 const IMG = '../assets/images/';
 const AUD = '../assets/audio/';
 
@@ -93,7 +95,7 @@ export const SCENES = [
     audioCropLabel: 'Southern Ocean band that drives the sound (exact crop, scroll sideways)',
     audio: audio('antarctica-ocean-deep-male', '6364bc1c9479266fc2d67e6e6e314ed47db780f9b6f51afd468b5bd01d2aa79c', '7c1bbcdd49a5a45b667650de170e3c81a545230ed2d5717b688c7f25da2aa85e'),
     cue: 'A low male singing voice',
-    description: 'Southern Ocean, the broad band of water around Antarctica. NASA\'s ECCO2 visualization draws surface currents as fine streamlines coloured by sea-surface temperature, for a period between March 2007 and March 2008. The band is dark blue with cyan and green threads along its northern edge, the cold end of the legend, above grey Antarctic land. The smaller picture shows the Antarctic Peninsula as a regional reference. The sound uses the wider band.',
+    description: 'Southern Ocean, the broad band of water around Antarctica. NASA\'s ECCO2 visualization draws surface currents as fine streamlines coloured by sea-surface temperature, for a period between March 2007 and March 2008. The band is dark blue with cyan and green threads along its northern edge, the cold end of the legend, above grey Antarctic land. The picture shows a detail of that band; the sound uses its whole width.',
     soundKey: 'You hear a low male singing voice in three long phrases. Cold colours select the singer\'s low register, and three sections of the band gently change how loud each phrase is. The singer keeps his natural pitch.'
   },
   {
@@ -146,5 +148,8 @@ export const PLAYLIST = SCENES.filter(s => s.audio).map(s => s.id);
 export const byId = id => SCENES.find(s => s.id === id) || null;
 export const sourceOf = scene => SOURCES[scene.phenomenon];
 export const limitsOf = scene => scene.limits || sourceOf(scene).limits;
-export const fullDescription = scene =>
-  [scene.description, scene.audio ? scene.soundKey : IMAGE_ONLY_NOTE, limitsOf(scene)].join(' ');
+// Everything read aloud for a view: what the image shows, what is heard, and what it does not tell. English or Italian.
+export const describe = (scene, lang) => lang === 'it-IT' ? IT.description[scene.id] : scene.description;
+export const fullDescription = (scene, lang) => lang === 'it-IT'
+  ? [IT.description[scene.id], scene.audio ? IT.soundKey[scene.id] : IT.imageOnly, IT.limits[scene.id] || IT.limits[scene.phenomenon]].join(' ')
+  : [scene.description, scene.audio ? scene.soundKey : IMAGE_ONLY_NOTE, limitsOf(scene)].join(' ');

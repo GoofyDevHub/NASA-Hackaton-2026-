@@ -344,13 +344,20 @@ const voice = createVoice({
   heard: (text, answer) => { vStatus.innerHTML = ''; const b = document.createElement('b'); b.textContent = `“${text}”`; vStatus.append(b, answer ? ` ${answer}` : ' (ignored)'); },
   interim: text => { vStatus.textContent = text + '…'; },
   message: text => { vStatus.textContent = text; },
-  lang: l => { $('voice-en').setAttribute('aria-pressed', String(l === 'en-US')); $('voice-it').setAttribute('aria-pressed', String(l === 'it-IT')); }
+  lang: l => { player.setLang(l); $('voice-en').setAttribute('aria-pressed', String(l === 'en-US')); $('voice-it').setAttribute('aria-pressed', String(l === 'it-IT')); }
 });
 $('voice-toggle').addEventListener('click', voice.toggle);
 $('voice-en').addEventListener('click', () => voice.setLang('en-US'));
 $('voice-it').addEventListener('click', () => voice.setLang('it-IT'));
+// One key from anywhere: V turns voice control on or off (not while typing in a field).
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() !== 'v' || e.ctrlKey || e.altKey || e.metaKey || e.repeat) return;
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox' && e.target.type !== 'range') return;
+  e.preventDefault(); voice.toggle();
+});
 window.ptsVoice = voice;                                   // lets a typed phrase be tried from the console: ptsVoice.run('next')
 
 player.subscribe(render);
 setView('entrance');
 render();
+$('voice-toggle').focus({ preventScroll: true });          // the page opens on Voice control: Enter, Space or V turns it on
