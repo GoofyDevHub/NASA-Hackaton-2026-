@@ -9,10 +9,10 @@ State on 15 November 2026. **Done** means the acceptance checks pass. **Built** 
 | [CAT02](CAT02.md) | Write scene descriptions and listening notes | CAT01 | Drafted in `site/scenes.js`. Not yet reviewed beside each image and legend. |
 | [WEB02](WEB02.md) | Explore through the globe or the text list | WEB01, CAT02 | Built: globe with three pins and a Content list of all nine views. Keyboard-only path, 200% zoom and reduced motion not checked; reduced motion departs from the ticket by request. |
 | [WEB03](WEB03.md) | Run the complete playlist without looking | WEB01, CAT01 | Built, with a departure: the tour and Previous/Next loop as a ring instead of ending with an announcement. Repeat, stop before a transition and skipping image-only scenes were scripted. |
-| [WEB04](WEB04.md) | Hear a description on demand | WEB03, CAT02 | Partly built: description pauses the sound and waits for resume. Narration before each tour track exists in `player.js` but has no control. |
+| [WEB04](WEB04.md) | Hear a description on demand | WEB03, CAT02 | Partly built: description pauses the sound and waits for resume. Narration before each tour track works by voice (“tour with descriptions”) and has no button. |
 | [AI01](AI01.md) | Answer a question about the selected image | CAT02 | Paused. Obit removed from the build. |
 | [AI02](AI02.md) | Control playback with Obit commands | AI01, WEB04 | Partly covered by voice control (`site/voice.js`); typed requests and clarification questions about images are gone with Obit. |
-| [AI03](AI03.md) | Have a hands-free conversation after activation | AI02 | Built as hands-free command control, not conversation. Never tried with a real microphone. |
+| [AI03](AI03.md) | Have a hands-free conversation after activation | AI02 | Built as hands-free command control, not conversation. Tried by the product owner with a real microphone and headphones in Chrome on 15 November 2026; the faults found were fixed and checked with a simulated recogniser, not yet re-tried by voice. |
 | [QA01](QA01.md) | Walk through the site with assistive technology | WEB02, WEB04, AI03 | Not started. Steps for NVDA and its braille viewer are in `site/README.md`. |
 | [QA02](QA02.md) | Check that the sound differences are understandable | WEB03, CAT02 | Not started. |
 | [VID01](VID01.md) | Capture the listening and voice interactions | WEB02, WEB04, AI03 | Not started. An early attempt at generating the film was discarded. |

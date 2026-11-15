@@ -18,7 +18,7 @@ Confirm both members' registration, event, selected challenge, public link permi
 |---|---|
 | Working entry point | A demo site runs locally with `node site/serve.mjs`; it is not hosted and has no public link. |
 | Media integrity | `node site/check.mjs` passes for all nine images, six tracks, both exact ocean crops and three NASA originals. |
-| Voice control | Built in English and Italian; command routing exercised by script. Not tried with a real voice and microphone. |
+| Voice control | Built in English and Italian; command routing exercised by script. Tried by the product owner with a real microphone and headphones in Chrome on 15 November 2026; the faults found were fixed and checked with a simulated recogniser, not yet re-tried by voice. |
 | Screen reader, braille, keyboard-only, zoom | Not tested. Steps for NVDA and its braille viewer are in `site/README.md`. |
 | Listening comprehension (Amazon against Congo) | Not tested with anyone. |
 | Film and transcript | Not produced. |

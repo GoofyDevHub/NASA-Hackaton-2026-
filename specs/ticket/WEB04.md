@@ -15,4 +15,4 @@ Offer description in the scene panel and an opt-in description setting for playl
 
 Open a scene silently, request its description, navigate mid-sentence and repeat with playlist narration on and off.
 
-> **Current build, 15 November 2026.** The button is labelled Listen to the description. Narration before each tour track exists in `site/player.js` (`setNarration`) but has no control in the interface or in the voice commands yet.
+> **Current build, 15 November 2026.** The button is labelled Listen to the description. Narration before each tour track works by voice (“tour with descriptions”); there is no button for it yet.

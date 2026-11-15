@@ -97,4 +97,5 @@ Playlist order is the order of the six listening references: Amazon lightning, C
 - Describing each image before its track during a tour is available by voice only ("tour with descriptions"); there is no button for it.
 - The Earth keeps turning, the stars drift and the entrance wave moves even when the system asks for reduced motion. This was a design request and conflicts with `specs/product.md`; only the playback level line is flat in that case.
 - The Earth texture is a Blue Marble image with thinned clouds, derived from a NASA image downloaded through Wikimedia Commons. See `textures/README.md`.
-- Not checked: a real screen reader, a braille display, speech recognition with a real voice and microphone, 200% zoom, narrow and portrait windows beyond a first pass, and browsers other than Chromium.
+- Voice control: Tried by the product owner with a real microphone and headphones in Chrome on 15 November 2026; the faults found were fixed and checked with a simulated recogniser, not yet re-tried by voice.
+- Not checked: a real screen reader, a braille display, 200% zoom, narrow and portrait windows beyond a first pass, and browsers other than Chromium.
