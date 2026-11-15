@@ -28,9 +28,9 @@ It prints `P.T.S. demo: http://localhost:4173/`. Open that address in **Chrome o
 | Where | Say (English) | Say (Italian) |
 |---|---|---|
 | Entrance | explore · enter · start | esplora · entra · inizia |
-| Anywhere | start tour · content list · help · where am I · home · italiano · stop listening | avvia il tour · elenco · aiuto · dove sono · inizio · inglese · spegni la voce |
+| Anywhere | start tour · tour with descriptions · content list · read the list · track three · first · last · help · where am I · home · italiano · stop listening | avvia il tour · tour con descrizioni · elenco · leggi l'elenco · traccia tre · prima traccia · ultima · aiuto · dove sono · inizio · inglese · spegni la voce |
 | Globe or list | Amazon · Congo · Antarctica, optionally with lightning, ocean or aerosols · Southern Ocean · wind · coughs · close (the list) | Amazzonia · Congo · Antartide, con fulmini, oceano o aerosol · chiudi |
-| Player | listen · pause · resume · stop · next · previous · describe · source · repeat · stop repeating · louder · quieter · volume 40 · mute · close · explore | ascolta · pausa · riprendi · ferma · avanti · indietro · descrivi · fonte · ripeti · basta ripetere · alza · abbassa · muto · chiudi · esplora |
+| Player | listen · pause · resume · stop · again · next · previous · describe · what do I hear · source · repeat · stop repeating · louder · quieter · volume 40 · maximum · minimum · mute · close · explore | ascolta · pausa · riprendi · ferma · da capo · avanti · indietro · descrivi · cosa sento · fonte · ripeti · basta ripetere · alza · abbassa · massimo · minimo · muto · chiudi · esplora |
 
 Every button on a page has a spoken command. A full run: “explore” → “Congo lightning” → “listen” → “pause” → “resume” → “next” → “stop” → “close”.
 
@@ -42,11 +42,22 @@ Recognition is forgiving on purpose:
 - English and Italian command words both work in either language mode.
 - While you speak during playback, the sound is lowered for a moment.
 
+How the page answers:
+
+- **Tones for short confirmations.** Pause and stop answer with a falling tone, volume and repeat with a rising one, an unknown phrase with a low one. The microphone stays open through a tone, so the next command is heard at once.
+- **Speech for information**: where you are, a place name, help, the source, what you hear, the list. The microphone closes while the page speaks, so it never hears itself, and a soft tick tells you when it is listening again.
+- **Nothing extra when a sound starts**: the sound is the answer. The reply is still shown at the top of the page.
+- An unknown phrase is answered in words once; after that only with the low tone, so talk nearby does not keep the page speaking.
+- While a description is being read aloud, only “stop” and “pause” are obeyed, so the page cannot command itself.
+
+The voice it speaks with:
+
+- The page prefers a natural-sounding voice and the same family for both languages: a multilingual neural voice where the browser offers one (Edge), otherwise the neural or Google voice of each language (Chrome: *Google US English* and *Google italiano*), and only then the system voices. Those better voices need the network.
+- To see or change it, open the browser console: `ptsVoice.voices()` lists what the browser has, `ptsVoice.voice()` shows the one in use for the current language, and `ptsVoice.useVoice('Google italiano')` keeps a choice for that language (`ptsVoice.useVoice()` forgets it).
+- Long text is spoken sentence by sentence, because some browser voices fall silent in the middle of one long passage.
+
 Behaviour to know about:
 
-- While a sound plays, replies appear on screen but are not spoken, so they do not cover the sound.
-- While a description is being read aloud, only “stop” and “pause” are obeyed, so the page cannot command itself.
-- The microphone is closed while the page speaks and reopened afterwards, so the page never hears itself.
 - Speakers can bleed into the microphone: thunder and coughs may be misheard as speech. Headphones avoid this.
 - Without a microphone, `ptsVoice.run('next')` in the browser console runs a phrase as if it had been spoken.
 - The **V** shortcut is a single key with no modifier and cannot be remapped or switched off yet. That falls short of WCAG 2.1.4 for people who dictate text; it is ignored while typing in a field.
@@ -81,7 +92,7 @@ Playlist order is the order of the six listening references: Amazon lightning, C
 
 - Obit, the conversational guide, is removed for now. Voice control covers commands only: it does not answer questions about an image.
 - Previous, Next and the guided tour loop as a ring: after the sixth track comes the first, and the tour runs until the listener stops it. `specs/ticket/WEB03.md` still says the playlist ends and announces completion.
-- Describing each image before its track during a tour exists in `player.js` (`setNarration`) but has no control in the interface or in the voice commands.
+- Describing each image before its track during a tour is available by voice only ("tour with descriptions"); there is no button for it.
 - The Earth keeps turning, the stars drift and the entrance wave moves even when the system asks for reduced motion. This was a design request and conflicts with `specs/product.md`; only the playback level line is flat in that case.
 - The Earth texture is a Blue Marble image with thinned clouds, derived from a NASA image downloaded through Wikimedia Commons. See `textures/README.md`.
 - Not checked: a real screen reader, a braille display, speech recognition with a real voice and microphone, 200% zoom, narrow and portrait windows beyond a first pass, and browsers other than Chromium.

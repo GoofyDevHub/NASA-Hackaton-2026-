@@ -37,23 +37,63 @@ export const playable = () => !!scene()?.audio;
 function setStatus(s) { state.status = s; emit(); }
 
 function cancelSpeech() {
-  utterance = null;
+  utterance = null; alive.clear();
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
 
-export function speak(text, done) {
-  let finished = false;
-  const end = () => { if (!finished) { finished = true; done?.(); } };
-  if (!('speechSynthesis' in window)) { announce(text); setTimeout(end, 0); return; }
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = state.lang; u.rate = 1;
-  const voices = speechSynthesis.getVoices();
-  const voice = voices.find(v => v.lang === state.lang) || voices.find(v => v.lang.startsWith(state.lang.slice(0, 2)));
-  if (voice) u.voice = voice;
-  u.onend = end; u.onerror = end;
-  utterance = u;                       // keep a reference so the browser does not drop its events
-  speechSynthesis.speak(u);
+// ---- the voice the page speaks with
+// Prefer a natural-sounding voice, and the same family for English and Italian so the two sound alike:
+// a multilingual neural voice where the browser has one (Edge), otherwise the neural or Google voice of
+// each language (Chrome), and only then the robotic system voices. A choice saved from the console wins.
+const VOICE_RANK = [/multilingual.*natural|natural.*multilingual/i, /natural/i, /google/i, /online/i, /elsa|zira|aria|jenny|samantha|alice/i];
+export function pickVoice(lang = state.lang) {
+  if (!('speechSynthesis' in window)) return null;
+  const all = speechSynthesis.getVoices(), base = lang.slice(0, 2).toLowerCase();
+  try { const saved = localStorage.getItem('pts-tts-' + lang), v = saved && all.find(x => x.name === saved); if (v) return v; } catch {}
+  const multi = all.find(v => VOICE_RANK[0].test(v.name));
+  if (multi) return multi;
+  const same = all.filter(v => v.lang.replace('_', '-').toLowerCase().startsWith(base));
+  const exact = same.filter(v => v.lang.replace('_', '-') === lang);
+  for (const re of VOICE_RANK.slice(1)) for (const pool of [exact, same]) { const v = pool.find(x => re.test(x.name)); if (v) return v; }
+  return exact[0] || same[0] || null;
 }
+if ('speechSynthesis' in window) { speechSynthesis.getVoices(); speechSynthesis.addEventListener?.('voiceschanged', () => speechSynthesis.getVoices()); }
+
+// Long text is spoken sentence by sentence: some browser voices fall silent on one long utterance.
+function sentences(text) {
+  const out = []; let cur = '';
+  for (const part of text.match(/[^.!?;:]+[.!?;:]*\s*/g) || [text]) {
+    if (cur && (cur + part).length > 190) { out.push(cur.trim()); cur = ''; }
+    cur += part;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+}
+const alive = new Set();               // utterances in flight; holding them keeps the browser from dropping their events
+
+// Speaks text in the current language and calls onend exactly once when the speech is over or cancelled.
+export function sayText(text, onend) {
+  let finished = false, started = false, poll = 0;
+  const end = () => { if (finished) return; finished = true; clearInterval(poll); onend?.(); };
+  if (!('speechSynthesis' in window)) { announce(text); setTimeout(end, 0); return; }
+  const voice = pickVoice(), parts = sentences(text);
+  parts.forEach((p, i) => {
+    const u = new SpeechSynthesisUtterance(p);
+    u.lang = state.lang; if (voice) u.voice = voice;
+    u.onstart = () => { started = true; };
+    u.onend = u.onerror = () => { alive.delete(u); if (i === parts.length - 1) end(); };
+    alive.add(u); speechSynthesis.speak(u);
+  });
+  // Do not rely on the end event alone: watch the synthesiser, so the microphone is never left closed.
+  const t0 = performance.now();
+  poll = setInterval(() => {
+    const busy = speechSynthesis.speaking || speechSynthesis.pending;
+    if (busy) started = true;
+    if ((started && !busy) || (!started && performance.now() - t0 > 2500)) end();
+  }, 120);
+}
+
+export function speak(text, done) { sayText(text, done); }
 
 function ensureAnalyser() {
   if (ctx || !(window.AudioContext || window.webkitAudioContext)) return;
