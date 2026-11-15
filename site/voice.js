@@ -146,7 +146,7 @@ function tone(kind) {
 export function createVoice(app, ui) {
   // Looked up when needed, so a stand-in recogniser (window.__ptsSR) can be used to test without a microphone.
   const Recogniser = () => window.__ptsSR || window.SpeechRecognition || window.webkitSpeechRecognition;
-  let rec = null, enabled = false, speaking = false, lang = 'en-US', restartTimer = 0, duckTimer = 0, misses = 0, tickNext = false, previous = null;
+  let rec = null, enabled = false, speaking = false, lang = 'en-US', restartTimer = 0, duckTimer = 0, duckFrom = 0, duckHold = 0, misses = 0, tickNext = false, previous = null;
   try { if (localStorage.getItem('pts-voice-lang') === 'it-IT') lang = 'it-IT'; } catch {}
 
   const T = () => TEXT[lang], it = () => lang === 'it-IT';
@@ -311,8 +311,15 @@ export function createVoice(app, ui) {
     r.lang = lang; r.continuous = true; r.interimResults = true; r.maxAlternatives = 5;
     r.onstart = () => { if (tickNext) { tickNext = false; tone('ready'); } };
     r.onresult = e => {
-      if (player.state.status === 'playing') {                       // lower the sound while the listener is speaking
-        player.setDuck(0.35); clearTimeout(duckTimer); duckTimer = setTimeout(() => { if (!speaking) player.setDuck(1); }, 1400);
+      const now = performance.now();
+      if (player.state.status === 'playing' && now > duckHold) {     // lower the sound while the listener is speaking
+        duckFrom = duckFrom || now;
+        if (now - duckFrom > 4000) {                                 // unbroken "speech" is the sound itself (steady rain): stop lowering it
+          duckFrom = 0; duckHold = now + 20000; clearTimeout(duckTimer); if (!speaking) player.setDuck(1);
+        } else {
+          player.setDuck(0.35); clearTimeout(duckTimer);
+          duckTimer = setTimeout(() => { duckFrom = 0; if (!speaking) player.setDuck(1); }, 1400);
+        }
       }
       for (let i = e.resultIndex; i < e.results.length; i++) {
         const res = e.results[i], alts = Array.from(res, a => a.transcript.trim()).filter(Boolean);
