@@ -95,8 +95,12 @@ export function sayText(text, onend) {
 
 export function speak(text, done) { sayText(text, done); }
 
+// The level meter routes the sound through WebAudio, and a context the browser has not allowed to run is
+// silent. So it is only created during a real click, tap or key press; a sound started by voice before
+// that plays straight from the audio element, without the meter.
 function ensureAnalyser() {
   if (ctx || !(window.AudioContext || window.webkitAudioContext)) return;
+  if (navigator.userActivation && !navigator.userActivation.isActive) return;
   try {
     ctx = new (window.AudioContext || window.webkitAudioContext)();
     analyser = ctx.createAnalyser(); analyser.fftSize = 1024;
@@ -105,6 +109,20 @@ function ensureAnalyser() {
     analyser.connect(ctx.destination);
   } catch { ctx = analyser = null; }
 }
+
+// Every click, tap or key press: wake the audio context, and the first time let the audio element play once
+// in silence. iPad and iPhone then allow later sounds started without a touch, such as by a voice command.
+const SILENCE = 'data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQIAAACAgA==';
+let primed = false;
+function unlock() {
+  ensureAnalyser();
+  if (ctx && ctx.state !== 'running') ctx.resume?.().catch?.(() => {});
+  if (primed || state.sceneId) { primed = true; return; }
+  primed = true;
+  audio.src = SILENCE;
+  audio.play().then(() => { if (audio.src === SILENCE) audio.pause(); }).catch(() => {});
+}
+for (const type of ['pointerdown', 'touchend', 'keydown']) window.addEventListener(type, unlock, true);
 
 // Current output level 0..1, for the orbit line.
 export function level() {
@@ -139,7 +157,8 @@ export function closePanel() {
 }
 
 function startAudio() {
-  ensureAnalyser(); ctx?.resume?.();
+  ensureAnalyser();
+  if (ctx && ctx.state !== 'running') ctx.resume?.().catch?.(() => {});
   applyVolume();
   const mine = token;
   startedAt = performance.now();
