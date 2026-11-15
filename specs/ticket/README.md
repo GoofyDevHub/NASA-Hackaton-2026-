@@ -15,9 +15,9 @@ State on 15 November 2026. **Done** means the acceptance checks pass. **Built** 
 | [AI03](AI03.md) | Have a hands-free conversation after activation | AI02 | Built as hands-free command control, not conversation. Tried by the product owner with a real microphone and headphones in Chrome on 15 November 2026; the faults found were fixed and checked with a simulated recogniser, not yet re-tried by voice. |
 | [QA01](QA01.md) | Walk through the site with assistive technology | WEB02, WEB04, AI03 | Not started. Steps for NVDA and its braille viewer are in `site/README.md`. |
 | [QA02](QA02.md) | Check that the sound differences are understandable | WEB03, CAT02 | Not started. |
-| [VID01](VID01.md) | Capture the listening and voice interactions | WEB02, WEB04, AI03 | Not started. An early attempt at generating the film was discarded. |
-| [VID02](VID02.md) | Edit the captioned 29-second film | VID01 | Not started. |
-| [REL01](REL01.md) | Rehearse and package the judging entry | QA01, QA02, VID02 | Not started. The site has no public link yet. |
+| [VID01](VID01.md) | Capture the listening and voice interactions | WEB02, WEB04, AI03 | Done by script: `film/make.mjs` drives the real site frame by frame. Voice input is a stand-in during capture. |
+| [VID02](VID02.md) | Edit the captioned 29-second film | VID01 | Film rendered and published, narrated instead of captioned. Captions and transcript still missing. |
+| [REL01](REL01.md) | Rehearse and package the judging entry | QA01, QA02, VID02 | Not started. The site is public at <https://pixelthatsounds.github.io/>. |
 
 ## Two-person delivery plan
 

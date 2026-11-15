@@ -1,5 +1,7 @@
 # P.T.S. — Pixel That Sounds: demo site
 
+Live at <https://pixelthatsounds.github.io/>. It is published from the `gh-pages` branch, which holds only the site files: after a change is merged into `main`, `gh-pages` must be republished or the public site stays behind.
+
 A static, dependency-free site served by a small Node script. No install step, no build.
 
 ## Run it
