@@ -1,10 +1,5 @@
-# Immagini di riferimento
+# Visual references
 
-[Apri la galleria](galleria.html) per vedere le cinque tappe del sito, i due stati del nuovo lettore, il controller e le dieci scene del film.
+The [globe](sito/globo.png) sets the composition. Use the [entrance](sito/ingresso.png), [idle player](sito/lettore-pronto.png), [playing state](sito/lettore-in-ascolto.png) and [navigation](sito/percorso.png) to guide layout and focus. The final controls and labels follow the [product behaviour](../product.md).
 
-- **sito/** contiene ingresso, globo, menu pronto e in ascolto, percorso e confronto. La seconda tavola del globo guida la direzione visiva.
-- **controller/** contiene presa, esploso, dettaglio termico e vista del modello. Le scene 5–7 del film usano gli stessi file.
-- **video/** contiene le altre scene. La scena 8 rivela due immagini illustrative del mare con lo stesso ritaglio. La scena 9 usa gli estremi A/B.
-- [Identità del team](identita/STYLE_REFERENCE.md). Il gesto dell’orbita ispira sito e film. Per la UI valgono grafite, bianco e arancione definiti nella [specifica di prodotto](../docs/prodotto.md).
-
-Provenienza: mockup e concept preparatori con una vista tecnica del modello. I crediti scientifici delle immagini ufficiali andranno registrati nel catalogo.
+The [opening](video/apertura.png), [location](video/luogo.png), [listen button](video/ascolta.png), [sound form](video/forma.png) and [closing](video/finale.png) are art direction for the [film](../storyboard.md). Capture the working interface for the final cut. The site in `site/` implements the entrance, globe and player frames in English and departs from them on purpose: a black deep-space background with stars and a Milky Way, the Earth lit from the upper left, liquid-glass panels and buttons, three region pins instead of one pin, no navigation menu on the entrance and globe pages, a fixed image frame opened from a small Earth, and a voice-control button in the header. The project is now named P.T.S. — Pixel That Sounds; the concept frames still show the old name ORBIT. These concept frames and the [team artwork](identita/STYLE_REFERENCE.md) are AI-assisted illustrations. Source the scientific imagery from the [NASA reference set](../../assets/images/README.md).
