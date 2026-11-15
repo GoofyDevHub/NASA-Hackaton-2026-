@@ -37,6 +37,8 @@ def tracks(manifest):
     for region in ("amazon", "congo", "antarctica"):
         crop, digest = read_crop(region + "-lightning", manifest)
         profile, _ = storms.activity_profile(crop)
+        if region == "amazon":
+            continue  # rain only since 15 November 2026: see rain_only.mjs
         if region == "antarctica":
             assert profile is None
             yield "antarctica-wind", storms.render_wind(digest)[0]

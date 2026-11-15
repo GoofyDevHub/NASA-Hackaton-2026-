@@ -62,10 +62,10 @@ export const SCENES = [
     id: 'amazon-lightning', place: 'Amazon', pin: { lat: -3, lon: -64 }, region: 'amazon', phenomenon: 'lightning',
     title: 'Amazon lightning', spoken: 'Amazon lightning',
     image: IMG + 'amazon-lightning.png', imageLabel: 'Amazon region',
-    audio: audio('amazon-storm', 'c85037624600d237fa5d430b0917d4bcb2b531c1d3db4b8bc01e4c6464e8a6f7', '1c35ce9b4f39d864a84b01ea4bb7241beab777f52a71148ed0a634758349dbc7'),
-    cue: 'Rain with three thunder groups',
+    audio: audio('amazon-rain', 'd7b7f896417969671c7ed6d9ae2b4c64b06fbe444f3b0bcf0d84852f9d3ee05d', '1b401d48e72c01bc00610250f69472375617dea477f24025502009b4c65bd3db'),
+    cue: 'Steady rain, no thunder',
     description: 'Amazon region, northern South America. This is NASA\'s map of how often lightning flashes in an average year, built from satellite records between 1995 and 2002. Almost the whole view is blue, the low end of the legend, with lighter blue speckles across the basin and a small yellow and red patch in the far north-west corner. Dark water in the north-east is the Atlantic.',
-    soundKey: 'You hear rain with three separate groups of thunder in 15 seconds. The sound scans the map column by column: brighter colours bring stronger rain and sharper thunder.'
+    soundKey: 'You hear 15 seconds of rain with no thunder. The sound scans the map column by column: brighter colours bring heavier rain.'
   },
   {
     id: 'congo-lightning', place: 'Congo', pin: { lat: 1, lon: 25 }, region: 'congo', phenomenon: 'lightning',
@@ -74,7 +74,7 @@ export const SCENES = [
     audio: audio('congo-storm', '3d42812de9c037d27d79aaf7a4a2fdbea8153097f71e3cff90d98006a08bf9a5', '04beca0a07d28d5d34eb48d49dc1745f63a948a83bb3295142aec0c93bca674b'),
     cue: 'Heavier rain with nine thunder groups',
     description: 'Congo region, central Africa. The same NASA lightning map and legend as the Amazon view, built from satellite records between 1995 and 2002. Here the land is cyan and green with a yellow and orange centre and a dark red patch to the east, the high end of the legend. Dark blue in the south-west corner is the Atlantic.',
-    soundKey: 'You hear heavier rain with nine groups of thunder in 15 seconds, made with the same recording and the same rule as the Amazon track. More frequent, louder thunder means the map shows higher colours here. The contrast is between two places, not between two dates.'
+    soundKey: 'You hear heavier rain with nine groups of thunder in 15 seconds, made from the same rain recording as the Amazon track, which has rain alone. Heavier rain and frequent, loud thunder mean the map shows higher colours here. The contrast is between two places, not between two dates.'
   },
   {
     id: 'antarctica-lightning', place: 'Antarctic Peninsula', pin: { lat: -66, lon: -63 }, region: 'antarctica', phenomenon: 'lightning',

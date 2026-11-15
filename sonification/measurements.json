@@ -133,12 +133,12 @@
         "seconds": 13.6484375,
         "activity": 0.39602144256646254,
         "amplitudeBeforeEmphasis": 0.14433354917232533,
-        "attackMs": 49.0
+        "attackMs": 49
       }
     ],
     "emphasisGainDbRange": [
       1.5,
-      8.0
+      8
     ],
     "wav": "../assets/audio/congo-storm.wav",
     "mp3": "../assets/audio/congo-storm.mp3",
@@ -150,7 +150,7 @@
     "repeatedWavIdentical": true,
     "loudnessIncreaseLu": 6.41
   },
-  "amazon-storm": {
+  "amazon-rain": {
     "status": "image-derived-audition",
     "matchedPixels": 2190,
     "matchedPixelFraction": 0.712890625,
@@ -160,7 +160,7 @@
     "maximumColumnScore": 0.31870787878787876,
     "soundProfile": "medium",
     "numericMeaning": "Dimensionless display-colour proxy; not rainfall, storm severity or flash counts.",
-    "kind": "image-derived-rain-thunder-metaphor",
+    "kind": "image-derived-rain-metaphor",
     "source": {
       "path": "../assets/images/originals/lightning.png",
       "page": "https://svs.gsfc.nasa.gov/3144/",
@@ -187,39 +187,14 @@
     "cropRawRgbSha256": "e61d4093c524cf791b002a3cdd90e70b7dbb3dfaf09db5af4433152975ac37a7",
     "transform": "Rectangular crop; preview enlarged with nearest neighbour; no recolouring.",
     "geography": "Approximate plate-carree image coordinates; no watershed mask.",
-    "events": [
-      {
-        "seconds": 2.507791666666667,
-        "activity": 0.17600665469103108,
-        "amplitudeBeforeEmphasis": 0.07631672702619402,
-        "attackMs": 85.66666666666667
-      },
-      {
-        "seconds": 8.15875,
-        "activity": 0.22163763629318775,
-        "amplitudeBeforeEmphasis": 0.08948327641533874,
-        "attackMs": 78.0625
-      },
-      {
-        "seconds": 13.1866875,
-        "activity": 0.23131867181662819,
-        "amplitudeBeforeEmphasis": 0.09235137474613264,
-        "attackMs": 76.4375
-      }
-    ],
-    "emphasisGainDbRange": [
-      1.5,
-      1.5105250640673011
-    ],
-    "wav": "../assets/audio/amazon-storm.wav",
-    "mp3": "../assets/audio/amazon-storm.mp3",
-    "loudnessLufs": -19.5,
-    "truePeakDbTP": -4.07,
-    "mp3TruePeakDbTP": -3.74,
-    "wavSha256": "1c35ce9b4f39d864a84b01ea4bb7241beab777f52a71148ed0a634758349dbc7",
-    "mp3Sha256": "c85037624600d237fa5d430b0917d4bcb2b531c1d3db4b8bc01e4c6464e8a6f7",
-    "repeatedWavIdentical": true,
-    "loudnessIncreaseLu": 1.45
+    "wav": "../assets/audio/amazon-rain.wav",
+    "mp3": "../assets/audio/amazon-rain.mp3",
+    "loudnessLufs": -20,
+    "truePeakDbTP": -3.5,
+    "mp3TruePeakDbTP": -3.8,
+    "wavSha256": "1b401d48e72c01bc00610250f69472375617dea477f24025502009b4c65bd3db",
+    "mp3Sha256": "d7b7f896417969671c7ed6d9ae2b4c64b06fbe444f3b0bcf0d84852f9d3ee05d",
+    "renderer": "rain_only.mjs (Node and ffmpeg); no thunder events"
   },
   "amazon-ocean-soprano": {
     "colouredPixelFraction": 0.4426150895140665,
@@ -258,14 +233,14 @@
         "sourceFile": "f1_long_straight_a.wav",
         "sourceExcerpt": [
           4.1,
-          7.0
+          7
         ],
         "startSeconds": 7.55,
         "durationSeconds": 3.35,
         "temperatureColourMean": 0.9071985299786612,
         "sourceFundamentalHz": 531.3782729657016,
         "intendedPitchHz": 529.8190981039061,
-        "appliedShiftSemitones": 0.0,
+        "appliedShiftSemitones": 0,
         "approximateShiftedFundamentalHz": 531.3782729657016,
         "tempoFactor": 0.8656716417910447
       },
@@ -280,7 +255,7 @@
         "temperatureColourMean": 0.8992762714818644,
         "sourceFundamentalHz": 521.5905087724872,
         "intendedPitchHz": 522.5953190986112,
-        "appliedShiftSemitones": 0.0,
+        "appliedShiftSemitones": 0,
         "approximateShiftedFundamentalHz": 521.5905087724872,
         "tempoFactor": 1.2686567164179106
       }
@@ -359,11 +334,11 @@
         ],
         "start": 0.15,
         "duration": 6.2,
-        "level": 1.0,
+        "level": 1,
         "sourceFundamentalHz": 127.47791085117453,
         "imageWarmthMean": 0.15782411587815023,
         "colourGain": 0.93156482317563,
-        "appliedShiftSemitones": 0.0,
+        "appliedShiftSemitones": 0,
         "approximateFundamentalHz": 127.47791085117453,
         "tempoFactor": 0.8467741935483871
       },
@@ -379,7 +354,7 @@
         "sourceFundamentalHz": 130.12403278014372,
         "imageWarmthMean": 0.1035156641589698,
         "colourGain": 0.920703132831794,
-        "appliedShiftSemitones": 0.0,
+        "appliedShiftSemitones": 0,
         "approximateFundamentalHz": 130.12403278014372,
         "tempoFactor": 0.8771929824561403
       },
@@ -395,7 +370,7 @@
         "sourceFundamentalHz": 126.8722190933963,
         "imageWarmthMean": 0.1319792192455282,
         "colourGain": 0.9263958438491057,
-        "appliedShiftSemitones": 0.0,
+        "appliedShiftSemitones": 0,
         "approximateFundamentalHz": 126.8722190933963,
         "tempoFactor": 0.8809523809523809
       }
@@ -533,7 +508,7 @@
         ],
         "startSeconds": 5.834395833333334,
         "durationSeconds": 0.6,
-        "smokeDisplayProxy": 1.0
+        "smokeDisplayProxy": 1
       },
       {
         "source": "cough-1.ogg",
@@ -543,7 +518,7 @@
         ],
         "startSeconds": 6.706666666666667,
         "durationSeconds": 0.76,
-        "smokeDisplayProxy": 1.0
+        "smokeDisplayProxy": 1
       },
       {
         "source": "cough-2.ogg",
@@ -563,7 +538,7 @@
         ],
         "startSeconds": 8.800583333333334,
         "durationSeconds": 1.07,
-        "smokeDisplayProxy": 1.0
+        "smokeDisplayProxy": 1
       },
       {
         "source": "cough-1.ogg",

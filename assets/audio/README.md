@@ -4,7 +4,7 @@ Each link plays a 15-second MP3. The stereo 48 kHz, 24-bit WAV alongside it is t
 
 | Scene | What to listen for | Sound source |
 |---|---|---|
-| [Amazon lightning](amazon-storm.mp3) | Rain with three thunder groups | Caesar's field recording |
+| [Amazon lightning](amazon-rain.mp3) | Steady rain, no thunder | Caesar's field recording |
 | [Congo lightning](congo-storm.mp3) | Heavier rain with nine thunder groups | The same recording and mapping at higher displayed activity |
 | [Antarctic lightning view](antarctica-wind.mp3) | Light wind | Illustrative synthesized airflow. The polar overlay is insufficient to determine lightning activity. |
 | [Southern Ocean](antarctica-ocean-deep-male.mp3) | A low male singing voice in three phrases | VocalSet singer m3 |

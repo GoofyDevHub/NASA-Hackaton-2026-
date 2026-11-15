@@ -1,6 +1,6 @@
-// Candidate track: Amazon lightning as rain only, no thunder.  node sonification/rain_only.mjs
+// The Amazon lightning track: rain only, no thunder.  node sonification/rain_only.mjs
 // Same image measurement and rain recording as storms.py; the thunder events are left out.
-// Needs ffmpeg on the PATH. Writes assets/audio/amazon-rain.wav and .mp3 (not yet an approved master).
+// Needs ffmpeg on the PATH. Writes assets/audio/amazon-rain.wav and .mp3, the approved master.
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';

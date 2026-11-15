@@ -30,7 +30,7 @@ export const IT = {
   },
 
   soundKey: {
-    'amazon-lightning': 'Si sente pioggia con tre gruppi distinti di tuoni in 15 secondi. Il suono scorre la mappa colonna per colonna: colori più accesi portano pioggia più forte e tuoni più netti.',
+    'amazon-lightning': 'Si sentono 15 secondi di pioggia, senza tuoni. Il suono scorre la mappa colonna per colonna: colori più accesi portano pioggia più fitta.',
     'congo-lightning': 'Si sente pioggia più intensa con nove gruppi di tuoni in 15 secondi, fatta con la stessa registrazione e la stessa regola della traccia amazzonica. Tuoni più frequenti e più forti significano che qui la mappa mostra colori più alti. Il confronto è tra due luoghi, non tra due date.',
     'antarctica-lightning': 'Si sente un vento leggero sintetizzato. È un segnale illustrativo scelto dal gruppo. Non è una registrazione e non deriva da una misura.',
     'antarctica-ocean': 'Si sente una voce maschile bassa che canta tre frasi lunghe. I colori freddi scelgono il registro basso del cantante, e tre sezioni della fascia cambiano leggermente il volume di ogni frase. Il cantante mantiene la sua altezza naturale.',

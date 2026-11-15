@@ -1,6 +1,6 @@
 # P.T.S. — Pixel That Sounds
 
-P.T.S. is a listening guide to three NASA Earth visualizations. Choose a region on a turning globe or from a content list, then hear what the colours in the image represent. Compare the Amazon and Congo lightning maps by listening for the difference in thunder density. A voice control lets a listener enter the site, start the sounds and move through them by speaking.
+P.T.S. is a listening guide to three NASA Earth visualizations. Choose a region on a turning globe or from a content list, then hear what the colours in the image represent. Compare the Amazon and Congo lightning maps by ear: rain alone over the Amazon, heavier rain with thunder over the Congo. A voice control lets a listener enter the site, start the sounds and move through them by speaking.
 
 **Status, 15 November 2026.** Available: nine regional image references, six approved 15-second tracks with their sources, a reproducible audio renderer, and a working demo site (`site/`) with an entrance, a globe, a player, a guided tour and voice control in English and Italian. Not yet done: the conversational guide Obit (paused and removed from the build), the 29-second film, hosting at a public link, and every test with assistive technology or listeners. The specifications are a working agreement for the two-person team; accessible operation and listener comprehension still need testing.
 
@@ -17,7 +17,7 @@ Open <http://localhost:4173/> in Chrome or Edge. Press `Ctrl+C` in the terminal 
 | Region | Lightning | Ocean temperature colours | Aerosols |
 |---|---|---|---|
 | Antarctica | [Illustrative wind](assets/audio/antarctica-wind.mp3) | [Southern Ocean, low male voice](assets/audio/antarctica-ocean-deep-male.mp3) | Image only |
-| Amazon | [Rain and three thunder groups](assets/audio/amazon-storm.mp3) | [Atlantic near the river mouth, soprano](assets/audio/amazon-ocean-soprano.mp3) | Image only |
+| Amazon | [Steady rain, no thunder](assets/audio/amazon-rain.mp3) | [Atlantic near the river mouth, soprano](assets/audio/amazon-ocean-soprano.mp3) | Image only |
 | Congo | [Heavier rain and nine thunder groups](assets/audio/congo-storm.mp3) | Image only | [Thirteen groups of coughs](assets/audio/congo-air-pollution-cough-dense.mp3) |
 
 The Antarctic lightning overlay cannot establish local activity. Wind is an artistic cue. The ocean voices follow relative temperature colours. Cough density responds to smoke-coloured area in a GEOS model image. These sources cover different periods. [See the nine images and source legends](assets/images/README.md) · [Listen and inspect the audio credits](assets/audio/README.md)

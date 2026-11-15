@@ -8,7 +8,7 @@ Record the actual click, orbit, keyboard description, assistant command and sour
 
 ## Acceptance
 
-- [ ] Capture both labelled lightning regions with the same legend and identifiable thunder excerpts.
+- [ ] Capture both labelled lightning regions with the same legend and identifiable excerpts: Amazon rain alone, Congo rain with thunder.
 - [ ] Capture the real voice command selecting the correct cold ocean crop. Record English text and clean sound separately for editing.
 
 ## Verify
