@@ -20,31 +20,33 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 // ------------------------------------------------------------------ the edit, in frames
 const TITLES = [   // id, text, first frame, frames per character, last frame, style
   ['hook', 'WHAT DOES EARTH SOUND LIKE?', 6, 3, 150, 'big'],
-  ['c1', '3 PLACES · 3 KINDS OF NASA IMAGE', 292, 1.5, 372, 'cap'],
-  ['c2', '1 · PICK A NASA IMAGE', 388, 2, 476, 'cap'],
-  ['c3', '2 · ONE BASE SOUND PER CATEGORY: LIGHTNING → RAIN', 486, 1.5, 656, 'cap'],
-  ['c4', '3 · STRONGER PIXELS → HEAVIER RAIN + THUNDER', 666, 1.5, 818, 'cap'],
-  ['c5', 'NEW CATEGORY: OCEAN TEMPERATURE → A VOICE. COLD = DEEP', 842, 1.5, 1016, 'cap'],
-  ['c6', 'NO SIGHT NEEDED: KEYBOARD · SCREEN READER · BRAILLE', 1026, 1.5, 1136, 'cap'],
-  ['c7', 'PRESS V → VOICE CONTROL', 1142, 1.5, 1182, 'cap'],
-  ['c8', 'SAY “DESCRIBE”', 1188, 2, 1436, 'cap'],
-  ['tag', 'HEAR THE PLANET. BEYOND VISUALS.', 1470, 2.5, TOTAL, 'big'],
-  ['url', 'pixelthatsounds.github.io', 1570, 2, TOTAL, 'pill']
+  ['card', 'ALSO FOR PEOPLE WHO CANNOT SEE IT.', 812, 2.5, 936, 'big'],
+  ['s1', '“Explore”', 1078, 2, 1150, 'say'], ['s2', '“Amazon, lightning”', 1168, 2, 1290, 'say'], ['s3', '“Listen”', 1306, 2, 1400, 'say'],
+  ['tag', 'HEAR THE PLANET. BEYOND VISUALS.', 1492, 2, TOTAL, 'big'],
+  ['url', 'pixelthatsounds.github.io', 1572, 2, TOTAL, 'pill']
 ];
 const ZOOMS = [    // from frame, to frame, scale from, scale to, element the zoom is centred on
   [186, 198, 1, 1.24, '#hero-title'], [236, 246, 1.24, 1, '#hero-title'],
   [560, 572, 1, 1.14, '.shot'], [640, 650, 1.14, 1, '.shot'],
-  [740, 752, 1, 1.14, '.shot'], [806, 816, 1.14, 1, '.shot'],
-  [900, 912, 1, 1.14, '.shot'], [1002, 1012, 1.14, 1, '.shot'],
-  [1150, 1162, 1, 1.3, '#voice-toggle'], [1200, 1212, 1.3, 1, '#voice-toggle'],
-  [1440, 1464, 1.4, 1, '#globe']
+  [720, 732, 1, 1.14, '.shot'], [784, 794, 1.14, 1, '.shot'],
+  [952, 980, 1, 1.5, '#voice-toggle'], [1056, 1074, 1.5, 1, '#voice-toggle'],
+  [1470, 1494, 1.4, 1, '#globe']
 ];
 const CLIPS = [    // approved track, first frame, last frame, offset in seconds, gain
-  ['amazon-rain', 480, 660, 1.0, 1], ['congo-storm', 660, 822, 7.5, 0.38],
-  ['antarctica-ocean-deep-male', 834, 1020, 0.2, 1], ['antarctica-ocean-deep-male', 1020, 1188, 3.3, 0.45],
-  ['amazon-ocean-soprano', 1440, TOTAL, 0.2, 0.8]
+  ['amazon-rain', 480, 660, 1.0, 0.6], ['congo-storm', 660, 800, 7.5, 0.3],
+  ['amazon-rain', 1348, 1470, 1.0, 0.6], ['amazon-ocean-soprano', 1470, TOTAL, 0.2, 0.55]
 ];
-const POPS = [138, 270, 375, 480, 660, 822, 834, 1680], TABS = [1030, 1055, 1080, 1105], VKEY = 1140, HEARD = 1188, SPEECH = [1215, 1436];
+const POPS = [138, 270, 375, 480, 660, 1680], VKEY = 1030, BLACK = [796, 946];
+const NARRATION = [   // first frame, text. A second voice speaks the listener's commands.
+  [186, 'P.T.S. turns NASA images of Earth into sound. Choose a place on the globe.'],
+  [470, 'Each kind of image gets a base sound. Lightning is rain.'],
+  [672, 'Brighter pixels: heavier rain, and thunder.'],
+  [832, 'And it is built for people who cannot see the screen.'],
+  [980, 'Press V, and just talk.'],
+  [1362, 'The whole site answers to your voice.'],
+  [1500, 'Hear the planet. Beyond visuals.']
+];
+const COMMANDS = [[1076, 'Explore.', 1126, 'explore'], [1166, 'Amazon, lightning.', 1256, 'amazon lightning'], [1304, 'Listen.', 1348, 'listen']];   // spoken at, words, obeyed at, heard as
 
 // ------------------------------------------------------------------ sound
 const mix = new Float32Array(TOTAL * SPF * 2);
@@ -57,8 +59,11 @@ const put = (frame, samples, gain = 1, stereo = false) => {
 };
 let seed = 20261115; const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
 const synth = (seconds, fn) => Float32Array.from({ length: Math.round(seconds * RATE) }, (_, i) => fn(i / RATE));
-const keyClick = () => { const f1 = 2100 + rnd() * 900, f2 = 5200 + rnd() * 1500, g = .8 + rnd() * .4;
-  return synth(.045, t => g * ((t < .003 ? (rnd() * 2 - 1) * .5 : 0) + .32 * Math.sin(6.283 * f1 * t) * Math.exp(-t * 160) + .14 * Math.sin(6.283 * f2 * t) * Math.exp(-t * 320))); };
+// A key going down and coming back up: a low, soft "thock" with a short dull tap, not a bright click.
+const keyClick = () => { const body = 150 + rnd() * 70, tap = 900 + rnd() * 500, g = .8 + rnd() * .4, up = .055 + rnd() * .02; let lp = 0;
+  return synth(.14, t => { const n = t < .006 ? rnd() * 2 - 1 : 0; lp += .22 * (n - lp); const u = t - up;
+    return g * (1.6 * lp + .5 * Math.sin(6.283 * body * t) * Math.exp(-t * 55) + .16 * Math.sin(6.283 * tap * t) * Math.exp(-t * 120)
+      + (u > 0 ? .1 * Math.sin(6.283 * (tap * 1.3) * u) * Math.exp(-u * 150) : 0)); }); };
 const pop = () => synth(.11, t => .55 * Math.sin(6.283 * (260 * t + 620 * (1 - Math.exp(-t * 38)) / 38)) * Math.exp(-t * 34) + (t < .002 ? (rnd() * 2 - 1) * .3 : 0));
 const beep = (hz, len, g) => synth(len, t => g * Math.sin(6.283 * hz * t) * Math.min(1, t / .004) * Math.exp(-t * 22));
 const decode = file => { const r = spawnSync('ffmpeg', ['-v', 'error', '-i', file, '-ac', '2', '-ar', String(RATE), '-f', 'f32le', '-'], { maxBuffer: 1 << 28 });
@@ -72,21 +77,31 @@ const segment = (pcm, seconds, frames, fadeOut = .012) => { const n = frames * S
   for (let i = 0; i < n; i++) { const k = Math.min(1, i / (.008 * RATE), (n - i) / (fadeOut * RATE)); out[i * 2] = k * (pcm[(from + i) * 2] || 0); out[i * 2 + 1] = k * (pcm[(from + i) * 2 + 1] || 0); }
   return out; };
 for (const [name, a, b, at, gain] of CLIPS) put(a, segment(tracks[name], at, b - a), gain, true);
-for (const [, text, f0, per, , style] of TITLES) [...text].forEach((ch, i) => { if (ch !== ' ' && (per >= 2 || i % 2 === 0)) put(Math.round(f0 + i * per), keyClick(), style === 'cap' ? .5 : .8); });
-for (const f of POPS) put(f, pop(), .9);
-for (const f of [...TABS, VKEY]) put(f, keyClick(), 1.1);
-put(VKEY + 6, beep(1250, .07, .22)); put(HEARD + 4, beep(880, .12, .2)); put(HEARD + 8, beep(1320, .14, .2));
-{ // the spoken line: the opening of the real description, rendered with the Windows voice
-  const text = fullDescription(byId('antarctica-ocean'), 'en-US'), wav = path.join(TMP, 'say.wav');
-  const ps = "Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; try { $s.SelectVoice('Microsoft Zira Desktop') } catch {}; $s.Rate = 1; $s.SetOutputToWaveFile($env:PTS_WAV); $s.Speak($env:PTS_TEXT); $s.Dispose()";
-  const r = spawnSync('powershell', ['-NoProfile', '-Command', ps], { env: { ...process.env, PTS_WAV: wav, PTS_TEXT: text } });
-  if (existsSync(wav)) put(SPEECH[0], segment(decode(wav), 0.05, SPEECH[1] - SPEECH[0], .12), 1.5, true);
-  else console.log('No Windows voice: the spoken line is left out.', r.stderr?.toString().slice(0, 200));
+// Typing: a recording dropped in film/sfx/typing.(wav|mp3) is used if present, otherwise the synthesised key.
+const TYPING = ['wav', 'mp3'].map(e => path.join(HERE, 'sfx', 'typing.' + e)).find(existsSync), typing = TYPING && decode(TYPING);
+for (const [, text, f0, per, , style] of TITLES) { if (style === 'say') continue;
+  if (typing) put(f0, segment(typing, 0, Math.ceil(text.length * per), .05), 1.1, true);
+  else [...text].forEach((ch, i) => { if (ch !== ' ') put(Math.round(f0 + i * per), keyClick(), .75); }); }
+for (const f of POPS) put(f, pop(), .8);
+put(VKEY, keyClick(), 1.1); put(VKEY + 6, beep(1250, .07, .2));
+for (const [, , at] of COMMANDS) { put(at + 2, beep(880, .1, .16)); put(at + 7, beep(1320, .12, .16)); }
+{ // narrator and listener: Windows voices, rendered offline
+  let n = 0; const say = (text, voice, rate) => { const wav = path.join(TMP, 'say' + (n++) + '.wav');
+    const ps = "Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; try { $s.SelectVoice($env:PTS_VOICE) } catch {}; $s.Rate = [int]$env:PTS_RATE; $s.SetOutputToWaveFile($env:PTS_WAV); $s.Speak($env:PTS_TEXT); $s.Dispose()";
+    spawnSync('powershell', ['-NoProfile', '-Command', ps], { env: { ...process.env, PTS_WAV: wav, PTS_TEXT: text, PTS_VOICE: voice, PTS_RATE: String(rate) } });
+    if (!existsSync(wav)) { console.log('No Windows voice for:', text); return new Float32Array(0); }
+    const pcm = decode(wav); let end = pcm.length / 2; while (end > 0 && Math.abs(pcm[end * 2 - 2]) < .004) end--; return pcm.slice(0, end * 2); };
+  const NARRATOR = process.env.NARRATOR || 'Microsoft Hazel Desktop', LISTENER = 'Microsoft Zira Desktop';
+  NARRATION.forEach(([at, text], i) => { const pcm = say(text, NARRATOR, 3), ends = at + Math.ceil(pcm.length / 2 / SPF), next = NARRATION[i + 1]?.[0] ?? TOTAL;
+    console.log('narration ' + at + '-' + ends + (ends > next ? '  OVERLAPS the next line at ' + next : '') + '  ' + text); put(at, pcm, 1.5, true); });
+  for (const [at, text, obey] of COMMANDS) { const pcm = say(text, LISTENER, 1), ends = at + Math.ceil(pcm.length / 2 / SPF);
+    console.log('command ' + at + '-' + ends + (ends > obey ? '  LATE: obeyed at ' + obey : '') + '  ' + text); put(at, pcm, 1.3, true); }
 }
 { let peak = 0; for (const v of mix) peak = Math.max(peak, Math.abs(v)); const k = Math.min(1, .89 / peak);
   const end = 4 * SPF; for (let i = 0; i < mix.length / 2; i++) { const g = k * Math.min(1, (TOTAL * SPF - i) / end); mix[i * 2] *= g; mix[i * 2 + 1] *= g; }
   console.log('audio peak before trim', peak.toFixed(2)); }
 const AUDIO = path.join(TMP, 'mix.f32'); writeFileSync(AUDIO, Buffer.from(mix.buffer));
+if (process.env.DRY) { rmSync(TMP, { recursive: true, force: true }); process.exit(0); }
 
 if (process.env.AUDIO_ONLY) {   // keep the rendered picture, replace the sound
   const out = path.join(HERE, 'out', 'pts-promo-29s.mp4'), next = path.join(HERE, 'out', 'next.mp4');
@@ -126,7 +141,7 @@ const CLOCK = `(() => {
   window.__hear = text => { const r = window.__rec; if (r) r.onresult?.({ resultIndex: 0, results: [Object.assign([{ transcript: text, confidence: .95 }], { isFinal: true })] }); };
 })();`;
 
-const STAGE = `(async (TITLES, ZOOMS, LEVELS) => {
+const STAGE = `(async (TITLES, ZOOMS, LEVELS, BLACK) => {
   const m = window.__pl = await import(new URL('player.js', document.baseURI).href), a = m._audio;
   let base = 0, start = null; const load = a.load.bind(a);
   Object.defineProperty(a, 'currentTime', { get: () => start === null ? base : Math.min(15, base + (performance.now() - start) / 1000), set: v => { base = +v || 0; if (start !== null) start = performance.now(); } });
@@ -144,8 +159,8 @@ const STAGE = `(async (TITLES, ZOOMS, LEVELS) => {
     #fx * { position: absolute; box-sizing: border-box; }
     #fx .cover { inset: 0; background: #000; } #fx .scrim { inset: 0; background: linear-gradient(90deg, rgba(2,3,8,.95) 0%, rgba(2,3,8,.92) 46%, rgba(2,3,8,.4) 78%, rgba(2,3,8,.5) 100%); opacity: 0; }
     #fx .big { left: 0; right: 0; top: 40%; text-align: center; font-size: 78px; font-weight: 700; letter-spacing: .06em; text-shadow: 0 4px 40px #000; white-space: pre; }
-    #fx .cap { left: 50%; bottom: 7px; transform: translateX(-50%); white-space: pre; font-size: 30px; font-weight: 700; letter-spacing: .05em; padding: 10px 28px; border-radius: 16px;
-      background: rgba(4,5,10,.82); border: 1px solid rgba(254,133,0,.75); box-shadow: 0 10px 50px rgba(0,0,0,.6); }
+    #fx .say { right: 150px; top: 84px; white-space: pre; font-size: 46px; font-weight: 600; padding: 14px 34px; border-radius: 28px 6px 28px 28px;
+      background: rgba(4,5,10,.86); border: 2px solid #FE8500; box-shadow: 0 10px 50px rgba(0,0,0,.6); }
     #fx .pill { left: 50%; top: 58%; transform: translateX(-50%); white-space: pre; font-size: 40px; font-weight: 700; padding: 16px 40px; border-radius: 999px; background: rgba(254,133,0,.94); color: #0A0B10; box-shadow: 0 0 60px rgba(254,133,0,.45); }
     #fx .caret { position: static; display: inline-block; width: .5em; height: .95em; margin-left: .08em; vertical-align: -.08em; background: #FE8500; }
     #fx .pill .caret { background: #0A0B10; }
@@ -174,14 +189,15 @@ const STAGE = `(async (TITLES, ZOOMS, LEVELS) => {
       const on = f >= f0 && f < f1; node.style.display = on ? '' : 'none'; if (!on) continue;
       const n = Math.min(text.length, Math.floor((f - f0) / per) + 1), typing = n < text.length;
       node.innerHTML = text.slice(0, n).replace(/</g, '&lt;') + (typing || Math.floor(f / 18) % 2 ? '<span class="caret"></span>' : '<span class="caret" style="opacity:0"></span>');
-      if (style === 'cap') node.style.opacity = Math.min(1, (f - f0 + 1) / 4);
+      if (style === 'say') { node.innerHTML = text.slice(0, n); node.style.opacity = Math.min(1, (f - f0 + 1) / 4, (f1 - f) / 8); }
     }
     // the hook: black, then a round opening from the P.T.S. button
     brand.style.display = f >= 95 && f < 162 ? '' : 'none'; brand.style.opacity = ease((f - 95) / 10);
     const bs = f >= 138 && f < 147 ? 1 + .15 * Math.sin(Math.PI * (f - 138) / 9) : 1; brand.style.transform = 'translateX(-50%) scale(' + bs + ')';
-    if (reveal === null) cover.style.background = '#000';
+    cover.style.opacity = 1;
+    if (reveal === null || (f >= BLACK[0] && f < BLACK[1])) { cover.style.background = '#000'; if (reveal !== null) cover.style.opacity = Math.min(1, (f - BLACK[0] + 1) / 6, (BLACK[1] - f) / 8); }
     else { const r = Math.pow(Math.max(0, f - reveal) / 16, 1.7) * 1500, c = centre(brand); cover.style.background = r > 1450 ? 'none' : 'radial-gradient(circle at ' + c[0] + 'px ' + c[1] + 'px, transparent ' + r + 'px, #000 ' + (r + 3) + 'px)'; if (f - reveal > 3) brand.style.opacity = Math.max(0, 1 - (f - reveal - 3) / 6); }
-    scrim.style.opacity = ease((f - 1452) / 16);
+    scrim.style.opacity = ease((f - 1482) / 16);
     // punch zooms on the page itself
     let s = 1, origin = null; for (const [a0, a1, from, to, sel] of ZOOMS) { if (f >= a0) { s = from + (to - from) * bez((f - a0) / (a1 - a0)); origin = sel; } if (f >= a1 && to === 1) { s = 1; origin = null; } }
     if (s === 1) { document.body.style.transform = ''; }
@@ -192,7 +208,7 @@ const STAGE = `(async (TITLES, ZOOMS, LEVELS) => {
     const kk = f - keyAt; key.style.opacity = kk >= 0 && kk < 22 ? Math.min(1, (22 - kk) / 6) : 0; key.style.transform = 'scale(' + (kk >= 0 && kk < 9 ? 1 + .15 * Math.sin(Math.PI * kk / 9) : 1) + ')';
     if (move) { const k = (f - move.f0) / (move.f1 - move.f0), to = centre(move.sel), e = k <= 0 ? 0 : k >= 1 ? 1 : (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
       cur = [move.from[0] + (to[0] - move.from[0]) * e, move.from[1] + (to[1] - move.from[1]) * e - Math.sin(Math.PI * e) * 46]; if (k >= 1) { cur = to.slice(); move = null; } }
-    cursor.style.display = f >= 96 && f < 1700 ? '' : 'none'; cursor.style.transform = 'translate(' + (cur[0] - 5) + 'px,' + (cur[1] - 3) + 'px)';
+    cursor.style.display = (f >= 96 && f < BLACK[0]) || (f >= 1630 && f < 1700) ? '' : 'none'; cursor.style.transform = 'translate(' + (cur[0] - 5) + 'px,' + (cur[1] - 3) + 'px)';
   };
   window.__fx(0); return true;
 })`;
@@ -216,7 +232,7 @@ try {
   await cdp('Page.addScriptToEvaluateOnNewDocument', { source: CLOCK });
   await cdp('Page.navigate', { url: `http://localhost:${PORT}/site/` });
   for (let i = 0; i < 80; i++) { await sleep(150); if (await ev('document.readyState === "complete" && !!window.ptsVoice').catch(() => false)) break; }
-  await ev(`${STAGE}(${JSON.stringify(TITLES)}, ${JSON.stringify(ZOOMS)}, ${JSON.stringify(levels)})`);
+  await ev(`${STAGE}(${JSON.stringify(TITLES)}, ${JSON.stringify(ZOOMS)}, ${JSON.stringify(levels)}, ${JSON.stringify(BLACK)})`);
   for (let i = 0; i < 90; i++) { await ev('__step(1000/60)'); await sleep(20); }       // let textures load and the Earth settle
 
   const mouse = async (type, [x, y]) => cdp('Input.dispatchMouseEvent', { type, x, y, button: type === 'mouseMoved' ? 'none' : 'left', clickCount: 1 });
@@ -227,25 +243,26 @@ try {
   const AMAZON = '#pins [aria-label^="Amazon"]';
   const ACTIONS = {
     100: () => ev('__cursor(__brand(), 100, 134)'),
-    138: f => ev(`__pop(__centre(__brand()), ${f})`),
-    147: f => ev(`__reveal(${f})`),
+    138: f => ev('__pop(__centre(__brand()), ' + f + ')'),
+    147: f => ev('__reveal(' + f + ')'),
     238: () => ev('__cursor("#explore", 238, 266)'),
     270: f => click('#explore', f),
-    330: () => ev(`__cursor(${JSON.stringify(AMAZON)}, 330, 371)`),
+    330: () => ev('__cursor(' + JSON.stringify(AMAZON) + ', 330, 371)'),
     375: f => click(AMAZON, f),
     436: () => ev('__cursor("#p-listen", 436, 474)'),
     480: async f => { await click('#p-listen', f); await ev('__pl._audio.currentTime = 1.0'); },
     624: () => ev('__cursor("#p-next", 624, 655)'),
     660: async f => { await click('#p-next', f); await ev('__pl._audio.currentTime = 7.5'); },
-    822: f => click('#p-next', f),
-    834: async f => { await click('#p-next', f); await ev('__pl._audio.currentTime = 0.2'); },
-    1030: f => press('Tab', 'Tab', 9, 'TAB', f), 1055: f => press('Tab', 'Tab', 9, 'TAB', f), 1080: f => press('Tab', 'Tab', 9, 'TAB', f), 1105: f => press('Tab', 'Tab', 9, 'TAB', f),
-    1140: f => press('v', 'KeyV', 86, 'V', f),
-    1188: async () => { const r = await ev('JSON.stringify({rec: !!window.__rec, st: document.querySelector("#voice-status").textContent})'); await ev('__hear("describe")'); if (STILLS) console.log('before hear', r); },
-    1440: async () => { await ev('ptsVoice.run(["stop"])'); await ev('ptsVoice.run(["home"])'); await sleep(200); },
-    1632: () => ev('__cursor([960, 660], 1632, 1674)'),
-    1680: f => ev(`__pop([960, 660], ${f})`)
+    804: async () => { await ev('__pl.stop(); ptsVoice.run(["home"])'); await sleep(200); },       // behind the black card: back to the entrance
+    [VKEY]: f => press('v', 'KeyV', 86, 'V', f),
+    [COMMANDS[0][2]]: () => ev('__hear(' + JSON.stringify(COMMANDS[0][3]) + ')'),
+    [COMMANDS[1][2]]: () => ev('__hear(' + JSON.stringify(COMMANDS[1][3]) + ')'),
+    [COMMANDS[2][2]]: async () => { await ev('__hear(' + JSON.stringify(COMMANDS[2][3]) + ')'); await ev('__pl._audio.currentTime = 1.0'); },
+    1470: async () => { await ev('ptsVoice.run(["stop"])'); await ev('ptsVoice.run(["home"])'); await sleep(200); },
+    1634: () => ev('__cursor([960, 660], 1634, 1674)'),
+    1680: f => ev('__pop([960, 660], ' + f + ')')
   };
+  const check = async (f, what) => { if (STILLS) console.log(f, what, await ev('JSON.stringify({view: document.body.dataset.view, scene: __pl.state.sceneId, status: __pl.state.status, rec: !!window.__rec})')); };
 
   let enc = null;
   if (!STILLS) {
@@ -256,7 +273,7 @@ try {
   }
   const t0 = Date.now();
   for (let f = 0; f < TOTAL; f++) {
-    if (ACTIONS[f]) await ACTIONS[f](f);
+    if (ACTIONS[f]) { await check(f, 'before'); await ACTIONS[f](f); }
     await ev(`__step(1000/60); __fx(${f})`);
     if (STILLS ? STILLS.includes(f) : true) {
       const png = Buffer.from((await cdp('Page.captureScreenshot', { format: 'png' })).data, 'base64');
